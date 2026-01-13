@@ -1,0 +1,153 @@
+<!--
+  © KT_ - https://github.com/twiq13/
+  This website and its source code are provided for personal use only.
+  Copying, redistribution, or reuse without explicit credit is not permitted.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PoE2 Loot Calculator</title>
+  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="icon" href="data/favincon.jpg">
+</head>
+
+<body>
+
+  <!-- TOP RIGHT (like "Feedback" button) -->
+  <a
+    id="redditBtn"
+    class="resetBtn redditBtn"
+    href="https://www.reddit.com/r/PathOfExile2/comments/1qaa7yx/poe2_farm_calculator_profit_tracker/"
+    target="_blank"
+    rel="noopener"
+    title="Open Reddit"
+  >
+    Reddit
+  </a>
+
+  <h1>PoE2 Loot Calculator</h1>
+
+  <!-- HEADER BAR -->
+  <div class="header-bar">
+
+    <!-- INVEST (left) -->
+    <div class="invest-mini">
+      <div class="field">
+        <label>Total Maps</label>
+        <input type="number" id="maps" value="10" min="0">
+      </div>
+
+      <div class="field">
+        <label>Cost per Map (Ex)</label>
+        <input type="number" id="costPerMap" value="0" min="0" step="0.01">
+      </div>
+
+      <div class="field">
+        <label>Cost per Map (Div)</label>
+        <input type="number" id="costPerMapDiv" value="0" min="0" step="0.01">
+      </div>
+    </div>
+
+    <!-- TOTALS (right) -->
+    <div class="totals-mini">
+      <div class="totalBox">
+        <div class="tLabel">Total Invest</div>
+        <div class="tValue" id="totalInvest">0</div>
+      </div>
+
+      <div class="totalBox">
+        <div class="tLabel">Total Loot</div>
+        <div class="tValue" id="totalLoot">0</div>
+      </div>
+
+      <div class="totalBox">
+        <div class="tLabel">Gains</div>
+        <div class="tValue" id="gain">0</div>
+      </div>
+
+      <!-- toggle Ex/Div display for totals -->
+      <button class="toggleBtn" id="displayUnitBtn" type="button">Show Div</button>
+
+      <button class="resetBtn" id="resetBtn" type="button">Reset</button>
+    </div>
+
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
+
+    <!-- LEFT PANEL -->
+    <aside class="left-panel">
+      <div class="panel-title">Market List</div>
+      <div class="panel-title">League: Fate of the Vaal</div>
+
+      <!-- TABS -->
+      <div class="tabs" id="tabs"></div>
+
+      <input id="marketSearch" placeholder="Search..." />
+
+      <div id="marketList"></div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="app">
+      <div class="app-title">Loot</div>
+
+      <table class="loot-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lootBody"></tbody>
+      </table>
+
+      <div class="loot-actions">
+        <button type="button" onclick="addLootRow()">
+          <span class="btnIcon">+</span> Add row
+        </button>
+
+        <button type="button" onclick="addManualRow()">
+          <span class="btnIcon">+</span> Manual row
+        </button>
+
+        <!-- same spacing as others -->
+        <button type="button" id="exportCsvBtn">Export CSV</button>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- AUTOCOMPLETE -->
+  <datalist id="itemDatalist"></datalist>
+
+  <!-- STATUS -->
+  <div id="fetchStatus" class="status">Status: waiting...</div>
+
+<footer class="site-signature" role="contentinfo">
+  <span>© <span id="year"></span> PoE2 Loot Calculator</span>
+  <span class="sep">•</span>
+  <span>Created by <strong>KT_</strong></span>
+  <span class="sep">•</span>
+  <a href="https://github.com/twiq13/" target="_blank" rel="noopener">
+    github.com/twiq13
+  </a>
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+
+  <!-- JS -->
+  <script src="app.js?v=1" defer></script>
+</body>
+</html>
+
+
