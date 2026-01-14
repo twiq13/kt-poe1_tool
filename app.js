@@ -1,764 +1,545 @@
-// =======================
-// PoE1 Loot Calculator (KT_) - Multi-league
-// =======================
-// Loads local JSON: ./data/prices-<LEAGUE>.json (GitHub Actions)
-// Base unit: Chaos
-// Auto display: Div if chaos >= (divChaos + 1)
-// Totals toggle: Chaos / Div
-// Main/Sub menus are built from prices.json.sections (group = main, id = sub)
+/* =========================================================
+   PoE1 Loot Calculator - League selector in sidebar
+   - data/prices-Standard.json
+   - data/prices-Keepers.json
+   ========================================================= */
 
-let rawData = null;
+const LEAGUES = ["Standard", "Keepers"];
+const DEFAULT_LEAGUE = "Standard";
 
-let allItems = [];
-let byName = new Map();
-
-// menu from JSON
-let menu = {
-  mains: [],
-  subsByMain: {},
+let state = {
+  league: DEFAULT_LEAGUE,
+  tab: "Maps",
+  search: "",
+  showDiv: false, // false = chaos display, true = divine display
+  divChaosRate: 200, // fallback if JSON doesn't contain divine rate
+  marketItems: [], // normalized items
+  lootRows: [] // rows objects
 };
 
-let activeMain = "";
-let activeSection = "";
+function $(id){ return document.getElementById(id); }
 
-// league
-let activeLeague = "Standard";
-
-// icons & rate
-let chaosIcon = "";
-let divineIcon = "";
-let divineChaosValue = null;
-
-// cost sync
-let lastEditedCost = "chaos";
-let isSyncingCost = false;
-
-// totals toggle
-let totalsUnit = "chaos";
-
-// ---------- Helpers ----------
 function setStatus(msg){
-  const el = document.getElementById("fetchStatus");
-  if (el) el.textContent = msg;
-  console.log(msg);
+  const el = $("status");
+  if (el) el.textContent = msg || "";
+  console.log("[KT]", msg);
 }
 
-function cleanName(s){
-  return String(s || "").replace(/\s*WIKI\s*$/i, "").trim();
-}
+/* -----------------------------
+   JSON NORMALIZATION
+   We try to support multiple possible schemas.
+-------------------------------- */
 
-function escapeHtml(s){
-  return String(s).replace(/[&<>"']/g, m => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
-  }[m]));
-}
+function normalizeItemsFromJson(json){
+  // We aim for: { name, category, chaos, div }
+  // Attempt multiple patterns.
 
-function fmtInt(n){
-  const x = Number(n || 0);
-  return String(Math.round(x));
-}
-
-function fmtDateTime(iso){
-  if (!iso) return "";
-  const d = new Date(iso);
-  if (isNaN(d.getTime())) return String(iso);
-  const pad = (x)=> String(x).padStart(2,"0");
-  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-}
-
-function num(id){
-  const el = document.getElementById(id);
-  const v = el ? Number(el.value) : 0;
-  return Number.isFinite(v) ? v : 0;
-}
-
-function safeFileLeagueName(s){
-  return String(s || "Standard").trim().replace(/[^a-z0-9_-]+/gi, "_");
-}
-
-// ---------- Display logic ----------
-function shouldShowDiv(chaosAmount){
-  if (!divineChaosValue || divineChaosValue <= 0) return false;
-  return Number(chaosAmount || 0) >= (divineChaosValue + 1);
-}
-
-function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
-  const c = Number(chaosAmount || 0);
-
-  if (shouldShowDiv(c) && divineChaosValue){
-    valueEl.textContent = fmtInt(c / divineChaosValue);
-    if (iconEl) iconEl.src = divineIcon || "";
-  } else {
-    valueEl.textContent = fmtInt(c);
-    if (iconEl) iconEl.src = chaosIcon || "";
-  }
-
-  if (iconEl){
-    iconEl.style.display = iconEl.src ? "block" : "none";
-  }
-}
-
-function formatTotalSingle(chaosVal){
-  const c = Number(chaosVal || 0);
-
-  if (totalsUnit === "div" && divineChaosValue && divineChaosValue > 0){
-    const div = c / divineChaosValue;
-    const icon = divineIcon ? `<img class="pIcon" src="${divineIcon}" alt="">` : "";
-    return `<span>${fmtInt(div)}</span>${icon}`;
-  }
-
-  const icon = chaosIcon ? `<img class="pIcon" src="${chaosIcon}" alt="">` : "";
-  return `<span>${fmtInt(c)}</span>${icon}`;
-}
-
-// ---------- Load local json per league ----------
-async function loadPricesJsonForLeague(league){
-  const lf = safeFileLeagueName(league);
-  const url = `./data/prices-${lf}.json?ts=` + Date.now();
-  setStatus("Status: loading " + url + " ...");
-
-  const res = await fetch(url, { cache:"no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status} loading ${url}`);
-  return await res.json();
-}
-
-// ---------- Menu build from JSON.sections ----------
-function buildMenuFromJson(data){
-  const secs = Array.isArray(data.sections) ? data.sections : [];
-
-  const groups = [];
-  const subsByMain = {};
-
-  for (const s of secs){
-    const group = s.group || "Other";
-    if (!groups.includes(group)) groups.push(group);
-    subsByMain[group] = subsByMain[group] || [];
-    subsByMain[group].push({ id: s.id, label: s.label || s.id });
-  }
-
-  // preferred order
-  const preferred = ["General Currency", "Equipment & Gems", "Atlas", "Crafting"];
-  const ordered = [
-    ...preferred.filter(x => groups.includes(x)),
-    ...groups.filter(x => !preferred.includes(x))
-  ];
-
-  menu.mains = ordered.map(g => ({ id: g, label: g }));
-  menu.subsByMain = subsByMain;
-
-  // validate current
-  if (!activeMain || !menu.subsByMain[activeMain]) activeMain = menu.mains[0]?.id || preferred[0];
-  const subs = menu.subsByMain[activeMain] || [];
-  if (!activeSection || !subs.some(x => x.id === activeSection)){
-    activeSection = subs[0]?.id || "currency";
-  }
-}
-
-function renderMainTabs(){
-  const wrap = document.getElementById("mainTabs");
-  if (!wrap) return;
-
-  wrap.innerHTML = "";
-  menu.mains.forEach(t => {
-    const b = document.createElement("button");
-    b.className = "tab" + (t.id === activeMain ? " active" : "");
-    b.textContent = t.label;
-    b.dataset.tab = t.id;
-
-    b.addEventListener("click", () => {
-      activeMain = t.id;
-      activeSection = (menu.subsByMain[activeMain]?.[0]?.id) || "currency";
-
-      document.querySelectorAll("#mainTabs .tab")
-        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
-
-      renderSubTabs();
-      saveState();
-      refreshItemsForSection();
-    });
-
-    wrap.appendChild(b);
-  });
-}
-
-function renderSubTabs(){
-  const wrap = document.getElementById("subTabs");
-  if (!wrap) return;
-
-  wrap.innerHTML = "";
-  const subs = menu.subsByMain[activeMain] || [];
-
-  subs.forEach(sec => {
-    const b = document.createElement("button");
-    b.className = "tab" + (sec.id === activeSection ? " active" : "");
-    b.textContent = sec.label;
-    b.dataset.tab = sec.id;
-
-    b.addEventListener("click", () => {
-      activeSection = sec.id;
-      document.querySelectorAll("#subTabs .tab")
-        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeSection));
-      saveState();
-      refreshItemsForSection();
-    });
-
-    wrap.appendChild(b);
-  });
-}
-
-// ---------- Items / Market ----------
-function refreshItemsForSection(){
-  if (!rawData){
-    setStatus("Status: ERROR ❌ prices not loaded");
-    return;
-  }
-
-  const lines = Array.isArray(rawData.lines) ? rawData.lines : [];
-
-  allItems = lines
-    .filter(x => (x.section || "") === activeSection)
-    .map(x => ({
-      section: x.section || activeSection,
-      name: cleanName(x.name),
-      icon: x.icon || "",
-      amount: Number(x.amount ?? 0),
+  // Pattern A: { items: [...] }
+  if (json && Array.isArray(json.items)) {
+    return json.items.map(it => ({
+      name: it.name ?? it.item ?? "Unknown",
+      category: it.category ?? it.group ?? it.tab ?? "Misc",
+      chaos: Number(it.chaos ?? it.chaosValue ?? it.priceChaos ?? 0),
+      div: Number(it.div ?? it.divine ?? it.divineValue ?? it.priceDiv ?? 0),
     }));
+  }
 
-  byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
+  // Pattern B: { categories: { "Maps": [...], ... } }
+  if (json && json.categories && typeof json.categories === "object") {
+    const out = [];
+    for (const [cat, arr] of Object.entries(json.categories)) {
+      if (!Array.isArray(arr)) continue;
+      for (const it of arr) {
+        out.push({
+          name: it.name ?? it.item ?? "Unknown",
+          category: cat,
+          chaos: Number(it.chaos ?? it.chaosValue ?? it.priceChaos ?? 0),
+          div: Number(it.div ?? it.divine ?? it.divineValue ?? it.priceDiv ?? 0),
+        });
+      }
+    }
+    return out;
+  }
 
-  fillDatalist();
-  renderMarket();
+  // Pattern C: poe.ninja-like { lines: [...] } (common)
+  if (json && Array.isArray(json.lines)) {
+    return json.lines.map(it => ({
+      name: it.name ?? it.baseType ?? it.currencyTypeName ?? "Unknown",
+      category: it.category ?? it.group ?? it.itemType ?? it.mapTier ? "Maps" : "Misc",
+      chaos: Number(it.chaosValue ?? it.chaosEquivalent ?? it.chaos ?? 0),
+      div: Number(it.divineValue ?? it.divine ?? 0),
+    }));
+  }
 
-  // refresh existing loot rows (re-apply prices/icons)
-  document.querySelectorAll("#lootBody tr").forEach(tr => {
-    if (tr.classList.contains("manualRow")) return;
-    const itemInput = tr.querySelector(".lootItem");
-    if (itemInput) itemInput.dispatchEvent(new Event("input"));
-  });
+  // Pattern D: unknown object with arrays
+  // best effort: flatten arrays found at top-level keys
+  if (json && typeof json === "object") {
+    const out = [];
+    for (const [k, v] of Object.entries(json)) {
+      if (!Array.isArray(v)) continue;
+      for (const it of v) {
+        if (!it || typeof it !== "object") continue;
+        out.push({
+          name: it.name ?? it.baseType ?? it.currencyTypeName ?? it.item ?? "Unknown",
+          category: it.category ?? k,
+          chaos: Number(it.chaosValue ?? it.chaosEquivalent ?? it.chaos ?? it.priceChaos ?? 0),
+          div: Number(it.divineValue ?? it.divine ?? it.priceDiv ?? 0),
+        });
+      }
+    }
+    if (out.length) return out;
+  }
 
-  recalcAll();
-
-  // update league label if you have one
-  const leagueLabel = document.getElementById("leagueLabel");
-  if (leagueLabel) leagueLabel.textContent = `League: ${rawData.league || activeLeague}`;
-
-  const updatedStr = rawData.updatedAt ? ` | updated=${fmtDateTime(rawData.updatedAt)}` : "";
-  const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : "";
-  setStatus(`Status: OK ✅ league=${rawData.league || activeLeague} main="${activeMain}" section="${activeSection}" items=${allItems.length}${divStr}${updatedStr}`);
+  return [];
 }
 
-function fillDatalist(){
-  const dl = document.getElementById("itemDatalist");
-  if (!dl) return;
-  dl.innerHTML = "";
-  allItems.forEach(it => {
-    const opt = document.createElement("option");
-    opt.value = it.name;
-    dl.appendChild(opt);
-  });
+function tryExtractDivRate(json){
+  // If your JSON includes divine rate, catch it here.
+  // Examples:
+  // { divChaosRate: 210 } or { rates: { divine: 210 } }
+  const a = Number(json?.divChaosRate);
+  if (Number.isFinite(a) && a > 0) return a;
+
+  const b = Number(json?.rates?.divine);
+  if (Number.isFinite(b) && b > 0) return b;
+
+  return null;
 }
 
-function renderMarket(){
-  const list = document.getElementById("marketList");
+/* -----------------------------
+   Data loading
+-------------------------------- */
+
+async function loadLeagueData(league){
+  const file = `data/prices-${league}.json`;
+  setStatus(`Loading ${file} …`);
+
+  const res = await fetch(file, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to fetch ${file} (${res.status})`);
+
+  const json = await res.json();
+
+  const divRate = tryExtractDivRate(json);
+  if (divRate) state.divChaosRate = divRate;
+
+  const items = normalizeItemsFromJson(json);
+
+  // if category is too messy, keep it but we’ll filter by tabs best-effort
+  state.marketItems = items;
+
+  setStatus(`Loaded ${items.length} items for ${league}`);
+}
+
+/* -----------------------------
+   Tabs / Categories
+-------------------------------- */
+
+function setActiveTab(tab){
+  state.tab = tab;
+  $$(".tab").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.tab === tab);
+  });
+  renderMarketList();
+}
+
+function $$(sel){ return Array.from(document.querySelectorAll(sel)); }
+
+function categoryMatchesTab(itemCategory, tab){
+  const c = (itemCategory || "").toLowerCase();
+  const t = (tab || "").toLowerCase();
+
+  // basic mapping
+  if (t.includes("maps")) return c.includes("map") || c.includes("atlas") || c.includes("invitation") || c.includes("memory");
+  if (t.includes("currency")) return c.includes("currency") || c.includes("fragment") || c.includes("scarab") || c.includes("essence");
+  if (t.includes("equipment")) return c.includes("equipment") || c.includes("gem") || c.includes("unique") || c.includes("armour") || c.includes("weapon");
+  if (t.includes("atlas")) return c.includes("atlas") || c.includes("sextant") || c.includes("compass");
+  if (t.includes("crafting")) return c.includes("craft") || c.includes("essence") || c.includes("fossil");
+
+  // fallback: allow everything
+  return true;
+}
+
+/* -----------------------------
+   Market rendering
+-------------------------------- */
+
+function formatPrice(it){
+  if (state.showDiv) {
+    const div = it.div && it.div > 0 ? it.div : (it.chaos / state.divChaosRate);
+    return `${round2(div)} div`;
+  }
+  return `${round0(it.chaos)} c`;
+}
+
+function round0(x){ return Math.round(Number(x) || 0); }
+function round2(x){ return Math.round((Number(x) || 0) * 100) / 100; }
+
+function renderMarketList(){
+  const list = $("marketList");
   if (!list) return;
 
-  const q = (document.getElementById("marketSearch")?.value || "").trim().toLowerCase();
+  const q = (state.search || "").trim().toLowerCase();
+  const tab = state.tab;
 
-  const filtered = allItems
-    .filter(it => it.name.toLowerCase().includes(q))
-    .slice(0, 500);
+  const filtered = state.marketItems
+    .filter(it => categoryMatchesTab(it.category, tab))
+    .filter(it => !q || (it.name || "").toLowerCase().includes(q))
+    .slice(0, 500); // safety
 
   list.innerHTML = "";
 
-  if (!filtered.length){
-    list.innerHTML = `<div style="color:#bbb;padding:10px;">No items.</div>`;
+  if (!filtered.length) {
+    list.innerHTML = `<div class="hint">No items.</div>`;
     return;
   }
 
-  filtered.forEach(it => {
+  for (const it of filtered) {
     const row = document.createElement("div");
-    row.className = "market-row";
+    row.className = "marketItem";
+    row.title = it.name;
 
-    row.innerHTML = `
-      <div class="mLeft">
-        ${it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : ""}
-        <span class="mName">${escapeHtml(it.name)}</span>
-      </div>
+    const name = document.createElement("div");
+    name.className = "marketItemName";
+    name.textContent = it.name;
 
-      <div class="mArrow">⇄</div>
+    const price = document.createElement("div");
+    price.className = "marketItemPrice";
+    price.textContent = formatPrice(it);
 
-      <div class="mRight">
-        <span class="mPriceVal">0</span>
-        <img class="unitIcon" alt="">
-      </div>
-    `;
+    row.appendChild(name);
+    row.appendChild(price);
 
-    const valEl = row.querySelector(".mPriceVal");
-    const icoEl = row.querySelector(".unitIcon");
-    setDualPriceDisplay(valEl, icoEl, it.amount);
+    row.addEventListener("click", () => addLootRowFromMarket(it));
 
-    row.addEventListener("click", () => addLootRow(it.name));
     list.appendChild(row);
-  });
+  }
 }
 
-// ---------- Loot rows ----------
-function addLootRow(prefillName = ""){
-  if (prefillName && typeof prefillName === "object") prefillName = "";
-  prefillName = String(prefillName || "");
+/* -----------------------------
+   Loot rows
+-------------------------------- */
 
-  const body = document.getElementById("lootBody");
-  if (!body) return;
-
-  const tr = document.createElement("tr");
-  tr.className = "lootRow";
-
-  tr.innerHTML = `
-    <td>
-      <div class="lootItemWrap">
-        <img class="lootIcon" alt="">
-        <input class="lootItem" list="itemDatalist" placeholder="Item">
-      </div>
-    </td>
-
-    <td>
-      <div class="priceCell">
-        <span class="lootPrice" data-chaos="0">0</span>
-        <img class="baseIcon" alt="">
-      </div>
-    </td>
-
-    <td>
-      <div class="qtyWrap">
-        <button type="button" class="qtyBtn qtyMinus" aria-label="Minus">−</button>
-        <input class="lootQty" type="number" value="0" min="0">
-        <button type="button" class="qtyBtn qtyPlus" aria-label="Plus">+</button>
-      </div>
-    </td>
-
-    <td><button type="button" class="deleteBtn" title="Delete">✖</button></td>
-  `;
-
-  body.appendChild(tr);
-
-  const itemInput = tr.querySelector(".lootItem");
-  const qtyInput  = tr.querySelector(".lootQty");
-  const iconImg   = tr.querySelector(".lootIcon");
-  const priceSpan = tr.querySelector(".lootPrice");
-  const unitImg   = tr.querySelector(".baseIcon");
-
-  itemInput.value = prefillName;
-
-  function applyPrice(){
-    const name = (itemInput.value || "").trim().toLowerCase();
-    const found = byName.get(name);
-
-    if (found?.icon){
-      iconImg.src = found.icon;
-      iconImg.style.display = "block";
-    } else {
-      iconImg.style.display = "none";
-    }
-
-    const chaos = Number(found ? found.amount : 0);
-    priceSpan.dataset.chaos = String(chaos);
-
-    setDualPriceDisplay(priceSpan, unitImg, chaos);
-  }
-
-  applyPrice();
-  recalcAll();
-  saveState();
-
-  itemInput.addEventListener("input", () => {
-    applyPrice();
-    recalcAll();
-    saveState();
+function addLootRowFromMarket(it){
+  state.lootRows.push({
+    type: "market",
+    name: it.name,
+    chaos: Number(it.chaos || 0),
+    div: Number(it.div || 0),
+    qty: 1
   });
-
-  qtyInput.addEventListener("input", () => {
-    recalcAll();
-    saveState();
-  });
-
-  tr.querySelector(".qtyMinus").addEventListener("click", () => {
-    qtyInput.value = Math.max(0, (Number(qtyInput.value) || 0) - 1);
-    recalcAll();
-    saveState();
-  });
-
-  tr.querySelector(".qtyPlus").addEventListener("click", () => {
-    qtyInput.value = (Number(qtyInput.value) || 0) + 1;
-    recalcAll();
-    saveState();
-  });
-
-  tr.querySelector(".deleteBtn").addEventListener("click", () => {
-    tr.remove();
-    recalcAll();
-    saveState();
-  });
+  renderLootRows();
+  recalcTotals();
 }
 
 function addManualRow(){
-  const body = document.getElementById("lootBody");
-  if (!body) return;
-
-  const tr = document.createElement("tr");
-  tr.className = "lootRow manualRow";
-
-  tr.innerHTML = `
-    <td>
-      <div class="lootItemWrap">
-        <img class="lootIcon" style="display:none" alt="">
-        <input class="lootItem" placeholder="Custom item">
-      </div>
-    </td>
-
-    <td>
-      <div class="priceCell">
-        <input class="manualPrice" type="number" value="0" min="0" step="0.01">
-        <img class="baseIcon" alt="">
-      </div>
-    </td>
-
-    <td>
-      <div class="qtyWrap">
-        <button type="button" class="qtyBtn qtyMinus">−</button>
-        <input class="lootQty" type="number" value="0" min="0">
-        <button type="button" class="qtyBtn qtyPlus">+</button>
-      </div>
-    </td>
-
-    <td><button type="button" class="deleteBtn" title="Delete">✖</button></td>
-  `;
-
-  body.appendChild(tr);
-
-  const baseImg = tr.querySelector(".baseIcon");
-  if (baseImg){
-    baseImg.src = chaosIcon || "";
-    baseImg.style.display = baseImg.src ? "inline-block" : "none";
-  }
-
-  const qtyInput = tr.querySelector(".lootQty");
-  const priceInput = tr.querySelector(".manualPrice");
-  const update = () => { recalcAll(); saveState(); };
-
-  qtyInput.addEventListener("input", update);
-  priceInput.addEventListener("input", update);
-
-  tr.querySelector(".qtyMinus").addEventListener("click", () => {
-    qtyInput.value = Math.max(0, (Number(qtyInput.value) || 0) - 1);
-    update();
+  state.lootRows.push({
+    type: "manual",
+    name: "",
+    chaos: 0,
+    div: 0,
+    qty: 1
   });
-
-  tr.querySelector(".qtyPlus").addEventListener("click", () => {
-    qtyInput.value = (Number(qtyInput.value) || 0) + 1;
-    update();
-  });
-
-  tr.querySelector(".deleteBtn").addEventListener("click", () => {
-    tr.remove();
-    update();
-  });
-
-  update();
+  renderLootRows();
+  recalcTotals();
 }
 
-// ---------- Cost syncing ----------
-function syncCostFields(){
-  const cEl = document.getElementById("costPerMap");
-  const dEl = document.getElementById("costPerMapDiv");
-  if (!cEl || !dEl) return;
-  if (!divineChaosValue || divineChaosValue <= 0) return;
+function renderLootRows(){
+  const host = $("lootRows");
+  if (!host) return;
 
-  isSyncingCost = true;
-  if (lastEditedCost === "div"){
-    const div = Number(dEl.value || 0);
-    cEl.value = String(div * divineChaosValue);
+  host.innerHTML = "";
+
+  state.lootRows.forEach((r, idx) => {
+    const row = document.createElement("div");
+    row.className = "lootRow";
+
+    // Item
+    const itemInput = document.createElement("input");
+    itemInput.type = "text";
+    itemInput.value = r.name;
+    itemInput.placeholder = "Item";
+    itemInput.addEventListener("input", () => {
+      r.name = itemInput.value;
+    });
+
+    // Price (readonly display if market row, editable if manual)
+    const priceInput = document.createElement("input");
+    priceInput.type = "number";
+    priceInput.min = "0";
+
+    if (r.type === "market") {
+      priceInput.value = state.showDiv
+        ? round2((r.div && r.div > 0) ? r.div : (r.chaos / state.divChaosRate))
+        : round0(r.chaos);
+      priceInput.disabled = true;
+    } else {
+      // manual: edit in current display currency, but store both
+      priceInput.disabled = false;
+      priceInput.value = state.showDiv ? round2(r.div || 0) : round0(r.chaos || 0);
+      priceInput.addEventListener("input", () => {
+        const v = Number(priceInput.value || 0);
+        if (state.showDiv) {
+          r.div = v;
+          r.chaos = v * state.divChaosRate;
+        } else {
+          r.chaos = v;
+          r.div = v / state.divChaosRate;
+        }
+        recalcTotals();
+        renderLootRows(); // refresh totals + per-row total label
+      });
+    }
+
+    // Qty controls
+    const qtyWrap = document.createElement("div");
+    qtyWrap.className = "qtyWrap";
+
+    const minus = document.createElement("button");
+    minus.className = "qtyBtn";
+    minus.textContent = "–";
+    minus.addEventListener("click", () => {
+      r.qty = Math.max(0, (r.qty || 0) - 1);
+      renderLootRows();
+      recalcTotals();
+    });
+
+    const qty = document.createElement("input");
+    qty.type = "number";
+    qty.min = "0";
+    qty.value = r.qty ?? 0;
+    qty.style.width = "70px";
+    qty.style.textAlign = "center";
+    qty.addEventListener("input", () => {
+      r.qty = Math.max(0, Number(qty.value || 0));
+      recalcTotals();
+      renderLootRows();
+    });
+
+    const plus = document.createElement("button");
+    plus.className = "qtyBtn";
+    plus.textContent = "+";
+    plus.addEventListener("click", () => {
+      r.qty = (r.qty || 0) + 1;
+      renderLootRows();
+      recalcTotals();
+    });
+
+    qtyWrap.appendChild(minus);
+    qtyWrap.appendChild(qty);
+    qtyWrap.appendChild(plus);
+
+    // Row total
+    const total = document.createElement("div");
+    total.className = "right";
+    total.textContent = formatRowTotal(r);
+
+    // Delete
+    const del = document.createElement("button");
+    del.className = "killBtn";
+    del.textContent = "✕";
+    del.addEventListener("click", () => {
+      state.lootRows.splice(idx, 1);
+      renderLootRows();
+      recalcTotals();
+    });
+
+    row.appendChild(itemInput);
+    row.appendChild(wrapRight(priceInput));
+    row.appendChild(wrapCenter(qtyWrap));
+    row.appendChild(total);
+    row.appendChild(wrapRight(del));
+
+    host.appendChild(row);
+  });
+}
+
+function wrapRight(el){
+  const d = document.createElement("div");
+  d.className = "right";
+  d.appendChild(el);
+  return d;
+}
+function wrapCenter(el){
+  const d = document.createElement("div");
+  d.className = "center";
+  d.appendChild(el);
+  return d;
+}
+
+function formatRowTotal(r){
+  const qty = Number(r.qty || 0);
+  if (state.showDiv) {
+    const div = (r.div && r.div > 0) ? r.div : (r.chaos / state.divChaosRate);
+    return `${round2(div * qty)} div`;
+  }
+  return `${round0((r.chaos || 0) * qty)} c`;
+}
+
+/* -----------------------------
+   Totals
+-------------------------------- */
+
+function recalcTotals(){
+  const maps = Number($("totalMaps")?.value || 0);
+  const costC = Number($("costPerMapChaos")?.value || 0);
+  const costD = Number($("costPerMapDiv")?.value || 0);
+
+  // Invest in chaos baseline
+  const investChaos = (maps * costC) + (maps * costD * state.divChaosRate);
+
+  // Loot in chaos baseline
+  const lootChaos = state.lootRows.reduce((sum, r) => {
+    const qty = Number(r.qty || 0);
+    return sum + (Number(r.chaos || 0) * qty);
+  }, 0);
+
+  const gainsChaos = lootChaos - investChaos;
+
+  // Display
+  if (state.showDiv) {
+    $("totalInvest").textContent = `${round2(investChaos / state.divChaosRate)} div`;
+    $("totalLoot").textContent = `${round2(lootChaos / state.divChaosRate)} div`;
+    $("totalGains").textContent = `${round2(gainsChaos / state.divChaosRate)} div`;
   } else {
-    const chaos = Number(cEl.value || 0);
-    dEl.value = String(chaos / divineChaosValue);
+    $("totalInvest").textContent = `${round0(investChaos)} c`;
+    $("totalLoot").textContent = `${round0(lootChaos)} c`;
+    $("totalGains").textContent = `${round0(gainsChaos)} c`;
   }
-  isSyncingCost = false;
 }
 
-function calcInvestChaos(){
-  const maps = num("maps");
-  const cEl = document.getElementById("costPerMap");
-  const dEl = document.getElementById("costPerMapDiv");
+/* -----------------------------
+   CSV Export
+-------------------------------- */
 
-  const chaosCost = cEl ? Number(cEl.value || 0) : 0;
-  const divCost = dEl ? Number(dEl.value || 0) : 0;
+function exportCSV(){
+  // Format requested earlier in your other messages was:
+  // Item,Price,Devise,Qty,Total price exalt/divine
+  // Invest,Loot,Gains
+  // Here we keep simple and consistent with Chaos/Div display.
+  const rows = [];
+  rows.push(["Item","Price","Currency","Qty","Total"].join(","));
 
-  let costChaos = chaosCost;
-  if (lastEditedCost === "div" && divineChaosValue && divineChaosValue > 0){
-    costChaos = divCost * divineChaosValue;
+  for (const r of state.lootRows) {
+    const qty = Number(r.qty || 0);
+    const price = state.showDiv
+      ? round2((r.div && r.div > 0) ? r.div : (r.chaos / state.divChaosRate))
+      : round0(r.chaos);
+
+    const cur = state.showDiv ? "div" : "chaos";
+    const total = state.showDiv ? round2(price * qty) : round0(price * qty);
+
+    rows.push([escapeCSV(r.name), price, cur, qty, total].join(","));
   }
-  return maps * (Number(costChaos) || 0);
-}
 
-function calcLootChaos(){
-  let total = 0;
-  document.querySelectorAll("#lootBody tr").forEach(tr => {
-    const qty = Number(tr.querySelector(".lootQty")?.value || 0);
+  rows.push("");
+  rows.push(["Invest", $("totalInvest").textContent].join(","));
+  rows.push(["Loot", $("totalLoot").textContent].join(","));
+  rows.push(["Gains", $("totalGains").textContent].join(","));
 
-    if (tr.classList.contains("manualRow")){
-      const p = Number(tr.querySelector(".manualPrice")?.value || 0);
-      total += p * qty;
-    } else {
-      const chaos = Number(tr.querySelector(".lootPrice")?.dataset?.chaos || 0);
-      total += chaos * qty;
-    }
-  });
-  return total;
-}
-
-function recalcAll(){
-  const invest = calcInvestChaos();
-  const loot = calcLootChaos();
-  const gain = loot - invest;
-
-  document.getElementById("totalInvest").innerHTML = formatTotalSingle(invest);
-  document.getElementById("totalLoot").innerHTML = formatTotalSingle(loot);
-  document.getElementById("gain").innerHTML = formatTotalSingle(gain);
-}
-
-// ---------- CSV ----------
-function exportLootCSV(){
-  const lines = [];
-  lines.push("Item,Price,Devise,Qty,Total price chaos/divine");
-
-  const investC = calcInvestChaos();
-  const lootC = calcLootChaos();
-  const gainC = lootC - investC;
-
-  const toBoth = (chaos) => {
-    const cInt = fmtInt(chaos);
-    const dInt = (divineChaosValue && divineChaosValue > 0) ? fmtInt(chaos / divineChaosValue) : "0";
-    return `${cInt} Chaos / ${dInt} Div`;
-  };
-
-  document.querySelectorAll("#lootBody tr").forEach(tr => {
-    const item = (tr.querySelector(".lootItem")?.value || "").trim();
-    const qty = Number(tr.querySelector(".lootQty")?.value || 0);
-
-    let priceC = 0;
-    let devise = "Chaos";
-
-    if (tr.classList.contains("manualRow")){
-      priceC = Number(tr.querySelector(".manualPrice")?.value || 0);
-      devise = "Chaos";
-    } else {
-      priceC = Number(tr.querySelector(".lootPrice")?.dataset?.chaos || 0);
-      devise = shouldShowDiv(priceC) ? "Div" : "Chaos";
-    }
-
-    if (!item && qty === 0 && priceC === 0) return;
-
-    const displayPrice = (devise === "Div" && divineChaosValue)
-      ? fmtInt(priceC / divineChaosValue)
-      : fmtInt(priceC);
-
-    const totalC = priceC * qty;
-
-    const esc = (s) => {
-      const str = String(s ?? "");
-      return /[",\n"]/.test(str) ? `"${str.replace(/"/g,'""')}"` : str;
-    };
-
-    lines.push([esc(item), displayPrice, devise, fmtInt(qty), esc(toBoth(totalC))].join(","));
-  });
-
-  lines.push("");
-  lines.push("Invest,Loot,Gains");
-  lines.push([toBoth(investC), toBoth(lootC), toBoth(gainC)].join(","));
-
-  const csv = lines.join("\n");
+  const csv = rows.join("\n");
   const blob = new Blob([csv], { type:"text/csv;charset=utf-8" });
   const url = URL.createObjectURL(blob);
 
   const a = document.createElement("a");
   a.href = url;
-  a.download = `poe1_loot_${Date.now()}.csv`;
+  a.download = `poe1-loot-${state.league}.csv`;
   document.body.appendChild(a);
   a.click();
   a.remove();
+
   URL.revokeObjectURL(url);
 }
 
-// ---------- State ----------
-function saveState(){
-  const rows = [...document.querySelectorAll("#lootBody tr")].map(tr => {
-    const manual = tr.classList.contains("manualRow");
-    return {
-      manual,
-      item: tr.querySelector(".lootItem")?.value || "",
-      qty: tr.querySelector(".lootQty")?.value ?? "0",
-      price: manual ? (tr.querySelector(".manualPrice")?.value ?? "0") : null
-    };
-  });
-
-  const state = {
-    league: activeLeague,
-    activeMain,
-    activeSection,
-    search: document.getElementById("marketSearch")?.value ?? "",
-    maps: document.getElementById("maps")?.value ?? "10",
-    costPerMap: document.getElementById("costPerMap")?.value ?? "0",
-    costPerMapDiv: document.getElementById("costPerMapDiv")?.value ?? "0",
-    lastEditedCost,
-    totalsUnit,
-    rows
-  };
-
-  localStorage.setItem("poe1FarmState", JSON.stringify(state));
+function escapeCSV(s){
+  const v = String(s ?? "");
+  if (v.includes(",") || v.includes('"') || v.includes("\n")) {
+    return `"${v.replaceAll('"','""')}"`;
+  }
+  return v;
 }
 
-function loadState(){
-  const raw = localStorage.getItem("poe1FarmState");
-  if (!raw) return null;
-  try{ return JSON.parse(raw); }catch{ return null; }
-}
+/* -----------------------------
+   League switch
+-------------------------------- */
 
-function resetAll(){
-  localStorage.removeItem("poe1FarmState");
+async function setLeague(league){
+  if (!LEAGUES.includes(league)) league = DEFAULT_LEAGUE;
 
-  document.getElementById("maps").value = "10";
-  document.getElementById("costPerMap").value = "0";
-  document.getElementById("costPerMapDiv").value = "0";
-  lastEditedCost = "chaos";
+  state.league = league;
+  $("leagueName").textContent = league;
 
-  totalsUnit = "chaos";
-  const btn = document.getElementById("displayUnitBtn");
-  if (btn) btn.textContent = "Show Div";
-
-  document.getElementById("lootBody").innerHTML = "";
-  addLootRow();
-
-  document.getElementById("marketSearch").value = "";
-  recalcAll();
-  setStatus("Status: reset ✅");
-}
-
-// ---------- Boot / League switch ----------
-async function loadLeague(league){
-  activeLeague = league || "Standard";
-
-  const sel = document.getElementById("leagueSelect");
-  if (sel) sel.value = activeLeague;
-
-  rawData = await loadPricesJsonForLeague(activeLeague);
-
-  chaosIcon = rawData.baseIcon || "";
-  divineIcon = rawData?.divine?.icon || "";
-  divineChaosValue = Number(rawData?.divine?.chaosValue ?? 0) || null;
-
-  buildMenuFromJson(rawData);
-  renderMainTabs();
-  renderSubTabs();
-
-  // update label in panel title if present
-  const leagueLabel = document.getElementById("leagueLabel");
-  if (leagueLabel) leagueLabel.textContent = `League: ${rawData.league || activeLeague}`;
-
-  refreshItemsForSection();
-  syncCostFields();
-  recalcAll();
-  saveState();
-}
-
-async function boot(){
-  try{
-    const saved = loadState() || {};
-    const initialLeague = saved.league || document.getElementById("leagueSelect")?.value || "Standard";
-    activeMain = saved.activeMain || "";
-    activeSection = saved.activeSection || "";
-
-    // restore input fields
-    if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = saved.search ?? "";
-    if (document.getElementById("maps")) document.getElementById("maps").value = saved.maps ?? "10";
-    if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = saved.costPerMap ?? "0";
-    if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = saved.costPerMapDiv ?? "0";
-    if (saved.lastEditedCost) lastEditedCost = saved.lastEditedCost;
-    if (saved.totalsUnit) totalsUnit = saved.totalsUnit;
-
-    const btn = document.getElementById("displayUnitBtn");
-    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
-
-    // restore loot rows
-    const body = document.getElementById("lootBody");
-    if (body) body.innerHTML = "";
-    if (Array.isArray(saved.rows) && saved.rows.length){
-      saved.rows.forEach(r => {
-        if (r.manual){
-          addManualRow();
-          const last = body.lastElementChild;
-          last.querySelector(".lootItem").value = r.item || "";
-          last.querySelector(".lootQty").value = r.qty ?? "0";
-          last.querySelector(".manualPrice").value = r.price ?? "0";
-        } else {
-          addLootRow(r.item || "");
-          const last = body.lastElementChild;
-          last.querySelector(".lootQty").value = r.qty ?? "0";
-        }
-      });
-    } else {
-      addLootRow();
-    }
-
-    await loadLeague(initialLeague);
-  }catch(e){
+  try {
+    await loadLeagueData(league);
+    renderMarketList();
+  } catch (e) {
     console.error(e);
-    setStatus("Status: ERROR ❌ " + e.toString());
+    setStatus(`ERROR loading league data: ${e.message}`);
+    $("marketList").innerHTML = `<div class="hint">Failed to load data/prices-${league}.json</div>`;
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("marketSearch")?.addEventListener("input", () => { renderMarket(); saveState(); });
+/* -----------------------------
+   Init
+-------------------------------- */
 
-  document.getElementById("maps")?.addEventListener("input", () => { recalcAll(); saveState(); });
-
-  document.getElementById("costPerMap")?.addEventListener("input", () => {
-    if (isSyncingCost) return;
-    lastEditedCost = "chaos";
-    syncCostFields();
-    recalcAll();
-    saveState();
+function initUI(){
+  // tabs
+  $$(".tab").forEach(btn => {
+    btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
   });
 
-  document.getElementById("costPerMapDiv")?.addEventListener("input", () => {
-    if (isSyncingCost) return;
-    lastEditedCost = "div";
-    syncCostFields();
-    recalcAll();
-    saveState();
+  // search
+  $("marketSearch").addEventListener("input", (e) => {
+    state.search = e.target.value || "";
+    renderMarketList();
   });
 
-  document.getElementById("displayUnitBtn")?.addEventListener("click", () => {
-    totalsUnit = (totalsUnit === "chaos") ? "div" : "chaos";
-    const btn = document.getElementById("displayUnitBtn");
-    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
-    recalcAll();
-    saveState();
+  // league
+  const sel = $("leagueSelect");
+  sel.value = state.league;
+  sel.addEventListener("change", async () => {
+    await setLeague(sel.value);
   });
 
-  document.getElementById("resetBtn")?.addEventListener("click", resetAll);
-  document.getElementById("exportCsvBtn")?.addEventListener("click", exportLootCSV);
-
-  document.getElementById("leagueSelect")?.addEventListener("change", async (e) => {
-    try{
-      await loadLeague(e.target.value || "Standard");
-    }catch(err){
-      setStatus("Status: ERROR ❌ " + err.toString());
-    }
+  // actions
+  $("addRow").addEventListener("click", () => {
+    // add empty row (manual item name), you can also make it add from first search result if you want
+    addManualRow();
   });
 
-  boot();
-});
+  $("manualRow").addEventListener("click", () => addManualRow());
 
-// expose
-window.addLootRow = addLootRow;
-window.addManualRow = addManualRow;
-window.resetAll = resetAll;
+  $("exportCsv").addEventListener("click", () => exportCSV());
+
+  $("toggleCurrency").addEventListener("click", () => {
+    state.showDiv = !state.showDiv;
+    $("toggleCurrency").textContent = state.showDiv ? "Show Chaos" : "Show Div";
+    renderMarketList();
+    renderLootRows();
+    recalcTotals();
+  });
+
+  $("resetAll").addEventListener("click", () => {
+    state.lootRows = [];
+    $("totalMaps").value = 10;
+    $("costPerMapChaos").value = 0;
+    $("costPerMapDiv").value = 0;
+    renderLootRows();
+    recalcTotals();
+    setStatus("Reset.");
+  });
+
+  // invest recalculation
+  ["totalMaps","costPerMapChaos","costPerMapDiv"].forEach(id => {
+    $(id).addEventListener("input", () => recalcTotals());
+  });
+
+  // default tab
+  setActiveTab("Maps");
+}
+
+(async function boot(){
+  initUI();
+  recalcTotals();
+  await setLeague(state.league);
+})();
