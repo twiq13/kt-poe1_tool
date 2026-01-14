@@ -387,6 +387,7 @@ h1{
   overflow:hidden;
   text-overflow:ellipsis;
   max-width: 170px;
+  font-size: 14px; 
 }
 
 .mArrow{
@@ -405,6 +406,7 @@ h1{
   font-weight:900;
   min-width: 26px;
   text-align:right;
+  font-size: 14px;
 }
 .unitIcon{
   width:18px;
@@ -599,3 +601,4 @@ h1{
   .totalBox{ min-width: 140px; }
   #marketList{ max-height: 360px; }
 }
+
