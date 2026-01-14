@@ -1,37 +1,39 @@
 // =======================
-// PoE1 Loot Calculator (KT_) - SAFE VERSION
+// PoE1 Loot Calculator (KT_) - Multi-league
 // =======================
-// Loads local JSON: ./data/prices.json (GitHub Actions)
+// Loads local JSON: ./data/prices-<LEAGUE>.json (GitHub Actions)
 // Base unit: Chaos
 // Auto display: Div if chaos >= (divChaos + 1)
 // Totals toggle: Chaos / Div
-// Menus built from prices.json.sections (group -> main, id -> sub)
+// Main/Sub menus are built from prices.json.sections (group = main, id = sub)
 
 let rawData = null;
 
 let allItems = [];
 let byName = new Map();
 
-// Menu state (built from JSON)
+// menu from JSON
 let menu = {
-  mains: [],        // [{ id, label }]
-  subsByMain: {},   // { mainId: [{id,label}] }
-  mainLabelById: {},// id -> label
+  mains: [],
+  subsByMain: {},
 };
 
-let activeMain = "";     // e.g. "General Currency"
-let activeSection = "";  // e.g. "currency"
+let activeMain = "";
+let activeSection = "";
 
-// Icons & rate
+// league
+let activeLeague = "Standard";
+
+// icons & rate
 let chaosIcon = "";
 let divineIcon = "";
 let divineChaosValue = null;
 
-// Cost sync
+// cost sync
 let lastEditedCost = "chaos";
 let isSyncingCost = false;
 
-// Totals display unit
+// totals toggle
 let totalsUnit = "chaos";
 
 // ---------- Helpers ----------
@@ -43,12 +45,6 @@ function setStatus(msg){
 
 function cleanName(s){
   return String(s || "").replace(/\s*WIKI\s*$/i, "").trim();
-}
-
-function num(id){
-  const el = document.getElementById(id);
-  const v = el ? Number(el.value) : 0;
-  return Number.isFinite(v) ? v : 0;
 }
 
 function escapeHtml(s){
@@ -70,6 +66,17 @@ function fmtDateTime(iso){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
+function num(id){
+  const el = document.getElementById(id);
+  const v = el ? Number(el.value) : 0;
+  return Number.isFinite(v) ? v : 0;
+}
+
+function safeFileLeagueName(s){
+  return String(s || "Standard").trim().replace(/[^a-z0-9_-]+/gi, "_");
+}
+
+// ---------- Display logic ----------
 function shouldShowDiv(chaosAmount){
   if (!divineChaosValue || divineChaosValue <= 0) return false;
   return Number(chaosAmount || 0) >= (divineChaosValue + 1);
@@ -86,7 +93,6 @@ function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
     if (iconEl) iconEl.src = chaosIcon || "";
   }
 
-  // Hide icon img if empty to avoid broken image icon
   if (iconEl){
     iconEl.style.display = iconEl.src ? "block" : "none";
   }
@@ -105,19 +111,21 @@ function formatTotalSingle(chaosVal){
   return `<span>${fmtInt(c)}</span>${icon}`;
 }
 
-// ---------- Load JSON ----------
-async function loadPricesJson(){
-  setStatus("Status: loading data/prices.json...");
-  const res = await fetch("./data/prices.json?ts=" + Date.now(), { cache:"no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status} loading data/prices.json`);
+// ---------- Load local json per league ----------
+async function loadPricesJsonForLeague(league){
+  const lf = safeFileLeagueName(league);
+  const url = `./data/prices-${lf}.json?ts=` + Date.now();
+  setStatus("Status: loading " + url + " ...");
+
+  const res = await fetch(url, { cache:"no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} loading ${url}`);
   return await res.json();
 }
 
-// ---------- Build menu from JSON.sections ----------
+// ---------- Menu build from JSON.sections ----------
 function buildMenuFromJson(data){
   const secs = Array.isArray(data.sections) ? data.sections : [];
 
-  // main = group label
   const groups = [];
   const subsByMain = {};
 
@@ -128,7 +136,7 @@ function buildMenuFromJson(data){
     subsByMain[group].push({ id: s.id, label: s.label || s.id });
   }
 
-  // default order: the 4 groups if present
+  // preferred order
   const preferred = ["General Currency", "Equipment & Gems", "Atlas", "Crafting"];
   const ordered = [
     ...preferred.filter(x => groups.includes(x)),
@@ -137,16 +145,9 @@ function buildMenuFromJson(data){
 
   menu.mains = ordered.map(g => ({ id: g, label: g }));
   menu.subsByMain = subsByMain;
-  menu.mainLabelById = Object.fromEntries(menu.mains.map(x => [x.id, x.label]));
 
-  // Defaults if empty
-  if (!menu.mains.length){
-    menu.mains = [{ id:"General Currency", label:"General Currency" }];
-    menu.subsByMain["General Currency"] = [{ id:"currency", label:"Currency" }];
-  }
-
-  // Validate active selections
-  if (!activeMain || !menu.subsByMain[activeMain]) activeMain = menu.mains[0].id;
+  // validate current
+  if (!activeMain || !menu.subsByMain[activeMain]) activeMain = menu.mains[0]?.id || preferred[0];
   const subs = menu.subsByMain[activeMain] || [];
   if (!activeSection || !subs.some(x => x.id === activeSection)){
     activeSection = subs[0]?.id || "currency";
@@ -155,7 +156,7 @@ function buildMenuFromJson(data){
 
 function renderMainTabs(){
   const wrap = document.getElementById("mainTabs");
-  if (!wrap) return; // if HTML doesn't have it, we skip
+  if (!wrap) return;
 
   wrap.innerHTML = "";
   menu.mains.forEach(t => {
@@ -208,7 +209,7 @@ function renderSubTabs(){
 // ---------- Items / Market ----------
 function refreshItemsForSection(){
   if (!rawData){
-    setStatus("Status: ERROR ❌ prices.json not loaded");
+    setStatus("Status: ERROR ❌ prices not loaded");
     return;
   }
 
@@ -220,7 +221,7 @@ function refreshItemsForSection(){
       section: x.section || activeSection,
       name: cleanName(x.name),
       icon: x.icon || "",
-      amount: Number(x.amount ?? 0), // Chaos
+      amount: Number(x.amount ?? 0),
     }));
 
   byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
@@ -228,7 +229,7 @@ function refreshItemsForSection(){
   fillDatalist();
   renderMarket();
 
-  // Refresh loot item rows prices
+  // refresh existing loot rows (re-apply prices/icons)
   document.querySelectorAll("#lootBody tr").forEach(tr => {
     if (tr.classList.contains("manualRow")) return;
     const itemInput = tr.querySelector(".lootItem");
@@ -237,9 +238,13 @@ function refreshItemsForSection(){
 
   recalcAll();
 
+  // update league label if you have one
+  const leagueLabel = document.getElementById("leagueLabel");
+  if (leagueLabel) leagueLabel.textContent = `League: ${rawData.league || activeLeague}`;
+
   const updatedStr = rawData.updatedAt ? ` | updated=${fmtDateTime(rawData.updatedAt)}` : "";
   const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : "";
-  setStatus(`Status: OK ✅ main="${activeMain}" section="${activeSection}" items=${allItems.length}${divStr}${updatedStr}`);
+  setStatus(`Status: OK ✅ league=${rawData.league || activeLeague} main="${activeMain}" section="${activeSection}" items=${allItems.length}${divStr}${updatedStr}`);
 }
 
 function fillDatalist(){
@@ -261,7 +266,7 @@ function renderMarket(){
 
   const filtered = allItems
     .filter(it => it.name.toLowerCase().includes(q))
-    .slice(0, 400);
+    .slice(0, 500);
 
   list.innerHTML = "";
 
@@ -274,10 +279,9 @@ function renderMarket(){
     const row = document.createElement("div");
     row.className = "market-row";
 
-    const iconHtml = it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : "";
     row.innerHTML = `
       <div class="mLeft">
-        ${iconHtml}
+        ${it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : ""}
         <span class="mName">${escapeHtml(it.name)}</span>
       </div>
 
@@ -288,10 +292,6 @@ function renderMarket(){
         <img class="unitIcon" alt="">
       </div>
     `;
-
-    // hide broken icons
-    const leftIcon = row.querySelector(".cIcon");
-    if (leftIcon && !it.icon) leftIcon.style.display = "none";
 
     const valEl = row.querySelector(".mPriceVal");
     const icoEl = row.querySelector(".unitIcon");
@@ -435,7 +435,6 @@ function addManualRow(){
 
   body.appendChild(tr);
 
-  // set base icon if available
   const baseImg = tr.querySelector(".baseIcon");
   if (baseImg){
     baseImg.src = chaosIcon || "";
@@ -521,13 +520,9 @@ function recalcAll(){
   const loot = calcLootChaos();
   const gain = loot - invest;
 
-  const invEl = document.getElementById("totalInvest");
-  const lootEl = document.getElementById("totalLoot");
-  const gainEl = document.getElementById("gain");
-
-  if (invEl) invEl.innerHTML = formatTotalSingle(invest);
-  if (lootEl) lootEl.innerHTML = formatTotalSingle(loot);
-  if (gainEl) gainEl.innerHTML = formatTotalSingle(gain);
+  document.getElementById("totalInvest").innerHTML = formatTotalSingle(invest);
+  document.getElementById("totalLoot").innerHTML = formatTotalSingle(loot);
+  document.getElementById("gain").innerHTML = formatTotalSingle(gain);
 }
 
 // ---------- CSV ----------
@@ -573,13 +568,7 @@ function exportLootCSV(){
       return /[",\n"]/.test(str) ? `"${str.replace(/"/g,'""')}"` : str;
     };
 
-    lines.push([
-      esc(item),
-      displayPrice,
-      devise,
-      fmtInt(qty),
-      esc(toBoth(totalC))
-    ].join(","));
+    lines.push([esc(item), displayPrice, devise, fmtInt(qty), esc(toBoth(totalC))].join(","));
   });
 
   lines.push("");
@@ -612,6 +601,7 @@ function saveState(){
   });
 
   const state = {
+    league: activeLeague,
     activeMain,
     activeSection,
     search: document.getElementById("marketSearch")?.value ?? "",
@@ -628,45 +618,8 @@ function saveState(){
 
 function loadState(){
   const raw = localStorage.getItem("poe1FarmState");
-  if (!raw) return;
-
-  try{
-    const s = JSON.parse(raw);
-
-    if (s.activeMain) activeMain = s.activeMain;
-    if (s.activeSection) activeSection = s.activeSection;
-
-    if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = s.search ?? "";
-    if (document.getElementById("maps")) document.getElementById("maps").value = s.maps ?? "10";
-    if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = s.costPerMap ?? "0";
-    if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = s.costPerMapDiv ?? "0";
-
-    if (s.lastEditedCost) lastEditedCost = s.lastEditedCost;
-    if (s.totalsUnit) totalsUnit = s.totalsUnit;
-
-    const btn = document.getElementById("displayUnitBtn");
-    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
-
-    // Restore loot rows
-    const body = document.getElementById("lootBody");
-    if (body) body.innerHTML = "";
-
-    if (Array.isArray(s.rows) && s.rows.length){
-      s.rows.forEach(r => {
-        if (r.manual){
-          addManualRow();
-          const last = body.lastElementChild;
-          last.querySelector(".lootItem").value = r.item || "";
-          last.querySelector(".lootQty").value = r.qty ?? "0";
-          last.querySelector(".manualPrice").value = r.price ?? "0";
-        } else {
-          addLootRow(r.item || "");
-          const last = body.lastElementChild;
-          last.querySelector(".lootQty").value = r.qty ?? "0";
-        }
-      });
-    }
-  }catch{}
+  if (!raw) return null;
+  try{ return JSON.parse(raw); }catch{ return null; }
 }
 
 function resetAll(){
@@ -681,8 +634,7 @@ function resetAll(){
   const btn = document.getElementById("displayUnitBtn");
   if (btn) btn.textContent = "Show Div";
 
-  const body = document.getElementById("lootBody");
-  if (body) body.innerHTML = "";
+  document.getElementById("lootBody").innerHTML = "";
   addLootRow();
 
   document.getElementById("marketSearch").value = "";
@@ -690,32 +642,73 @@ function resetAll(){
   setStatus("Status: reset ✅");
 }
 
-// ---------- Boot ----------
+// ---------- Boot / League switch ----------
+async function loadLeague(league){
+  activeLeague = league || "Standard";
+
+  const sel = document.getElementById("leagueSelect");
+  if (sel) sel.value = activeLeague;
+
+  rawData = await loadPricesJsonForLeague(activeLeague);
+
+  chaosIcon = rawData.baseIcon || "";
+  divineIcon = rawData?.divine?.icon || "";
+  divineChaosValue = Number(rawData?.divine?.chaosValue ?? 0) || null;
+
+  buildMenuFromJson(rawData);
+  renderMainTabs();
+  renderSubTabs();
+
+  // update label in panel title if present
+  const leagueLabel = document.getElementById("leagueLabel");
+  if (leagueLabel) leagueLabel.textContent = `League: ${rawData.league || activeLeague}`;
+
+  refreshItemsForSection();
+  syncCostFields();
+  recalcAll();
+  saveState();
+}
+
 async function boot(){
   try{
-    rawData = await loadPricesJson();
+    const saved = loadState() || {};
+    const initialLeague = saved.league || document.getElementById("leagueSelect")?.value || "Standard";
+    activeMain = saved.activeMain || "";
+    activeSection = saved.activeSection || "";
 
-    chaosIcon = rawData.baseIcon || "";
-    divineIcon = rawData?.divine?.icon || "";
-    divineChaosValue = Number(rawData?.divine?.chaosValue ?? 0) || null;
+    // restore input fields
+    if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = saved.search ?? "";
+    if (document.getElementById("maps")) document.getElementById("maps").value = saved.maps ?? "10";
+    if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = saved.costPerMap ?? "0";
+    if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = saved.costPerMapDiv ?? "0";
+    if (saved.lastEditedCost) lastEditedCost = saved.lastEditedCost;
+    if (saved.totalsUnit) totalsUnit = saved.totalsUnit;
 
-    buildMenuFromJson(rawData);
+    const btn = document.getElementById("displayUnitBtn");
+    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
 
-    // tabs (if exist)
-    renderMainTabs();
-    renderSubTabs();
+    // restore loot rows
+    const body = document.getElementById("lootBody");
+    if (body) body.innerHTML = "";
+    if (Array.isArray(saved.rows) && saved.rows.length){
+      saved.rows.forEach(r => {
+        if (r.manual){
+          addManualRow();
+          const last = body.lastElementChild;
+          last.querySelector(".lootItem").value = r.item || "";
+          last.querySelector(".lootQty").value = r.qty ?? "0";
+          last.querySelector(".manualPrice").value = r.price ?? "0";
+        } else {
+          addLootRow(r.item || "");
+          const last = body.lastElementChild;
+          last.querySelector(".lootQty").value = r.qty ?? "0";
+        }
+      });
+    } else {
+      addLootRow();
+    }
 
-    // restore UI state AFTER menu exists
-    loadState();
-    buildMenuFromJson(rawData);
-    renderMainTabs();
-    renderSubTabs();
-
-    if (!document.querySelector("#lootBody tr")) addLootRow();
-
-    refreshItemsForSection();
-    syncCostFields();
-    recalcAll();
+    await loadLeague(initialLeague);
   }catch(e){
     console.error(e);
     setStatus("Status: ERROR ❌ " + e.toString());
@@ -753,6 +746,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.getElementById("resetBtn")?.addEventListener("click", resetAll);
   document.getElementById("exportCsvBtn")?.addEventListener("click", exportLootCSV);
+
+  document.getElementById("leagueSelect")?.addEventListener("change", async (e) => {
+    try{
+      await loadLeague(e.target.value || "Standard");
+    }catch(err){
+      setStatus("Status: ERROR ❌ " + err.toString());
+    }
+  });
 
   boot();
 });
