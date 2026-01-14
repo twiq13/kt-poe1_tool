@@ -1,80 +1,33 @@
 // =======================
-// PoE1 Loot Calculator (poe.ninja)
-// Base internal unit: Chaos
-// Display: auto Div if chaos >= (divineChaos + 1)  // "+1 minimum" rule
-// Totals toggle: Chaos / Div
+// PoE1 Loot Calculator (KT_)
 // =======================
+//
+// Loads local JSON: ./data/prices.json (built by GitHub Actions)
+// Base unit: Chaos
+// Display rule (market + loot): show Div if >= (1 Div in Chaos + 1 Chaos)
+// Totals: toggle Chaos/Div (single unit)
+// UI: same patterns as PoE2 (rows, datalist, state, etc.)
 
-// -----------------------
-// State
-// -----------------------
 let allItems = [];
 let byName = new Map();
 
+// Tabs
 let activeMain = "general";
-let activeSub = "currency";
+let activeSection = "currency"; // sub tab id
 
-let chaosIcon = "";     // fallback icon (optional)
-let divineIcon = "";    // Divine Orb icon
+// Icons & rate
+let chaosIcon = "";
+let divineIcon = "";
 let divineChaosValue = null; // 1 Div = X Chaos
 
-let lastEditedCost = "chaos";   // "chaos" | "div"
+// Cost sync
+let lastEditedCost = "chaos"; // "chaos" | "div"
 let isSyncingCost = false;
 
-let totalsUnit = "chaos";       // "chaos" | "div"
+// Totals display unit
+let totalsUnit = "chaos"; // "chaos" | "div"
 
-// -----------------------
-// Menu config (4 main + sub menus)
-// type/kind are poe.ninja API types
-// -----------------------
-const MAIN_TABS = [
-  { id:"general", label:"General Currency" },
-  { id:"equip",   label:"Equipment & Gems" },
-  { id:"atlas",   label:"Atlas" },
-  { id:"craft",   label:"Crafting" },
-];
-
-const SUB_TABS = {
-  general: [
-    { id:"currency",  label:"Currency",     kind:"currency", type:"Currency" },
-    { id:"fragment",  label:"Fragments",    kind:"currency", type:"Fragment" },
-    { id:"scarab",    label:"Scarabs",      kind:"item",     type:"Scarab" },
-    { id:"divcard",   label:"Div Cards",    kind:"item",     type:"DivinationCard" },
-  ],
-  equip: [
-    { id:"skillgem",  label:"Skill Gems",   kind:"item", type:"SkillGem" },
-    { id:"basetype",  label:"Base Types",   kind:"item", type:"BaseType" },
-    { id:"uweapon",   label:"Unique Wpn",   kind:"item", type:"UniqueWeapon" },
-    { id:"uarmour",   label:"Unique Arm",   kind:"item", type:"UniqueArmour" },
-    { id:"uacc",      label:"Unique Acc",   kind:"item", type:"UniqueAccessory" },
-    { id:"ujewel",    label:"Unique Jewel", kind:"item", type:"UniqueJewel" },
-    { id:"cluster",   label:"Cluster",      kind:"item", type:"ClusterJewel" },
-    { id:"uflask",    label:"Unique Flask", kind:"item", type:"UniqueFlask" },
-  ],
-  atlas: [
-    { id:"map",       label:"Maps",         kind:"item", type:"Map" },
-    { id:"umap",      label:"Unique Maps",  kind:"item", type:"UniqueMap" },
-    { id:"invite",    label:"Invitations",  kind:"item", type:"Invitation" },
-    { id:"memory",    label:"Memories",     kind:"item", type:"Memory" },
-    { id:"blight",    label:"Blighted",     kind:"item", type:"BlightedMap" },
-    { id:"brav",      label:"Ravaged",      kind:"item", type:"BlightRavagedMap" },
-  ],
-  craft: [
-    { id:"essence",   label:"Essences",     kind:"item", type:"Essence" },
-    { id:"fossil",    label:"Fossils",      kind:"item", type:"Fossil" },
-    { id:"resonator", label:"Resonators",   kind:"item", type:"Resonator" },
-    { id:"oil",       label:"Oils",         kind:"item", type:"Oil" },
-    { id:"deliorb",   label:"Deli Orbs",    kind:"item", type:"DeliriumOrb" },
-    { id:"incubator", label:"Incubators",   kind:"item", type:"Incubator" },
-    { id:"beast",     label:"Beasts",       kind:"item", type:"Beast" },
-    { id:"vial",      label:"Vials",        kind:"item", type:"Vial" },
-    { id:"omen",      label:"Omens",        kind:"item", type:"Omen" },
-  ]
-};
-
-// -----------------------
-// Helpers
-// -----------------------
+// ---------- DOM helpers ----------
 function setStatus(msg){
   const el = document.getElementById("fetchStatus");
   if (el) el.textContent = msg;
@@ -97,7 +50,6 @@ function escapeHtml(s){
   }[m]));
 }
 
-// integer display everywhere (same as your PoE2)
 function fmtInt(n){
   const x = Number(n || 0);
   return String(Math.round(x));
@@ -111,35 +63,70 @@ function fmtDateTime(iso){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
-function getLeague(){
-  const v = (document.getElementById("leagueInput")?.value || "").trim();
-  return v.length ? v : "keepers";
+// ---------- Sections mapping (4 main menus + sub menus) ----------
+// Your UI has #mainTabs and #subTabs (see index.html I gave earlier).
+// If you kept your old HTML without these, tell me and I’ll adapt to single tabs.
+const MAIN_TABS = [
+  { id:"general", label:"General Currency" },
+  { id:"equip",   label:"Equipment & Gems" },
+  { id:"atlas",   label:"Atlas" },
+  { id:"craft",   label:"Crafting" },
+];
+
+// This maps your poe1 prices.json "section" ids into main menus.
+// Make sure the section ids here match the ids you output in scripts/scrape-poeninja-poe1.mjs
+const SUB_TABS = {
+  general: [
+    { id:"currency",  label:"Currency" },
+    { id:"fragments", label:"Fragments" },
+    { id:"scarabs",   label:"Scarabs" },
+    { id:"divcards",  label:"Div Cards" },
+  ],
+  equip: [
+    { id:"skillgems", label:"Skill Gems" },
+    { id:"basetypes", label:"Base Types" },
+    { id:"uweapon",   label:"Unique Wpn" },
+    { id:"uarmour",   label:"Unique Arm" },
+    { id:"uacc",      label:"Unique Acc" },
+    { id:"ujewel",    label:"Unique Jewel" },
+    { id:"cluster",   label:"Cluster" },
+    { id:"uflask",    label:"Unique Flask" },
+  ],
+  atlas: [
+    { id:"maps",      label:"Maps" },
+    { id:"umaps",     label:"Unique Maps" },
+    { id:"invites",   label:"Invitations" },
+    { id:"memories",  label:"Memories" },
+    { id:"blighted",  label:"Blighted" },
+    { id:"ravaged",   label:"Ravaged" },
+  ],
+  craft: [
+    { id:"essence",   label:"Essences" },
+    { id:"fossil",    label:"Fossils" },
+    { id:"resonator", label:"Resonators" },
+    { id:"oil",       label:"Oils" },
+    { id:"deliorb",   label:"Deli Orbs" },
+    { id:"incubator", label:"Incubators" },
+    { id:"beast",     label:"Beasts" },
+    { id:"vial",      label:"Vials" },
+    { id:"omen",      label:"Omens" },
+  ],
+};
+
+function isValidMain(id){
+  return MAIN_TABS.some(t => t.id === id);
+}
+function isValidSub(mainId, subId){
+  return (SUB_TABS[mainId] || []).some(s => s.id === subId);
 }
 
-// poe.ninja API
-function makePoeNinjaUrl(league, kind, type){
-  const base = "https://poe.ninja/api/data";
-  const l = encodeURIComponent(league);
-  const t = encodeURIComponent(type);
-  if (kind === "currency") return `${base}/currencyoverview?league=${l}&type=${t}`;
-  return `${base}/itemoverview?league=${l}&type=${t}`;
-}
-
-async function fetchJSON(url){
-  const res = await fetch(url, { cache:"no-store" });
-  if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
-  return await res.json();
-}
-
-// -----------------------
-// Currency logic: auto Div if >= (1div in chaos + 1 chaos)
-// -----------------------
+// ---------- Display rule ----------
+// market/loot display in Div if >= (1 Div + 1 Chaos)
 function shouldShowDiv(chaosAmount){
   if (!divineChaosValue || divineChaosValue <= 0) return false;
   return Number(chaosAmount || 0) >= (divineChaosValue + 1);
 }
 
-// market + loot price display (auto div)
 function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
   const c = Number(chaosAmount || 0);
 
@@ -148,7 +135,7 @@ function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
     if (iconEl) iconEl.src = divineIcon;
   } else {
     valueEl.textContent = fmtInt(c);
-    if (iconEl) iconEl.src = chaosIcon || ""; // optional
+    if (iconEl) iconEl.src = chaosIcon || "";
   }
 }
 
@@ -168,81 +155,69 @@ function formatTotalSingle(chaosVal){
   `;
 }
 
-// -----------------------
-// Fetch & parse
-// -----------------------
-async function loadDivineRateAndIcons(league){
-  // Load Currency overview to find Divine Orb value and icons
-  const url = makePoeNinjaUrl(league, "currency", "Currency");
-  const data = await fetchJSON(url);
+// ---------- Load local data/prices.json ----------
+async function loadData(){
+  try{
+    setStatus("Status: loading data/prices.json...");
+    const res = await fetch("./data/prices.json?ts=" + Date.now(), { cache:"no-store" });
+    if (!res.ok) throw new Error(`HTTP ${res.status} fetching data/prices.json`);
+    const data = await res.json();
 
-  const lines = Array.isArray(data?.lines) ? data.lines : [];
-  const divine = lines.find(x => (x.currencyTypeName || x.name) === "Divine Orb");
-  const chaos  = lines.find(x => (x.currencyTypeName || x.name) === "Chaos Orb");
+    // lines
+    const lines = Array.isArray(data.lines) ? data.lines : [];
 
-  divineIcon = divine?.icon || "";
-  chaosIcon  = chaos?.icon || "";
+    // Keep only selected section for current tab
+    const selectedSectionId = activeSection;
 
-  const val = divine?.chaosEquivalent ?? divine?.chaosValue ?? null;
-  divineChaosValue = (typeof val === "number" && isFinite(val)) ? val : null;
+    allItems = lines
+      .filter(x => (x.section || "") === selectedSectionId)
+      .map(x => ({
+        section: x.section || selectedSectionId,
+        name: cleanName(x.name),
+        icon: x.icon || "",
+        amount: Number(x.amount ?? 0), // ✅ amount in Chaos
+        unit: x.unit || "Chaos Orb",
+        unitIcon: x.unitIcon || data.baseIcon || "",
+      }));
 
-  return { updatedAt: data?.updated ?? data?.updatedAt ?? "" };
+    byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
+
+    // base icon
+    chaosIcon = data.baseIcon || "";
+    // divine
+    divineIcon = data?.divine?.icon || "";
+    divineChaosValue = Number(data?.divine?.chaosValue ?? 0) || null;
+
+    // league title
+    const league = data.league || "Standard";
+    const leagueTitle = document.getElementById("leagueTitle");
+    if (leagueTitle) leagueTitle.textContent = `League: ${league}`;
+
+    const updatedAt = data.updatedAt || "";
+    const updatedStr = updatedAt ? ` | updated=${fmtDateTime(updatedAt)}` : "";
+    const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : " | 1 Div=?";
+
+    setStatus(`Status: OK ✅ main=${activeMain} section=${activeSection} items=${allItems.length}${divStr}${updatedStr}`);
+
+    fillDatalist();
+    renderMarket();
+
+    // refresh loot display (re-apply icons/prices)
+    document.querySelectorAll("#lootBody tr").forEach(tr => {
+      if (tr.classList.contains("manualRow")) return;
+      const itemInput = tr.querySelector(".lootItem");
+      if (itemInput) itemInput.dispatchEvent(new Event("input"));
+    });
+
+    syncCostFields();
+    recalcAll();
+  }catch(e){
+    console.error(e);
+    setStatus("Status: ERROR ❌ " + e.toString());
+  }
 }
 
-function parsePoeNinjaLines(payload, fallbackSectionId){
-  const lines = Array.isArray(payload?.lines) ? payload.lines : [];
-  const items = lines.map(x => {
-    const name = cleanName(x.currencyTypeName || x.name || x.baseType || "Unknown");
-    const icon = x.icon || "";
-    const chaos = Number(
-      x.chaosEquivalent ??
-      x.chaosValue ??
-      x.value ??
-      0
-    ) || 0;
-
-    // keep same object shape as PoE2 (amount in base unit)
-    return {
-      section: fallbackSectionId,
-      name,
-      icon,
-      amount: chaos,     // base = chaos
-      unit: "chaos",
-      unitIcon: chaosIcon || "",
-    };
-  });
-
-  return items;
-}
-
-async function loadMarketForActive(){
-  const league = getLeague();
-  const sub = (SUB_TABS[activeMain] || []).find(s => s.id === activeSub) || (SUB_TABS.general[0]);
-
-  const url = makePoeNinjaUrl(league, sub.kind, sub.type);
-
-  setStatus(`Status: loading poe.ninja... league=${league} type=${sub.type}`);
-
-  const payload = await fetchJSON(url);
-  const items = parsePoeNinjaLines(payload, `${activeMain}:${activeSub}`);
-
-  // update global list
-  allItems = items;
-  byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
-
-  fillDatalist();
-  renderMarket();
-
-  const updatedAt = payload?.updated ?? payload?.updatedAt ?? "";
-  const updatedStr = updatedAt ? ` | last update=${fmtDateTime(updatedAt)}` : "";
-  const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : "";
-
-  setStatus(`Status: OK ✅ items=${allItems.length}${divStr}${updatedStr}`);
-}
-
-// -----------------------
-// UI: tabs
-// -----------------------
+// ---------- Tabs UI ----------
 function buildMainTabs(){
   const wrap = document.getElementById("mainTabs");
   if (!wrap) return;
@@ -254,17 +229,18 @@ function buildMainTabs(){
     b.textContent = t.label;
     b.dataset.tab = t.id;
 
-    b.addEventListener("click", async () => {
+    b.addEventListener("click", () => {
       activeMain = t.id;
-      // default sub to first
-      activeSub = (SUB_TABS[activeMain]?.[0]?.id) || "currency";
+      // default sub
+      activeSection = SUB_TABS[activeMain]?.[0]?.id || "currency";
 
-      document.querySelectorAll("#mainTabs .tab")
-        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
+      document.querySelectorAll("#mainTabs .tab").forEach(x =>
+        x.classList.toggle("active", x.dataset.tab === activeMain)
+      );
 
       buildSubTabs();
-      await reloadAll();
       saveState();
+      loadData();
     });
 
     wrap.appendChild(b);
@@ -276,30 +252,39 @@ function buildSubTabs(){
   if (!wrap) return;
 
   wrap.innerHTML = "";
-
   const subs = SUB_TABS[activeMain] || [];
+
   subs.forEach(sec => {
     const b = document.createElement("button");
-    b.className = "tab" + (sec.id === activeSub ? " active" : "");
+    b.className = "tab" + (sec.id === activeSection ? " active" : "");
     b.textContent = sec.label;
     b.dataset.tab = sec.id;
 
-    b.addEventListener("click", async () => {
-      activeSub = sec.id;
-      document.querySelectorAll("#subTabs .tab")
-        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeSub));
-
-      await reloadAll();
+    b.addEventListener("click", () => {
+      activeSection = sec.id;
+      document.querySelectorAll("#subTabs .tab").forEach(x =>
+        x.classList.toggle("active", x.dataset.tab === activeSection)
+      );
       saveState();
+      loadData();
     });
 
     wrap.appendChild(b);
   });
 }
 
-// -----------------------
-// Market list render (same as PoE2)
-// -----------------------
+// ---------- Market list ----------
+function fillDatalist(){
+  const dl = document.getElementById("itemDatalist");
+  if (!dl) return;
+  dl.innerHTML = "";
+  allItems.forEach(it => {
+    const opt = document.createElement("option");
+    opt.value = it.name;
+    dl.appendChild(opt);
+  });
+}
+
 function renderMarket(){
   const list = document.getElementById("marketList");
   if (!list) return;
@@ -344,20 +329,7 @@ function renderMarket(){
   });
 }
 
-function fillDatalist(){
-  const dl = document.getElementById("itemDatalist");
-  if (!dl) return;
-  dl.innerHTML = "";
-  allItems.forEach(it => {
-    const opt = document.createElement("option");
-    opt.value = it.name;
-    dl.appendChild(opt);
-  });
-}
-
-// -----------------------
-// Loot rows (same structure, but base=chaos)
-// -----------------------
+// ---------- Loot rows ----------
 function addLootRow(prefillName = ""){
   if (prefillName && typeof prefillName === "object") prefillName = "";
   prefillName = String(prefillName || "");
@@ -515,9 +487,7 @@ function addManualRow(){
   update();
 }
 
-// -----------------------
-// Cost per map syncing (chaos <-> div)
-// -----------------------
+// ---------- Cost syncing ----------
 function syncCostFields(){
   const cEl = document.getElementById("costPerMap");
   const dEl = document.getElementById("costPerMapDiv");
@@ -576,9 +546,7 @@ function recalcAll(){
   document.getElementById("gain").innerHTML = formatTotalSingle(gain);
 }
 
-// -----------------------
-// CSV export (same structure as PoE2, but chaos/div)
-// -----------------------
+// ---------- CSV ----------
 function exportLootCSV(){
   const lines = [];
   lines.push("Item,Price,Devise,Qty,Total price chaos/divine");
@@ -648,9 +616,7 @@ function exportLootCSV(){
   URL.revokeObjectURL(url);
 }
 
-// -----------------------
-// Persistence
-// -----------------------
+// ---------- State ----------
 function saveState(){
   const rows = [...document.querySelectorAll("#lootBody tr")].map(tr => {
     const manual = tr.classList.contains("manualRow");
@@ -664,9 +630,8 @@ function saveState(){
 
   const state = {
     activeMain,
-    activeSub,
+    activeSection,
     search: document.getElementById("marketSearch")?.value ?? "",
-    league: document.getElementById("leagueInput")?.value ?? "keepers",
     maps: document.getElementById("maps")?.value ?? "10",
     costPerMap: document.getElementById("costPerMap")?.value ?? "0",
     costPerMapDiv: document.getElementById("costPerMapDiv")?.value ?? "0",
@@ -685,31 +650,29 @@ function loadState(){
   try{
     const s = JSON.parse(raw);
 
-    if (s.activeMain) activeMain = s.activeMain;
-    if (s.activeSub) activeSub = s.activeSub;
+    if (s.activeMain && isValidMain(s.activeMain)) activeMain = s.activeMain;
+    if (s.activeSection && isValidSub(activeMain, s.activeSection)) activeSection = s.activeSection;
 
     if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = s.search ?? "";
-    if (document.getElementById("leagueInput")) document.getElementById("leagueInput").value = s.league ?? "keepers";
 
     if (document.getElementById("maps")) document.getElementById("maps").value = s.maps ?? "10";
     if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = s.costPerMap ?? "0";
     if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = s.costPerMapDiv ?? "0";
-
     if (s.lastEditedCost) lastEditedCost = s.lastEditedCost;
     if (s.totalsUnit) totalsUnit = s.totalsUnit;
 
     const btn = document.getElementById("displayUnitBtn");
     if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
 
-    // build tabs UI state
+    // rebuild tabs to match restored state
     buildMainTabs();
     document.querySelectorAll("#mainTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
-
     buildSubTabs();
-    document.querySelectorAll("#subTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeSub));
+    document.querySelectorAll("#subTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeSection));
 
+    // restore loot rows
     const body = document.getElementById("lootBody");
-    body.innerHTML = "";
+    if (body) body.innerHTML = "";
 
     if (Array.isArray(s.rows) && s.rows.length){
       s.rows.forEach(r => {
@@ -745,7 +708,7 @@ function resetAll(){
   addLootRow();
 
   activeMain = "general";
-  activeSub = "currency";
+  activeSection = "currency";
   document.getElementById("marketSearch").value = "";
 
   buildMainTabs();
@@ -755,61 +718,9 @@ function resetAll(){
   setStatus("Status: reset ✅");
 }
 
-// -----------------------
-// Reload all (league change, tab change, etc.)
-// -----------------------
-async function reloadAll(){
-  const league = getLeague();
-  document.getElementById("leagueTitle").textContent = `League: ${league}`;
-
-  try{
-    // always refresh divine rate (needed for conversion)
-    const meta = await loadDivineRateAndIcons(league);
-
-    const divStr = divineChaosValue ? `1 Div=${fmtInt(divineChaosValue)} Chaos` : "Div rate: N/A";
-    const updatedStr = meta?.updatedAt ? ` | rates updated=${fmtDateTime(meta.updatedAt)}` : "";
-
-    setStatus(`Status: rates OK ✅ ${divStr}${updatedStr}`);
-
-    // sync cost inputs now that we have divineChaosValue
-    syncCostFields();
-
-    // now load active market
-    await loadMarketForActive();
-
-    // re-render existing loot rows (icons/prices)
-    document.querySelectorAll("#lootBody tr").forEach(tr => {
-      if (tr.classList.contains("manualRow")) return;
-      const itemInput = tr.querySelector(".lootItem");
-      if (!itemInput) return;
-      itemInput.dispatchEvent(new Event("input"));
-    });
-
-    recalcAll();
-  }catch(e){
-    console.error(e);
-    setStatus("Status: ERROR ❌ " + e.toString());
-  }
-}
-
-// -----------------------
-// Init
-// -----------------------
+// ---------- Init ----------
 document.addEventListener("DOMContentLoaded", () => {
-  // defaults
-  buildMainTabs();
-  buildSubTabs();
-
-  // restore
-  loadState();
-
-  // wire events
   document.getElementById("marketSearch")?.addEventListener("input", () => { renderMarket(); saveState(); });
-
-  document.getElementById("leagueInput")?.addEventListener("change", async () => {
-    await reloadAll();
-    saveState();
-  });
 
   document.getElementById("maps")?.addEventListener("input", () => { recalcAll(); saveState(); });
 
@@ -840,15 +751,16 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("resetBtn")?.addEventListener("click", resetAll);
   document.getElementById("exportCsvBtn")?.addEventListener("click", exportLootCSV);
 
-  // ensure at least one row
+  buildMainTabs();
+  buildSubTabs();
+  loadState();
+
   if (!document.querySelector("#lootBody tr")) addLootRow();
 
-  // initial load
-  reloadAll();
+  loadData();
 });
 
-// expose (same as your PoE2)
+// expose
 window.addLootRow = addLootRow;
 window.addManualRow = addManualRow;
 window.resetAll = resetAll;
-
