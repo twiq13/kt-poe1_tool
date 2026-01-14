@@ -242,7 +242,7 @@ button:hover{ background:#2f2f2f; }
   content:"";
   position:absolute;
   inset:0;
-  background-image:url("data/Vaal_Atziri_Cinematic1.png");
+  background-image:url("data/LayeredKeyArt_HighRes2.png");
   background-size:cover;
   background-position:center;
   opacity:var(--loot-bg-opacity);
@@ -450,3 +450,4 @@ a.resetBtn{
 .site-signature a{ color:#cfcfcf; text-decoration:none; }
 .site-signature a:hover{ text-decoration:underline; }
 .site-signature .sep{ opacity:.5; }
+
