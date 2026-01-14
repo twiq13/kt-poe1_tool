@@ -1,124 +1,162 @@
-<!doctype html>
+<!--
+  © KT_ - https://github.com/twiq13/
+  This website and its source code are provided for personal use only.
+  Copying, redistribution, or reuse without explicit credit is not permitted.
+-->
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PoE1 Loot Calculator</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=1">
+  <link rel="icon" href="data/favincon.jpg">
 </head>
 
 <body>
-  <div class="app">
-    <!-- TOP BAR -->
-    <header class="topbar">
-      <div class="title">PoE1 Loot Calculator</div>
 
-      <div class="controls">
-        <div class="field">
-          <label>Total Maps</label>
-          <input id="totalMaps" type="number" min="0" value="10" />
-        </div>
+  <!-- TOP RIGHT -->
+  <a
+    id="redditBtn"
+    class="resetBtn redditBtn"
+    href="https://poe.ninja/"
+    target="_blank"
+    rel="noopener"
+    title="Open poe.ninja"
+  >
+    poe.ninja
+  </a>
 
-        <div class="field">
-          <label>Cost per Map (Chaos)</label>
-          <input id="costPerMapChaos" type="number" min="0" value="0" />
-        </div>
+  <h1>PoE1 Loot Calculator</h1>
 
-        <div class="field">
-          <label>Cost per Map (Div)</label>
-          <input id="costPerMapDiv" type="number" min="0" value="0" />
-        </div>
+  <!-- HEADER BAR -->
+  <div class="header-bar">
+
+    <!-- INVEST (left) -->
+    <div class="invest-mini">
+      <div class="field">
+        <label>Total Maps</label>
+        <input type="number" id="maps" value="10" min="0">
       </div>
 
-      <div class="totals">
-        <div class="pill">
-          <div class="pillLabel">Total Invest</div>
-          <div class="pillValue" id="totalInvest">0</div>
-        </div>
-        <div class="pill">
-          <div class="pillLabel">Total Loot</div>
-          <div class="pillValue" id="totalLoot">0</div>
-        </div>
-        <div class="pill">
-          <div class="pillLabel">Gains</div>
-          <div class="pillValue" id="totalGains">0</div>
-        </div>
-
-        <button id="toggleCurrency" class="btn">Show Div</button>
-        <button id="resetAll" class="btn danger">Reset</button>
+      <div class="field">
+        <label>Cost per Map (Chaos)</label>
+        <input type="number" id="costPerMap" value="0" min="0" step="0.01">
       </div>
 
-      <a class="poeninja" href="https://poe.ninja/" target="_blank" rel="noreferrer">poe.ninja</a>
-    </header>
+      <div class="field">
+        <label>Cost per Map (Div)</label>
+        <input type="number" id="costPerMapDiv" value="0" min="0" step="0.01">
+      </div>
 
-    <!-- MAIN LAYOUT -->
-    <div class="layout">
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="panelHeader">
-          <div class="panelTitle">Market List</div>
-
-          <div class="leagueRow">
-            <span class="leagueLabel">League:</span>
-            <span id="leagueName" class="leagueName">Standard</span>
-            <select id="leagueSelect" class="leagueSelect">
-              <option value="Standard">Standard</option>
-              <option value="Keepers">Keepers</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="tabs">
-          <button class="tab active" data-tab="General Currency">General Currency</button>
-          <button class="tab" data-tab="Equipment & Gems">Equipment & Gems</button>
-          <button class="tab" data-tab="Atlas">Atlas</button>
-          <button class="tab" data-tab="Crafting">Crafting</button>
-          <button class="tab" data-tab="Maps">Maps</button>
-          <button class="tab" data-tab="Unique Maps">Unique Maps</button>
-          <button class="tab" data-tab="Invitations">Invitations</button>
-          <button class="tab" data-tab="Memories">Memories</button>
-          <button class="tab" data-tab="Blighted Maps">Blighted Maps</button>
-          <button class="tab" data-tab="Ravaged Maps">Ravaged Maps</button>
-        </div>
-
-        <div class="searchBox">
-          <input id="marketSearch" type="text" placeholder="Search..." />
-        </div>
-
-        <div id="marketList" class="marketList">
-          <div class="hint">Loading data…</div>
-        </div>
-      </aside>
-
-      <!-- CONTENT -->
-      <main class="content">
-        <div class="contentHeader">
-          <div class="contentTitle">Loot</div>
-        </div>
-
-        <div class="lootTable">
-          <div class="lootHead">
-            <div>Item</div>
-            <div class="right">Price</div>
-            <div class="center">Quantity</div>
-            <div class="right">Total</div>
-            <div></div>
-          </div>
-
-          <div id="lootRows" class="lootRows"></div>
-        </div>
-
-        <div class="lootActions">
-          <button id="addRow" class="btn">+ Add row</button>
-          <button id="manualRow" class="btn">+ Manual row</button>
-          <button id="exportCsv" class="btn">Export CSV</button>
-        </div>
-
-        <div class="status" id="status"></div>
-      </main>
+      <!-- ✅ REMOVED: League input (moved to sidebar dropdown) -->
     </div>
+
+    <!-- TOTALS (right) -->
+    <div class="totals-mini">
+      <div class="totalBox">
+        <div class="tLabel">Total Invest</div>
+        <div class="tValue" id="totalInvest">0</div>
+      </div>
+
+      <div class="totalBox">
+        <div class="tLabel">Total Loot</div>
+        <div class="tValue" id="totalLoot">0</div>
+      </div>
+
+      <div class="totalBox">
+        <div class="tLabel">Gains</div>
+        <div class="tValue" id="gain">0</div>
+      </div>
+
+      <!-- toggle Chaos/Div display for totals -->
+      <button class="toggleBtn" id="displayUnitBtn" type="button">Show Div</button>
+
+      <button class="resetBtn" id="resetBtn" type="button">Reset</button>
+    </div>
+
   </div>
 
-  <script src="app.js"></script>
+  <!-- MAIN LAYOUT -->
+  <div class="layout">
+
+    <!-- LEFT PANEL -->
+    <aside class="left-panel">
+      <div class="panel-title">Market List</div>
+
+      <!-- ✅ League row with dropdown just after League: ... -->
+      <div class="panel-league-row">
+        <div class="panel-title" id="leagueTitle">League: Standard</div>
+
+        <select id="leagueSelect" class="leagueSelect" aria-label="Select League">
+          <option value="Standard">Standard</option>
+          <option value="Keepers">Keepers</option>
+        </select>
+      </div>
+
+      <!-- MAIN TABS -->
+      <div class="tabs" id="mainTabs"></div>
+
+      <!-- SUB TABS -->
+      <div class="tabs" id="subTabs"></div>
+
+      <input id="marketSearch" placeholder="Search..." />
+      <div id="marketList"></div>
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="app">
+      <div class="app-title">Loot</div>
+
+      <table class="loot-table">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="lootBody"></tbody>
+      </table>
+
+      <div class="loot-actions">
+        <button type="button" onclick="addLootRow()">
+          <span class="btnIcon">+</span> Add row
+        </button>
+
+        <button type="button" onclick="addManualRow()">
+          <span class="btnIcon">+</span> Manual row
+        </button>
+
+        <button type="button" id="exportCsvBtn">Export CSV</button>
+      </div>
+    </main>
+
+  </div>
+
+  <!-- AUTOCOMPLETE -->
+  <datalist id="itemDatalist"></datalist>
+
+  <!-- STATUS -->
+  <div id="fetchStatus" class="status">Status: waiting...</div>
+
+  <footer class="site-signature" role="contentinfo">
+    <span>© <span id="year"></span> PoE1 Loot Calculator</span>
+    <span class="sep">•</span>
+    <span>Created by <strong>KT_</strong></span>
+    <span class="sep">•</span>
+    <a href="https://github.com/twiq13/" target="_blank" rel="noopener">
+      github.com/twiq13
+    </a>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+
+  <!-- JS -->
+  <script src="app.js?v=1" defer></script>
 </body>
 </html>
