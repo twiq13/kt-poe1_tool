@@ -1,7 +1,7 @@
 // scripts/scrape-poeninja-poe1.mjs
 import fs from "fs";
 
-const LEAGUE = (process.env.LEAGUE || "keepers").trim();
+const LEAGUE = (process.env.LEAGUE || "Standard").trim();
 const BASE = "https://poe.ninja/api/data";
 
 // 4 menus (main) + sous menus (sub)
@@ -80,12 +80,7 @@ async function fetchJSON(url){
   return await res.json();
 }
 
-/**
- * currencyoverview FIX:
- * - prices are in payload.lines[]
- * - icons are in payload.currencyDetails[]
- * We map: currencyDetails.name -> currencyDetails.icon
- */
+// currencyoverview FIX: icons are in currencyDetails
 function buildCurrencyIconMap(payload){
   const details = Array.isArray(payload?.currencyDetails) ? payload.currencyDetails : [];
   const map = new Map();
@@ -97,31 +92,33 @@ function buildCurrencyIconMap(payload){
   return map;
 }
 
+function safeFileLeagueName(s){
+  return String(s || "Standard").trim().replace(/[^a-z0-9_-]+/gi, "_");
+}
+
 (async () => {
-  // 1) Load currencyoverview(Currency) first to get Chaos+Div icons & div rate
+  // 1) Currency overview for Chaos+Div icon/rate
   const curPayload = await fetchJSON(apiUrl("currency", "Currency"));
   const curLines = Array.isArray(curPayload?.lines) ? curPayload.lines : [];
   const curIconMap = buildCurrencyIconMap(curPayload);
 
-  // Base icon: Chaos Orb (from currencyDetails!)
   const chaosIcon = curIconMap.get("chaos orb") || "";
   const divineIcon = curIconMap.get("divine orb") || "";
 
   const divineLine = curLines.find(x => cleanName(x.currencyTypeName || x.name).toLowerCase() === "divine orb");
   const divineChaos = pickChaos(divineLine);
 
-  // Safety: fail hard if icons missing (because you said "absolutely")
-  if (!chaosIcon) {
-    console.error("ERROR: Chaos Orb icon not found in currencyDetails. API changed or blocked.");
-    console.error("Tip: inspect currencyoverview payload keys: lines, currencyDetails.");
+  // hard fail if base icons missing (you said mandatory)
+  if (!chaosIcon){
+    console.error("ERROR: Chaos Orb icon missing in currencyDetails (currencyoverview).");
     process.exit(1);
   }
-  if (!divineIcon) {
-    console.error("ERROR: Divine Orb icon not found in currencyDetails. API changed or blocked.");
+  if (!divineIcon){
+    console.error("ERROR: Divine Orb icon missing in currencyDetails (currencyoverview).");
     process.exit(1);
   }
 
-  // 2) Fetch all sections
+  // 2) all sections
   let all = [];
 
   for (const sec of SECTIONS){
@@ -137,7 +134,6 @@ function buildCurrencyIconMap(payload){
 
         const icon = normalizeUrl(iconMap.get(name.toLowerCase()) || "");
         if (!icon){
-          // you requested icons absolutely -> fail hard
           console.error(`ERROR: Missing icon for currency "${name}" in section ${sec.id} (${sec.type})`);
           process.exit(1);
         }
@@ -152,7 +148,6 @@ function buildCurrencyIconMap(payload){
         });
       }
     } else {
-      // itemoverview: icon is usually directly on line
       for (const x of lines){
         const name = cleanName(x.name || x.baseType || "Unknown");
         if (!name) continue;
@@ -167,17 +162,17 @@ function buildCurrencyIconMap(payload){
           section: sec.id,
           name,
           icon,
-          amount: pickChaos(x), // chaosValue
+          amount: pickChaos(x),
           unit: "Chaos Orb",
           unitIcon: chaosIcon,
         });
       }
     }
 
-    console.log(`Section ${sec.id} (${sec.type}) -> ${lines.length} rows (kept=${all.filter(a=>a.section===sec.id).length})`);
+    console.log(`Section ${sec.id} (${sec.type}) -> rows=${lines.length}`);
   }
 
-  // 3) Output JSON
+  // 3) output
   const out = {
     updatedAt: new Date().toISOString(),
     league: LEAGUE,
@@ -199,8 +194,9 @@ function buildCurrencyIconMap(payload){
     lines: all
   };
 
+  const leagueFile = safeFileLeagueName(LEAGUE);
   fs.mkdirSync("data", { recursive: true });
-  fs.writeFileSync("data/prices.json", JSON.stringify(out, null, 2), "utf8");
+  fs.writeFileSync(`data/prices-${leagueFile}.json`, JSON.stringify(out, null, 2), "utf8");
 
-  console.log(`DONE ✅ lines=${all.length} | 1 Div=${divineChaos} Chaos`);
+  console.log(`DONE ✅ wrote data/prices-${leagueFile}.json | lines=${all.length} | 1 Div=${divineChaos} Chaos`);
 })();
