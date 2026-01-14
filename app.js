@@ -113,7 +113,7 @@ function fmtDateTime(iso){
 
 function getLeague(){
   const v = (document.getElementById("leagueInput")?.value || "").trim();
-  return v.length ? v : "Standard";
+  return v.length ? v : "keepers";
 }
 
 // poe.ninja API
@@ -666,7 +666,7 @@ function saveState(){
     activeMain,
     activeSub,
     search: document.getElementById("marketSearch")?.value ?? "",
-    league: document.getElementById("leagueInput")?.value ?? "Standard",
+    league: document.getElementById("leagueInput")?.value ?? "keepers",
     maps: document.getElementById("maps")?.value ?? "10",
     costPerMap: document.getElementById("costPerMap")?.value ?? "0",
     costPerMapDiv: document.getElementById("costPerMapDiv")?.value ?? "0",
@@ -689,7 +689,7 @@ function loadState(){
     if (s.activeSub) activeSub = s.activeSub;
 
     if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = s.search ?? "";
-    if (document.getElementById("leagueInput")) document.getElementById("leagueInput").value = s.league ?? "Standard";
+    if (document.getElementById("leagueInput")) document.getElementById("leagueInput").value = s.league ?? "keepers";
 
     if (document.getElementById("maps")) document.getElementById("maps").value = s.maps ?? "10";
     if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = s.costPerMap ?? "0";
@@ -851,3 +851,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addLootRow = addLootRow;
 window.addManualRow = addManualRow;
 window.resetAll = resetAll;
+
