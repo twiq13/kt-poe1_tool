@@ -169,27 +169,41 @@ a:hover{ text-decoration:underline; }
   margin:0 0 10px 0;
 }
 
+/* League selector row */
 .panel-league-row{
   display:flex;
   align-items:center;
-  justify-content:space-between;
   gap:10px;
-  margin-bottom:12px;
+  margin-bottom:14px;
+}
+
+.league-label{
+  font-weight:700;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.league-value{
+  font-weight:900;
+  font-size:14px;
+  min-width:70px;
 }
 
 .leagueSelect{
-  min-width:130px;
+  margin-left:auto;
+  min-width:120px;
   padding:8px 10px;
   border-radius:10px;
   border:1px solid var(--border);
   background:#151515;
   color:var(--text);
-  outline:none;
 }
+
 .leagueSelect:focus{
   border-color: rgba(201,168,106,.6);
   box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
+
 
 /* tabs */
 .tabs{
@@ -455,3 +469,4 @@ a:hover{ text-decoration:underline; }
   .field input{ width: 100%; }
   #marketList{ max-height: 45vh; }
 }
+
