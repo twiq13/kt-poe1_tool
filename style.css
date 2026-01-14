@@ -346,7 +346,7 @@ a:hover{ text-decoration:underline; }
   content:"";
   position:absolute;
   inset:0;
-  background-image:url("data/Vaal_Atziri_Cinematic1.png");
+  background-image:url("data/LayeredKeyArt_HighRes2.png");
   background-size:cover;
   background-position:center;
   opacity:var(--loot-bg-opacity);
@@ -576,3 +576,4 @@ a.resetBtn{
   .field input{ width: 100%; }
   .invest-mini{ width:100%; }
 }
+
