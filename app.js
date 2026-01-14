@@ -1,33 +1,40 @@
 // =======================
-// PoE1 Loot Calculator (KT_)
+// PoE1 Loot Calculator (KT_) - SAFE VERSION
 // =======================
-//
-// Loads local JSON: ./data/prices.json (built by GitHub Actions)
+// Loads local JSON: ./data/prices.json (GitHub Actions)
 // Base unit: Chaos
-// Display rule (market + loot): show Div if >= (1 Div in Chaos + 1 Chaos)
-// Totals: toggle Chaos/Div (single unit)
-// UI: same patterns as PoE2 (rows, datalist, state, etc.)
+// Auto display: Div if chaos >= (divChaos + 1)
+// Totals toggle: Chaos / Div
+// Menus built from prices.json.sections (group -> main, id -> sub)
+
+let rawData = null;
 
 let allItems = [];
 let byName = new Map();
 
-// Tabs
-let activeMain = "general";
-let activeSection = "currency"; // sub tab id
+// Menu state (built from JSON)
+let menu = {
+  mains: [],        // [{ id, label }]
+  subsByMain: {},   // { mainId: [{id,label}] }
+  mainLabelById: {},// id -> label
+};
+
+let activeMain = "";     // e.g. "General Currency"
+let activeSection = "";  // e.g. "currency"
 
 // Icons & rate
 let chaosIcon = "";
 let divineIcon = "";
-let divineChaosValue = null; // 1 Div = X Chaos
+let divineChaosValue = null;
 
 // Cost sync
-let lastEditedCost = "chaos"; // "chaos" | "div"
+let lastEditedCost = "chaos";
 let isSyncingCost = false;
 
 // Totals display unit
-let totalsUnit = "chaos"; // "chaos" | "div"
+let totalsUnit = "chaos";
 
-// ---------- DOM helpers ----------
+// ---------- Helpers ----------
 function setStatus(msg){
   const el = document.getElementById("fetchStatus");
   if (el) el.textContent = msg;
@@ -63,65 +70,6 @@ function fmtDateTime(iso){
   return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
 }
 
-// ---------- Sections mapping (4 main menus + sub menus) ----------
-// Your UI has #mainTabs and #subTabs (see index.html I gave earlier).
-// If you kept your old HTML without these, tell me and I’ll adapt to single tabs.
-const MAIN_TABS = [
-  { id:"general", label:"General Currency" },
-  { id:"equip",   label:"Equipment & Gems" },
-  { id:"atlas",   label:"Atlas" },
-  { id:"craft",   label:"Crafting" },
-];
-
-// This maps your poe1 prices.json "section" ids into main menus.
-// Make sure the section ids here match the ids you output in scripts/scrape-poeninja-poe1.mjs
-const SUB_TABS = {
-  general: [
-    { id:"currency",  label:"Currency" },
-    { id:"fragments", label:"Fragments" },
-    { id:"scarabs",   label:"Scarabs" },
-    { id:"divcards",  label:"Div Cards" },
-  ],
-  equip: [
-    { id:"skillgems", label:"Skill Gems" },
-    { id:"basetypes", label:"Base Types" },
-    { id:"uweapon",   label:"Unique Wpn" },
-    { id:"uarmour",   label:"Unique Arm" },
-    { id:"uacc",      label:"Unique Acc" },
-    { id:"ujewel",    label:"Unique Jewel" },
-    { id:"cluster",   label:"Cluster" },
-    { id:"uflask",    label:"Unique Flask" },
-  ],
-  atlas: [
-    { id:"maps",      label:"Maps" },
-    { id:"umaps",     label:"Unique Maps" },
-    { id:"invites",   label:"Invitations" },
-    { id:"memories",  label:"Memories" },
-    { id:"blighted",  label:"Blighted" },
-    { id:"ravaged",   label:"Ravaged" },
-  ],
-  craft: [
-    { id:"essence",   label:"Essences" },
-    { id:"fossil",    label:"Fossils" },
-    { id:"resonator", label:"Resonators" },
-    { id:"oil",       label:"Oils" },
-    { id:"deliorb",   label:"Deli Orbs" },
-    { id:"incubator", label:"Incubators" },
-    { id:"beast",     label:"Beasts" },
-    { id:"vial",      label:"Vials" },
-    { id:"omen",      label:"Omens" },
-  ],
-};
-
-function isValidMain(id){
-  return MAIN_TABS.some(t => t.id === id);
-}
-function isValidSub(mainId, subId){
-  return (SUB_TABS[mainId] || []).some(s => s.id === subId);
-}
-
-// ---------- Display rule ----------
-// market/loot display in Div if >= (1 Div + 1 Chaos)
 function shouldShowDiv(chaosAmount){
   if (!divineChaosValue || divineChaosValue <= 0) return false;
   return Number(chaosAmount || 0) >= (divineChaosValue + 1);
@@ -130,100 +78,87 @@ function shouldShowDiv(chaosAmount){
 function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
   const c = Number(chaosAmount || 0);
 
-  if (shouldShowDiv(c) && divineIcon && divineChaosValue){
+  if (shouldShowDiv(c) && divineChaosValue){
     valueEl.textContent = fmtInt(c / divineChaosValue);
-    if (iconEl) iconEl.src = divineIcon;
+    if (iconEl) iconEl.src = divineIcon || "";
   } else {
     valueEl.textContent = fmtInt(c);
     if (iconEl) iconEl.src = chaosIcon || "";
   }
+
+  // Hide icon img if empty to avoid broken image icon
+  if (iconEl){
+    iconEl.style.display = iconEl.src ? "block" : "none";
+  }
 }
 
-// Totals: single currency with toggle
 function formatTotalSingle(chaosVal){
   const c = Number(chaosVal || 0);
+
   if (totalsUnit === "div" && divineChaosValue && divineChaosValue > 0){
     const div = c / divineChaosValue;
-    return `
-      <span>${fmtInt(div)}</span>
-      ${divineIcon ? `<img class="pIcon" src="${divineIcon}" alt="">` : ""}
-    `;
+    const icon = divineIcon ? `<img class="pIcon" src="${divineIcon}" alt="">` : "";
+    return `<span>${fmtInt(div)}</span>${icon}`;
   }
-  return `
-    <span>${fmtInt(c)}</span>
-    ${chaosIcon ? `<img class="pIcon" src="${chaosIcon}" alt="">` : ""}
-  `;
+
+  const icon = chaosIcon ? `<img class="pIcon" src="${chaosIcon}" alt="">` : "";
+  return `<span>${fmtInt(c)}</span>${icon}`;
 }
 
-// ---------- Load local data/prices.json ----------
-async function loadData(){
-  try{
-    setStatus("Status: loading data/prices.json...");
-    const res = await fetch("./data/prices.json?ts=" + Date.now(), { cache:"no-store" });
-    if (!res.ok) throw new Error(`HTTP ${res.status} fetching data/prices.json`);
-    const data = await res.json();
+// ---------- Load JSON ----------
+async function loadPricesJson(){
+  setStatus("Status: loading data/prices.json...");
+  const res = await fetch("./data/prices.json?ts=" + Date.now(), { cache:"no-store" });
+  if (!res.ok) throw new Error(`HTTP ${res.status} loading data/prices.json`);
+  return await res.json();
+}
 
-    // lines
-    const lines = Array.isArray(data.lines) ? data.lines : [];
+// ---------- Build menu from JSON.sections ----------
+function buildMenuFromJson(data){
+  const secs = Array.isArray(data.sections) ? data.sections : [];
 
-    // Keep only selected section for current tab
-    const selectedSectionId = activeSection;
+  // main = group label
+  const groups = [];
+  const subsByMain = {};
 
-    allItems = lines
-      .filter(x => (x.section || "") === selectedSectionId)
-      .map(x => ({
-        section: x.section || selectedSectionId,
-        name: cleanName(x.name),
-        icon: x.icon || "",
-        amount: Number(x.amount ?? 0), // ✅ amount in Chaos
-        unit: x.unit || "Chaos Orb",
-        unitIcon: x.unitIcon || data.baseIcon || "",
-      }));
+  for (const s of secs){
+    const group = s.group || "Other";
+    if (!groups.includes(group)) groups.push(group);
+    subsByMain[group] = subsByMain[group] || [];
+    subsByMain[group].push({ id: s.id, label: s.label || s.id });
+  }
 
-    byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
+  // default order: the 4 groups if present
+  const preferred = ["General Currency", "Equipment & Gems", "Atlas", "Crafting"];
+  const ordered = [
+    ...preferred.filter(x => groups.includes(x)),
+    ...groups.filter(x => !preferred.includes(x))
+  ];
 
-    // base icon
-    chaosIcon = data.baseIcon || "";
-    // divine
-    divineIcon = data?.divine?.icon || "";
-    divineChaosValue = Number(data?.divine?.chaosValue ?? 0) || null;
+  menu.mains = ordered.map(g => ({ id: g, label: g }));
+  menu.subsByMain = subsByMain;
+  menu.mainLabelById = Object.fromEntries(menu.mains.map(x => [x.id, x.label]));
 
-    // league title
-    const league = data.league || "Standard";
-    const leagueTitle = document.getElementById("leagueTitle");
-    if (leagueTitle) leagueTitle.textContent = `League: ${league}`;
+  // Defaults if empty
+  if (!menu.mains.length){
+    menu.mains = [{ id:"General Currency", label:"General Currency" }];
+    menu.subsByMain["General Currency"] = [{ id:"currency", label:"Currency" }];
+  }
 
-    const updatedAt = data.updatedAt || "";
-    const updatedStr = updatedAt ? ` | updated=${fmtDateTime(updatedAt)}` : "";
-    const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : " | 1 Div=?";
-
-    setStatus(`Status: OK ✅ main=${activeMain} section=${activeSection} items=${allItems.length}${divStr}${updatedStr}`);
-
-    fillDatalist();
-    renderMarket();
-
-    // refresh loot display (re-apply icons/prices)
-    document.querySelectorAll("#lootBody tr").forEach(tr => {
-      if (tr.classList.contains("manualRow")) return;
-      const itemInput = tr.querySelector(".lootItem");
-      if (itemInput) itemInput.dispatchEvent(new Event("input"));
-    });
-
-    syncCostFields();
-    recalcAll();
-  }catch(e){
-    console.error(e);
-    setStatus("Status: ERROR ❌ " + e.toString());
+  // Validate active selections
+  if (!activeMain || !menu.subsByMain[activeMain]) activeMain = menu.mains[0].id;
+  const subs = menu.subsByMain[activeMain] || [];
+  if (!activeSection || !subs.some(x => x.id === activeSection)){
+    activeSection = subs[0]?.id || "currency";
   }
 }
 
-// ---------- Tabs UI ----------
-function buildMainTabs(){
+function renderMainTabs(){
   const wrap = document.getElementById("mainTabs");
-  if (!wrap) return;
+  if (!wrap) return; // if HTML doesn't have it, we skip
 
   wrap.innerHTML = "";
-  MAIN_TABS.forEach(t => {
+  menu.mains.forEach(t => {
     const b = document.createElement("button");
     b.className = "tab" + (t.id === activeMain ? " active" : "");
     b.textContent = t.label;
@@ -231,28 +166,26 @@ function buildMainTabs(){
 
     b.addEventListener("click", () => {
       activeMain = t.id;
-      // default sub
-      activeSection = SUB_TABS[activeMain]?.[0]?.id || "currency";
+      activeSection = (menu.subsByMain[activeMain]?.[0]?.id) || "currency";
 
-      document.querySelectorAll("#mainTabs .tab").forEach(x =>
-        x.classList.toggle("active", x.dataset.tab === activeMain)
-      );
+      document.querySelectorAll("#mainTabs .tab")
+        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
 
-      buildSubTabs();
+      renderSubTabs();
       saveState();
-      loadData();
+      refreshItemsForSection();
     });
 
     wrap.appendChild(b);
   });
 }
 
-function buildSubTabs(){
+function renderSubTabs(){
   const wrap = document.getElementById("subTabs");
   if (!wrap) return;
 
   wrap.innerHTML = "";
-  const subs = SUB_TABS[activeMain] || [];
+  const subs = menu.subsByMain[activeMain] || [];
 
   subs.forEach(sec => {
     const b = document.createElement("button");
@@ -262,18 +195,53 @@ function buildSubTabs(){
 
     b.addEventListener("click", () => {
       activeSection = sec.id;
-      document.querySelectorAll("#subTabs .tab").forEach(x =>
-        x.classList.toggle("active", x.dataset.tab === activeSection)
-      );
+      document.querySelectorAll("#subTabs .tab")
+        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeSection));
       saveState();
-      loadData();
+      refreshItemsForSection();
     });
 
     wrap.appendChild(b);
   });
 }
 
-// ---------- Market list ----------
+// ---------- Items / Market ----------
+function refreshItemsForSection(){
+  if (!rawData){
+    setStatus("Status: ERROR ❌ prices.json not loaded");
+    return;
+  }
+
+  const lines = Array.isArray(rawData.lines) ? rawData.lines : [];
+
+  allItems = lines
+    .filter(x => (x.section || "") === activeSection)
+    .map(x => ({
+      section: x.section || activeSection,
+      name: cleanName(x.name),
+      icon: x.icon || "",
+      amount: Number(x.amount ?? 0), // Chaos
+    }));
+
+  byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
+
+  fillDatalist();
+  renderMarket();
+
+  // Refresh loot item rows prices
+  document.querySelectorAll("#lootBody tr").forEach(tr => {
+    if (tr.classList.contains("manualRow")) return;
+    const itemInput = tr.querySelector(".lootItem");
+    if (itemInput) itemInput.dispatchEvent(new Event("input"));
+  });
+
+  recalcAll();
+
+  const updatedStr = rawData.updatedAt ? ` | updated=${fmtDateTime(rawData.updatedAt)}` : "";
+  const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : "";
+  setStatus(`Status: OK ✅ main="${activeMain}" section="${activeSection}" items=${allItems.length}${divStr}${updatedStr}`);
+}
+
 function fillDatalist(){
   const dl = document.getElementById("itemDatalist");
   if (!dl) return;
@@ -306,9 +274,10 @@ function renderMarket(){
     const row = document.createElement("div");
     row.className = "market-row";
 
+    const iconHtml = it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : "";
     row.innerHTML = `
       <div class="mLeft">
-        ${it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : ""}
+        ${iconHtml}
         <span class="mName">${escapeHtml(it.name)}</span>
       </div>
 
@@ -319,6 +288,10 @@ function renderMarket(){
         <img class="unitIcon" alt="">
       </div>
     `;
+
+    // hide broken icons
+    const leftIcon = row.querySelector(".cIcon");
+    if (leftIcon && !it.icon) leftIcon.style.display = "none";
 
     const valEl = row.querySelector(".mPriceVal");
     const icoEl = row.querySelector(".unitIcon");
@@ -445,7 +418,7 @@ function addManualRow(){
     <td>
       <div class="priceCell">
         <input class="manualPrice" type="number" value="0" min="0" step="0.01">
-        ${chaosIcon ? `<img class="baseIcon" src="${chaosIcon}" alt="">` : `<img class="baseIcon" alt="">`}
+        <img class="baseIcon" alt="">
       </div>
     </td>
 
@@ -461,6 +434,13 @@ function addManualRow(){
   `;
 
   body.appendChild(tr);
+
+  // set base icon if available
+  const baseImg = tr.querySelector(".baseIcon");
+  if (baseImg){
+    baseImg.src = chaosIcon || "";
+    baseImg.style.display = baseImg.src ? "inline-block" : "none";
+  }
 
   const qtyInput = tr.querySelector(".lootQty");
   const priceInput = tr.querySelector(".manualPrice");
@@ -541,9 +521,13 @@ function recalcAll(){
   const loot = calcLootChaos();
   const gain = loot - invest;
 
-  document.getElementById("totalInvest").innerHTML = formatTotalSingle(invest);
-  document.getElementById("totalLoot").innerHTML = formatTotalSingle(loot);
-  document.getElementById("gain").innerHTML = formatTotalSingle(gain);
+  const invEl = document.getElementById("totalInvest");
+  const lootEl = document.getElementById("totalLoot");
+  const gainEl = document.getElementById("gain");
+
+  if (invEl) invEl.innerHTML = formatTotalSingle(invest);
+  if (lootEl) lootEl.innerHTML = formatTotalSingle(loot);
+  if (gainEl) gainEl.innerHTML = formatTotalSingle(gain);
 }
 
 // ---------- CSV ----------
@@ -612,7 +596,6 @@ function exportLootCSV(){
   document.body.appendChild(a);
   a.click();
   a.remove();
-
   URL.revokeObjectURL(url);
 }
 
@@ -650,27 +633,21 @@ function loadState(){
   try{
     const s = JSON.parse(raw);
 
-    if (s.activeMain && isValidMain(s.activeMain)) activeMain = s.activeMain;
-    if (s.activeSection && isValidSub(activeMain, s.activeSection)) activeSection = s.activeSection;
+    if (s.activeMain) activeMain = s.activeMain;
+    if (s.activeSection) activeSection = s.activeSection;
 
     if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = s.search ?? "";
-
     if (document.getElementById("maps")) document.getElementById("maps").value = s.maps ?? "10";
     if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = s.costPerMap ?? "0";
     if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = s.costPerMapDiv ?? "0";
+
     if (s.lastEditedCost) lastEditedCost = s.lastEditedCost;
     if (s.totalsUnit) totalsUnit = s.totalsUnit;
 
     const btn = document.getElementById("displayUnitBtn");
     if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
 
-    // rebuild tabs to match restored state
-    buildMainTabs();
-    document.querySelectorAll("#mainTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
-    buildSubTabs();
-    document.querySelectorAll("#subTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeSection));
-
-    // restore loot rows
+    // Restore loot rows
     const body = document.getElementById("lootBody");
     if (body) body.innerHTML = "";
 
@@ -704,21 +681,47 @@ function resetAll(){
   const btn = document.getElementById("displayUnitBtn");
   if (btn) btn.textContent = "Show Div";
 
-  document.getElementById("lootBody").innerHTML = "";
+  const body = document.getElementById("lootBody");
+  if (body) body.innerHTML = "";
   addLootRow();
 
-  activeMain = "general";
-  activeSection = "currency";
   document.getElementById("marketSearch").value = "";
-
-  buildMainTabs();
-  buildSubTabs();
-
   recalcAll();
   setStatus("Status: reset ✅");
 }
 
-// ---------- Init ----------
+// ---------- Boot ----------
+async function boot(){
+  try{
+    rawData = await loadPricesJson();
+
+    chaosIcon = rawData.baseIcon || "";
+    divineIcon = rawData?.divine?.icon || "";
+    divineChaosValue = Number(rawData?.divine?.chaosValue ?? 0) || null;
+
+    buildMenuFromJson(rawData);
+
+    // tabs (if exist)
+    renderMainTabs();
+    renderSubTabs();
+
+    // restore UI state AFTER menu exists
+    loadState();
+    buildMenuFromJson(rawData);
+    renderMainTabs();
+    renderSubTabs();
+
+    if (!document.querySelector("#lootBody tr")) addLootRow();
+
+    refreshItemsForSection();
+    syncCostFields();
+    recalcAll();
+  }catch(e){
+    console.error(e);
+    setStatus("Status: ERROR ❌ " + e.toString());
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("marketSearch")?.addEventListener("input", () => { renderMarket(); saveState(); });
 
@@ -751,13 +754,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("resetBtn")?.addEventListener("click", resetAll);
   document.getElementById("exportCsvBtn")?.addEventListener("click", exportLootCSV);
 
-  buildMainTabs();
-  buildSubTabs();
-  loadState();
-
-  if (!document.querySelector("#lootBody tr")) addLootRow();
-
-  loadData();
+  boot();
 });
 
 // expose
