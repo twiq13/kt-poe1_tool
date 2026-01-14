@@ -1,453 +1,369 @@
-/* =========================================================
-   🎛 ICON SIZE CONTROL PANEL (CHANGE SIZES HERE)
-   ========================================================= */
 :root{
-  --icon-total-size: 18px;
-  --icon-market-size: 18px;
-  --icon-loot-item-size: 18px;
-  --icon-loot-price-size: 18px;
-  --icon-shadow: drop-shadow(0 0 2px rgba(0,0,0,.7));
-
-  /* ✅ CHANGE LOOT BG OPACITY HERE (0 → invisible, 1 → full) */
-  --loot-bg-opacity: 0.28;
+  --bg:#1c1c1c;
+  --panel:#232323;
+  --panel2:#1f1f1f;
+  --border:rgba(255,255,255,.08);
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.7);
+  --muted2:rgba(255,255,255,.55);
+  --danger:#ff3b3b;
+  --radius:12px;
 }
 
-/* =========================================================
-   GLOBAL THEME
-   ========================================================= */
 *{ box-sizing:border-box; }
 
 body{
-  background:#1C1C1C;
-  color:#fff;
-  font-family: Arial, Helvetica, sans-serif;
   margin:0;
-  padding:20px;
+  background:var(--bg);
+  color:var(--text);
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{ margin:0 0 12px 0; }
-
-input, button{
-  background:#222;
-  color:#fff;
-  border:1px solid #444;
-  border-radius:10px;
-  padding:9px 10px;
+.app{
+  padding:16px;
 }
 
-input::placeholder{ color:#aaa; }
-
-button{ cursor:pointer; }
-button:hover{ background:#2f2f2f; }
-
-/* =========================================================
-   HEADER BAR
-   ========================================================= */
-.header-bar{
+.topbar{
+  position:relative;
   display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:14px;
-  background:#222;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:14px;
+  align-items:flex-start;
+  gap:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
 }
 
-.invest-mini{
+.title{
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:.3px;
+  margin-right:8px;
+  white-space:nowrap;
+}
+
+.controls{
   display:flex;
   gap:12px;
-  align-items:flex-end;
   flex-wrap:wrap;
+  padding-top:2px;
 }
 
-.field label{
-  display:block;
-  font-size:12px;
-  color:#bbb;
-  margin-bottom:6px;
-}
-
-.field input{ width:160px; }
-
-.totals-mini{
+.field{
   display:flex;
-  gap:12px;
-  align-items:flex-end;
-  flex-wrap:wrap;
-}
-
-.totalBox{
-  background:#1b1b1b;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:10px 12px;
+  flex-direction:column;
+  gap:6px;
   min-width:160px;
 }
 
-.tLabel{
+.field label{
+  color:var(--muted2);
   font-size:12px;
-  color:#bbb;
-  margin-bottom:6px;
 }
 
-.tValue{
-  font-size:16px;
-  font-weight:700;
+input, select, button{
+  font:inherit;
+}
+
+input, select{
+  background:#1a1a1a;
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:10px 10px;
+  outline:none;
+}
+
+input:focus, select:focus{
+  border-color:rgba(255,255,255,.18);
+}
+
+.totals{
+  margin-left:auto;
   display:flex;
   align-items:center;
-  gap:6px;
-  justify-content:flex-end;
+  gap:10px;
+  flex-wrap:wrap;
+  padding-top:2px;
 }
 
-/* Totals icons */
-.pIcon{
-  width:var(--icon-total-size);
-  height:var(--icon-total-size);
-  filter:var(--icon-shadow);
-  display:inline-block;
-  vertical-align:middle;
+.pill{
+  background:rgba(0,0,0,.25);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:10px 14px;
+  min-width:140px;
 }
 
-.resetBtn{
-  background:#ff3b3b;
-  border:1px solid #ff3b3b;
-  padding:10px 12px;
+.pillLabel{
+  font-size:12px;
+  color:var(--muted2);
+  margin-bottom:4px;
+}
+
+.pillValue{
+  font-size:18px;
+  font-weight:800;
+}
+
+.btn{
+  background:#2a2a2a;
+  border:1px solid var(--border);
+  color:var(--text);
   border-radius:10px;
+  padding:10px 12px;
+  cursor:pointer;
 }
-.resetBtn:hover{ background:#ff5a5a; }
 
-/* =========================================================
-   MAIN LAYOUT
-   ========================================================= */
+.btn:hover{
+  border-color:rgba(255,255,255,.18);
+}
+
+.btn.danger{
+  background:var(--danger);
+  border-color:rgba(0,0,0,.15);
+  font-weight:800;
+}
+
+.poeninja{
+  position:absolute;
+  right:16px;
+  top:16px;
+  background:#2a2a2a;
+  border:1px solid var(--border);
+  color:var(--text);
+  padding:8px 10px;
+  border-radius:10px;
+  text-decoration:none;
+  font-size:13px;
+}
+
 .layout{
-  display:flex;
+  display:grid;
+  grid-template-columns: 320px 1fr;
   gap:16px;
+  margin-top:16px;
+  min-height:calc(100vh - 110px);
 }
 
-/* =========================================================
-   LEFT PANEL (MARKET LIST)
-   ========================================================= */
-.left-panel{
-  width:320px;
-  background:#222;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:12px;
+.sidebar{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
-.panel-title{
-  font-weight:700;
-  margin-bottom:10px;
+.panelHeader{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.panelTitle{
+  font-size:16px;
+  font-weight:800;
+}
+
+.leagueRow{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.leagueLabel{
+  color:var(--muted2);
+  font-size:13px;
+}
+
+.leagueName{
+  font-weight:800;
+  font-size:14px;
+}
+
+.leagueSelect{
+  margin-left:auto;
+  min-width:130px;
+  padding:8px 10px;
+  border-radius:10px;
 }
 
 .tabs{
   display:flex;
-  gap:8px;
   flex-wrap:wrap;
-  margin-bottom:10px;
+  gap:8px;
 }
 
 .tab{
-  padding:7px 10px;
-  border-radius:10px;
-  border:1px solid #444;
-  background:#1b1b1b;
-  color:#fff;
+  background:#2a2a2a;
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:999px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-size:12px;
 }
-.tab.active{ border-color:#fff; }
 
-#marketSearch{
+.tab.active{
+  background:#3a3a3a;
+  border-color:rgba(255,255,255,.18);
+  font-weight:800;
+}
+
+.searchBox input{
   width:100%;
-  margin-bottom:10px;
 }
 
-#marketList{
-  max-height:560px;
-  overflow-y:auto;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:6px;
+.marketList{
+  flex:1;
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  background:rgba(0,0,0,.15);
 }
 
-/* Market list row */
-.market-row{
+.hint{
+  padding:12px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.marketItem{
   display:flex;
-  justify-content:space-between;
   align-items:center;
   gap:10px;
-  padding:8px;
-  border-bottom:1px solid #333;
-  border-radius:8px;
-}
-.market-row:hover{ background:#2a2a2a; }
-
-.mLeft{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  min-width:0;
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  cursor:pointer;
 }
 
-.mName{
+.marketItem:hover{
+  background:rgba(255,255,255,.04);
+}
+
+.marketItemName{
+  flex:1;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width:180px;
 }
 
-.mArrow{
-  color:#bbb;
-  margin:0 8px;
-  flex:0 0 auto;
+.marketItemPrice{
+  color:var(--muted);
+  font-weight:700;
+  font-size:13px;
 }
 
-.mRight{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  white-space:nowrap;
-  color:#ddd;
-}
-
-.cIcon{
-  width:var(--icon-market-size);
-  height:var(--icon-market-size);
-  filter:var(--icon-shadow);
-  display:block;
-}
-.unitIcon{
-  width:var(--icon-market-size);
-  height:var(--icon-market-size);
-  filter:var(--icon-shadow);
-  display:block;
-}
-
-/* =========================================================
-   RIGHT PANEL (LOOT)
-   ========================================================= */
-.app{
+.content{
+  background:rgba(255,255,255,.03);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
   position:relative;
-  flex:1;
-  background:#222;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:12px;
   overflow:hidden;
 }
 
-/* ✅ Background image on loot panel (optional) */
-.app::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:url("data/LayeredKeyArt_HighRes2.png");
-  background-size:cover;
-  background-position:center;
-  opacity:var(--loot-bg-opacity);
-  pointer-events:none;
-  z-index:0;
-}
-
-/* Ensure content above background */
-.app > *{
-  position:relative;
-  z-index:1;
-}
-
-.app-title{
-  font-weight:700;
-  margin-bottom:12px;
-  color:#ddd;
-}
-
-.loot-table{
-  width:100%;
-  border-collapse:collapse;
-  table-layout:fixed;
-}
-
-.loot-table th,
-.loot-table td{
-  border-bottom:1px solid #333;
-  padding:10px 8px;
-}
-
-.loot-table th{ color:#ccc; }
-
-.loot-table th:nth-child(1),
-.loot-table td:nth-child(1){ width:48%; }
-
-.loot-table th:nth-child(2),
-.loot-table td:nth-child(2){ width:18%; text-align:center; }
-
-.loot-table th:nth-child(3),
-.loot-table td:nth-child(3){ width:26%; }
-
-.loot-table th:nth-child(4),
-.loot-table td:nth-child(4){ width:44px; text-align:center; }
-
-.loot-table input[type="number"],
-.loot-table input[list]{
-  width:100%;
-}
-
-.lootItemWrap{
+.contentHeader{
   display:flex;
   align-items:center;
-  gap:8px;
-}
-
-.lootIcon{
-  width:var(--icon-loot-item-size);
-  height:var(--icon-loot-item-size);
-  filter:var(--icon-shadow);
-  display:none;
-}
-
-.priceCell{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  white-space:nowrap;
-}
-
-.baseIcon{
-  width:var(--icon-loot-price-size);
-  height:var(--icon-loot-price-size);
-  filter:var(--icon-shadow);
-  display:inline-block;
-}
-
-/* Qty controls */
-.qtyWrap{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  justify-content:center;
-}
-
-.lootQty{
-  width:50% !important;
-  text-align:center;
-}
-
-/* Smaller + / − buttons */
-.qtyBtn{
-  width:26px;
-  height:26px;
-  border-radius:9px;
-  border:1px solid #444;
-  background:#1b1b1b;
-  color:#fff;
-  font-weight:900;
-  font-size:14px;
-  line-height:1;
-  padding:0;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-}
-.qtyBtn:hover{
-  background:#2a2a2a;
-  border-color:#666;
-}
-
-/* Actions */
-.loot-actions{
-  margin-top:12px;
-  display:flex;
-  gap:10px;
+  justify-content:space-between;
   margin-bottom:10px;
 }
 
-.btnIcon{
-  color:#fff;
-  font-weight:900;
-  margin-right:6px;
+.contentTitle{
+  font-size:16px;
+  font-weight:800;
 }
 
-/* Delete button */
-.deleteBtn{
-  background:transparent;
-  border:none;
-  color:#ff3b3b;
-  font-size:18px;
-  cursor:pointer;
-}
-.deleteBtn:hover{ color:#ff7b7b; }
-
-/* =========================================================
-   DARK SCROLLBARS
-   ========================================================= */
-*{
-  scrollbar-width:thin;
-  scrollbar-color:#444 #1b1b1b;
-}
-*::-webkit-scrollbar{ width:10px; height:10px; }
-*::-webkit-scrollbar-track{ background:#1b1b1b; border-radius:10px; }
-*::-webkit-scrollbar-thumb{ background:#444; border-radius:10px; border:2px solid #1b1b1b; }
-*::-webkit-scrollbar-thumb:hover{ background:#555; }
-
-/* =========================================================
-   STATUS BAR
-   ========================================================= */
-.status{
-  background:#111;
-  border:1px solid #333;
-  border-radius:10px;
-  padding:10px;
-  margin-top:14px;
-  color:#00ff66;
-  white-space:pre-wrap;
+.lootTable{
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:rgba(0,0,0,.12);
 }
 
-/* Reddit link button */
-a.resetBtn{
-  display:inline-flex;
+.lootHead{
+  display:grid;
+  grid-template-columns: 1fr 140px 160px 160px 60px;
+  gap:10px;
+  padding:10px 12px;
+  background:rgba(255,255,255,.04);
+  color:var(--muted2);
+  font-size:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.lootRows{
+  display:flex;
+  flex-direction:column;
+}
+
+.lootRow{
+  display:grid;
+  grid-template-columns: 1fr 140px 160px 160px 60px;
+  gap:10px;
+  padding:10px 12px;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+
+.lootRow input{
+  width:100%;
+}
+
+.right{
+  text-align:right;
+}
+
+.center{
+  text-align:center;
+}
+
+.qtyWrap{
+  display:flex;
   align-items:center;
   justify-content:center;
-  text-decoration:none;
-  color:#fff;
-}
-
-/* Reddit button top-right */
-.redditBtn{
-  position:fixed;
-  top:18px;
-  right:20px;
-  z-index:9999;
-  background:#222;
-  border:1px solid #444;
-}
-.redditBtn:hover{ background:#2f2f2f; }
-
-/* Toggle button */
-.toggleBtn{
-  background:#222;
-  border:1px solid #444;
-  padding:10px 12px;
-  border-radius:10px;
-}
-.toggleBtn:hover{ background:#2f2f2f; }
-
-/* Footer signature */
-.site-signature{
-  margin-top:12px;
-  padding:10px 12px;
-  background:#111;
-  border:1px solid #333;
-  border-radius:10px;
-  color:#9a9a9a;
-  font-size:12px;
-  display:flex;
   gap:8px;
-  flex-wrap:wrap;
-  align-items:center;
 }
-.site-signature a{ color:#cfcfcf; text-decoration:none; }
-.site-signature a:hover{ text-decoration:underline; }
-.site-signature .sep{ opacity:.5; }
 
+.qtyBtn{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#2a2a2a;
+  color:var(--text);
+  cursor:pointer;
+  font-weight:900;
+}
+
+.qtyBtn:hover{
+  border-color:rgba(255,255,255,.18);
+}
+
+.killBtn{
+  width:40px;
+  height:34px;
+  border-radius:10px;
+  border:1px solid rgba(255,0,0,.25);
+  background:rgba(255,0,0,.12);
+  color:#ff6b6b;
+  cursor:pointer;
+  font-size:18px;
+  font-weight:900;
+}
+
+.lootActions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
+}
+
+.status{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:12px;
+}
