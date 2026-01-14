@@ -1,15 +1,15 @@
-name: Update PoE2 prices
+name: Update PoE1 prices.json
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"  # toutes les 6h
+    - cron: "*/30 * * * *" # toutes les 30 minutes
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,20 +20,16 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install Playwright
-        run: |
-          npm init -y
-          npm i playwright
-          npx playwright install --with-deps chromium
+      - name: Install
+        run: npm init -y
 
-      - name: Scrape poe.ninja PoE2 and build prices.json
-        env:
-          LEAGUE: vaal
-        run: node scripts/scrape-poeninja-poe2.mjs
+      - name: Build prices.json
+        run: node scripts/update-poe1-prices.js
 
-      - name: Commit & push if changed
+      - name: Commit & push
         run: |
-          git config user.name "poe2-price-bot"
-          git config user.email "actions@users.noreply.github.com"
+          git config user.name "poe1-bot"
+          git config user.email "actions@github.com"
           git add data/prices.json
-          git diff --staged --quiet || (git commit -m "Update PoE2 prices" && git push)
+          git commit -m "update poe1 prices" || echo "No changes"
+          git push
