@@ -1,4 +1,4 @@
-name: Update PoE1 prices
+name: Update PoE1 prices (multi-league)
 
 on:
   workflow_dispatch:
@@ -11,6 +11,9 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        league: ["Standard", "Keepers"]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,14 +23,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Build PoE1 prices.json from poe.ninja API
+      - name: Scrape PoE1 and build prices json
         env:
-          LEAGUE: Standard
+          LEAGUE: ${{ matrix.league }}
         run: node scripts/scrape-poeninja-poe1.mjs
 
       - name: Commit & push if changed
         run: |
           git config user.name "poe1-price-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/prices.json
-          git diff --staged --quiet || (git commit -m "Update PoE1 prices" && git push)
+          git add data/prices-*.json
+          git diff --staged --quiet || (git commit -m "Update PoE1 prices (multi)" && git push)
