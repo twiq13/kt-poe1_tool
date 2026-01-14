@@ -3,10 +3,14 @@ name: Update PoE1 prices (multi-league)
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"  # toutes les 30 min
+    - cron: "*/30 * * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: poe1-prices-update
+  cancel-in-progress: true
 
 jobs:
   update:
@@ -14,9 +18,12 @@ jobs:
     strategy:
       matrix:
         league: ["Standard", "Keepers"]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # IMPORTANT for rebase/pull
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -28,9 +35,21 @@ jobs:
           LEAGUE: ${{ matrix.league }}
         run: node scripts/scrape-poeninja-poe1.mjs
 
-      - name: Commit & push if changed
+      - name: Commit & push if changed (safe rebase + retry)
         run: |
+          set -e
           git config user.name "poe1-price-bot"
           git config user.email "actions@users.noreply.github.com"
+
           git add data/prices-*.json
-          git diff --staged --quiet || (git commit -m "Update PoE1 prices (multi)" && git push)
+
+          # nothing to commit
+          git diff --staged --quiet && echo "No changes." && exit 0
+
+          git commit -m "Update PoE1 prices (multi)"
+
+          # Rebase on top of remote to avoid non-fast-forward
+          git pull --rebase origin main
+
+          # Push (retry once if race condition)
+          git push origin main || (sleep 3 && git pull --rebase origin main && git push origin main)
