@@ -1,671 +1,578 @@
+/* =========================================================
+   🎛 ICON SIZE CONTROL PANEL (CHANGE SIZES HERE)
+   ========================================================= */
 :root{
-  /* ===== Theme (match kt-poe2_loot_calc vibe) ===== */
-  --bg:#0f0f10;
-  --panel: rgba(22,22,23,.78);
-  --panel-strong: rgba(18,18,19,.90);
-  --border: rgba(255,255,255,.08);
-  --border-strong: rgba(255,255,255,.12);
+  --icon-total-size: 18px;
+  --icon-market-size: 18px;
+  --icon-loot-item-size: 18px;
+  --icon-loot-price-size: 18px;
+  --icon-shadow: drop-shadow(0 0 2px rgba(0,0,0,.7));
 
-  --text:#f2f2f2;
-  --muted: rgba(255,255,255,.65);
+  /* ✅ CHANGE LOOT BG OPACITY HERE (0 → invisible, 1 → full) */
+  --loot-bg-opacity: 0.28;
 
-  /* keep your selection/button accent color */
-  --accent:#c9a86a;
-  --danger:#ff3c3c;
-
-  --radius: 16px;
-  --radius-sm: 12px;
-  --shadow: 0 18px 55px rgba(0,0,0,.55);
-  --shadow-soft: 0 10px 30px rgba(0,0,0,.40);
-
-  /* scrollbars (nightmode) */
-  --sb-track: rgba(255,255,255,.06);
-  --sb-thumb: rgba(255,255,255,.14);
-  --sb-thumb-hover: rgba(201,168,106,.22);
-
-  /* typography (easy global tuning) */
-  --fz-title: 34px;
-  --fz-label: 12px;
-  --fz-ui: 13px;
-  --fz-tabs-main: 13px;
-  --fz-tabs-sub: 12px;
-  --fz-market-item: 14px;
-  --fz-market-price: 14px;
+  /* ✅ FONT CONTROL (optional) */
+  --font-ui: 13px;
+  --font-tabs-main: 13px;
+  --font-tabs-sub: 12px;
+  --font-market-item: 14px;
+  --font-market-price: 14px;
 }
 
 /* =========================================================
-   BASE
+   GLOBAL THEME
    ========================================================= */
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
 
 body{
-  margin:0;
-  color:var(--text);
+  background:#1C1C1C;
+  color:#fff;
   font-family: Arial, Helvetica, sans-serif;
-
-  /* PoE2-like soft vignette + subtle accent glow */
-  background:
-    radial-gradient(1200px 700px at 18% 0%, rgba(201,168,106,.10), transparent 58%),
-    radial-gradient(900px 600px at 85% 12%, rgba(201,168,106,.06), transparent 60%),
-    radial-gradient(900px 700px at 50% 85%, rgba(0,0,0,.55), transparent 55%),
-    var(--bg);
+  margin:0;
+  padding:20px;
 }
 
-a{ color:var(--accent); text-decoration:none; }
+h1{ margin:0 0 12px 0; }
+
+input, button, select{
+  background:#222;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:9px 10px;
+  font-size: var(--font-ui);
+}
+
+input::placeholder{ color:#aaa; }
+
+button{ cursor:pointer; }
+button:hover{ background:#2f2f2f; }
+
+a{ color:#cfcfcf; text-decoration:none; }
 a:hover{ text-decoration:underline; }
-
-/* =========================================================
-   NIGHTMODE SCROLLBARS (GLOBAL)
-   ========================================================= */
-/* Firefox */
-*{
-  scrollbar-width: thin;
-  scrollbar-color: rgba(201,168,106,.35) var(--sb-track);
-}
-/* WebKit */
-::-webkit-scrollbar{ width:10px; height:10px; }
-::-webkit-scrollbar-track{
-  background: var(--sb-track);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb{
-  background: var(--sb-thumb);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-}
-::-webkit-scrollbar-thumb:hover{
-  background: var(--sb-thumb-hover);
-  border-color: rgba(201,168,106,.18);
-}
-::-webkit-scrollbar-corner{ background: transparent; }
-
-/* =========================================================
-   TOP RIGHT poe.ninja BUTTON
-   ========================================================= */
-.redditBtn{
-  position:fixed;
-  top:14px;
-  right:14px;
-  z-index:50;
-  padding:10px 12px;
-  border-radius: 999px;
-  border:1px solid rgba(201,168,106,.45);
-  background: rgba(0,0,0,.22);
-  color:var(--text);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(8px);
-}
-.redditBtn:hover{
-  background: rgba(201,168,106,.10);
-  border-color: rgba(201,168,106,.65);
-}
-
-/* =========================================================
-   TITLE
-   ========================================================= */
-h1{
-  margin:14px 16px 10px 16px;
-  font-size: var(--fz-title);
-  font-weight:900;
-  letter-spacing:.3px;
-  text-shadow: 0 2px 18px rgba(0,0,0,.55);
-}
-
-/* =========================================================
-   GLASS PANELS (shared)
-   ========================================================= */
-.header-bar,
-.left-panel,
-.app{
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: linear-gradient(180deg, rgba(22,22,23,.82), rgba(18,18,19,.70));
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(10px);
-}
 
 /* =========================================================
    HEADER BAR
    ========================================================= */
 .header-bar{
-  margin:0 16px 12px 16px;
-  padding:14px;
-
   display:flex;
-  gap:14px;
-  align-items:flex-end;
   justify-content:space-between;
-  flex-wrap:wrap;
+  align-items:flex-end;
+  gap:14px;
+  background:#222;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:12px;
+  margin-bottom:14px;
 }
 
 .invest-mini{
   display:flex;
   gap:12px;
-  flex-wrap:wrap;
   align-items:flex-end;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+  flex-wrap:wrap;
 }
 
 .field label{
-  font-size: var(--fz-label);
-  color: var(--muted);
+  display:block;
+  font-size:12px;
+  color:#bbb;
+  margin-bottom:6px;
 }
 
-.field input{
-  width: 170px;
-  padding:10px 10px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: rgba(0,0,0,.25);
-  color: var(--text);
-  outline:none;
-}
-
-.field input:focus{
-  border-color: rgba(201,168,106,.55);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
-}
+.field input{ width:160px; }
 
 .totals-mini{
   display:flex;
-  gap:10px;
-  align-items:center;
+  gap:12px;
+  align-items:flex-end;
   flex-wrap:wrap;
-  justify-content:flex-end;
 }
 
 .totalBox{
-  min-width: 150px;
+  background:#1b1b1b;
+  border:1px solid #333;
+  border-radius:10px;
   padding:10px 12px;
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  background: rgba(0,0,0,.22);
+  min-width:160px;
 }
 
 .tLabel{
-  font-size: var(--fz-label);
-  color: var(--muted);
-  margin-bottom:4px;
+  font-size:12px;
+  color:#bbb;
+  margin-bottom:6px;
 }
 
 .tValue{
-  font-size:18px;
-  font-weight:900;
+  font-size:16px;
+  font-weight:700;
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:6px;
+  justify-content:flex-end;
 }
 
+/* Totals icons */
 .pIcon{
-  width:18px; height:18px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,.65));
+  width:var(--icon-total-size);
+  height:var(--icon-total-size);
+  filter:var(--icon-shadow);
+  display:inline-block;
+  vertical-align:middle;
 }
 
-/* =========================================================
-   BUTTONS (keep your accent color)
-   ========================================================= */
-.toggleBtn, .resetBtn, .loot-actions button{
+/* Buttons */
+.resetBtn{
+  background:#ff3b3b;
+  border:1px solid #ff3b3b;
   padding:10px 12px;
-  border-radius: 999px;
-  border:1px solid rgba(201,168,106,.55);
-  background: rgba(0,0,0,.18);
-  color: var(--text);
-  cursor:pointer;
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(8px);
+  border-radius:10px;
 }
+.resetBtn:hover{ background:#ff5a5a; }
 
-.toggleBtn:hover, .resetBtn:hover, .loot-actions button:hover{
-  background: rgba(201,168,106,.10);
-  border-color: rgba(201,168,106,.70);
+.toggleBtn{
+  background:#222;
+  border:1px solid #444;
+  padding:10px 12px;
+  border-radius:10px;
 }
-
-.toggleBtn:active, .resetBtn:active, .loot-actions button:active{
-  transform: translateY(1px);
-}
-
-.resetBtn#resetBtn{
-  border-color: rgba(255,60,60,.50);
-  background: rgba(0,0,0,.18);
-}
-.resetBtn#resetBtn:hover{
-  background: rgba(255,60,60,.10);
-  border-color: rgba(255,60,60,.70);
-}
-
-.btnIcon{ font-weight:900; margin-right:6px; }
+.toggleBtn:hover{ background:#2f2f2f; }
 
 /* =========================================================
-   LAYOUT
+   MAIN LAYOUT
    ========================================================= */
 .layout{
   display:grid;
   grid-template-columns: 320px 1fr;
   gap:16px;
-  padding:0 16px 16px 16px;
 }
 
 /* =========================================================
-   LEFT PANEL (Market)
+   LEFT PANEL (MARKET LIST)
    ========================================================= */
 .left-panel{
-  padding:14px;
-  overflow:hidden;
-  min-height: 400px;
+  width:320px;
+  background:#222;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:12px;
 }
 
 .panel-title{
-  font-weight:900;
-  margin:0 0 10px 0;
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  font-weight:700;
+  margin-bottom:10px;
 }
 
-/* League row (compact, closer) */
+/* ✅ League row: "League:" + dropdown close */
 .panel-league-row{
   display:flex;
   align-items:center;
-  gap:6px;              /* closer than before */
-  margin: 2px 0 12px 0;
+  gap:8px;
+  margin-bottom:10px;
 }
 
 .league-label{
-  font-weight:900;
-  color: var(--text);
+  font-weight:700;
+  color:#ddd;
 }
 
 .leagueSelect{
-  margin-left:0;
-  min-width: 120px;
-  padding: 7px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(201,168,106,.40);
-  background: rgba(0,0,0,.25);
-  color: var(--text);
-  outline:none;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+  padding:7px 10px;
+  border-radius:10px;
+  border:1px solid #444;
+  background:#1b1b1b;
+  color:#fff;
+}
+.leagueSelect:hover{ background:#2a2a2a; }
+
+/* =========================================================
+   ✅ MAIN / SUB BLOCKS (NEW, but SAME STYLE as PoE2)
+   ========================================================= */
+.tabsBlock{
+  margin-bottom:10px;
 }
 
-.leagueSelect:hover{ border-color: rgba(201,168,106,.65); }
-.leagueSelect:focus{
-  border-color: rgba(201,168,106,.75);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
-}
-
-/* MAIN / SUB blocks (more homogeneous) */
-.tabsBlock{ margin-top: 10px; }
 .tabsBlock--sub{
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,.06);
+  margin-top:8px;
+  padding-top:10px;
+  border-top:1px solid #333;
 }
 
+/* label (MAIN / SUB) like your small grey texts */
 .tabsLabel{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: .9px;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.72);
-  background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.08);
-  margin: 0 0 10px 2px;
+  display:block;
+  font-size:12px;
+  color:#bbb;
+  margin:0 0 8px 0;
+  letter-spacing:.6px;
+  font-weight:700;
 }
 
+/* Tabs container */
 .tabs{
   display:flex;
+  gap:8px;
   flex-wrap:wrap;
-  gap:10px;
+  margin-bottom:0;
 }
 
-.tabs .tab{
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.18);
-  color: var(--text);
-  cursor:pointer;
-  transition: transform .05s ease, background .15s ease, border-color .15s ease;
-  white-space: nowrap;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+/* Tab base: EXACT PoE2 look */
+.tab{
+  padding:7px 10px;
+  border-radius:10px;
+  border:1px solid #444;
+  background:#1b1b1b;
+  color:#fff;
+  font-size: var(--font-tabs-main);
+  line-height:1;
 }
+.tab:hover{ background:#2a2a2a; }
 
-.tabs .tab:hover{
-  border-color: rgba(201,168,106,.55);
-  background: rgba(201,168,106,.08);
-}
+/* ✅ Keep your selection colors */
+.tab.active{ border-color:#fff; }
 
-.tabs .tab.active{
-  border-color: rgba(201,168,106,.85);
-  background: rgba(201,168,106,.14);
-}
-
-.tabs .tab:active{ transform: translateY(1px); }
-
-/* MAIN slightly bigger but same “family” */
+/* MAIN: slightly stronger, but same family */
 .tabs--main .tab{
-  padding: 9px 14px;
-  font-size: var(--fz-tabs-main);
-  font-weight: 900;
+  font-size: var(--font-tabs-main);
+  font-weight:700;
 }
 
-/* SUB: slightly smaller + child indent */
-.tabs--sub{ padding-left: 10px; }
+/* SUB: slightly smaller + slight indent to show child */
+.tabs--sub{
+  padding-left:6px;
+}
 .tabs--sub .tab{
-  padding: 8px 12px;
-  font-size: var(--fz-tabs-sub);
-  font-weight: 750;
-  background: rgba(0,0,0,.16);
-  border-color: rgba(255,255,255,.08);
+  font-size: var(--font-tabs-sub);
+  font-weight:700;
+  opacity:.98;
 }
 
-/* Search */
+/* =========================================================
+   SEARCH + LIST
+   ========================================================= */
 #marketSearch{
   width:100%;
-  margin-top:10px;
-  padding:10px 12px;
-  border-radius: 999px;
-  border: 1px solid var(--border);
-  background: rgba(0,0,0,.25);
-  color: var(--text);
-  outline:none;
-  font-size: var(--fz-ui);
+  margin:10px 0;
 }
 
-#marketSearch:focus{
-  border-color: rgba(201,168,106,.55);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
-}
-
-/* Market list */
 #marketList{
-  margin-top:10px;
-  max-height: 420px;
-  overflow:auto;
-  padding-right: 4px;
+  max-height:560px;
+  overflow-y:auto;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:6px;
+  background:#1b1b1b;
 }
 
-/* Market row (more PoE2-like compact glass) */
+/* Market list row */
 .market-row{
   display:flex;
-  align-items:center;
   justify-content:space-between;
+  align-items:center;
   gap:10px;
-  padding:10px 10px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.18);
-  cursor:pointer;
-  margin-bottom:8px;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
+  padding:8px;
+  border-bottom:1px solid #333;
+  border-radius:8px;
 }
-
-.market-row:hover{
-  border-color: rgba(201,168,106,.55);
-  background: rgba(201,168,106,.08);
-}
+.market-row:hover{ background:#2a2a2a; }
 
 .mLeft{
   display:flex;
   align-items:center;
   gap:8px;
-  min-width: 0;
-}
-
-.cIcon{
-  width:18px; height:18px;
-  flex:0 0 auto;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,.65));
+  min-width:0;
 }
 
 .mName{
-  font-weight:900;
-  font-size: var(--fz-market-item);
+  font-size: var(--font-market-item);
+  font-weight:700;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width: 170px;
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  max-width:180px;
 }
 
 .mArrow{
-  opacity:.55;
+  color:#bbb;
+  margin:0 8px;
   flex:0 0 auto;
 }
 
 .mRight{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  justify-content:flex-end;
-  gap:8px;
-  flex:0 0 auto;
+  gap:6px;
+  white-space:nowrap;
+  color:#ddd;
 }
 
 .mPriceVal{
-  font-weight:900;
-  font-size: var(--fz-market-price);
-  min-width: 26px;
-  text-align:right;
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  font-size: var(--font-market-price);
+  font-weight:700;
+}
+
+.cIcon{
+  width:var(--icon-market-size);
+  height:var(--icon-market-size);
+  filter:var(--icon-shadow);
+  display:block;
 }
 
 .unitIcon{
-  width:18px; height:18px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,.65));
+  width:var(--icon-market-size);
+  height:var(--icon-market-size);
+  filter:var(--icon-shadow);
+  display:block;
 }
 
 /* =========================================================
-   RIGHT PANEL (Loot)
+   RIGHT PANEL (LOOT)
    ========================================================= */
 .app{
-  padding:14px;
+  position:relative;
+  flex:1;
+  background:#222;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:12px;
   overflow:hidden;
-  min-height: 520px;
+
+  /* keep your bottom space if needed */
+  padding-bottom:64px;
+}
+
+/* ✅ Background image on loot panel */
+.app::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image:url("data/Vaal_Atziri_Cinematic1.png");
+  background-size:cover;
+  background-position:center;
+  opacity:var(--loot-bg-opacity);
+  pointer-events:none;
+  z-index:0;
+}
+
+/* Ensure content above background */
+.app > *{
+  position:relative;
+  z-index:1;
 }
 
 .app-title{
-  font-weight:900;
-  margin:0 0 10px 0;
-  text-shadow: 0 2px 10px rgba(0,0,0,.45);
+  font-weight:700;
+  margin-bottom:12px;
+  color:#ddd;
 }
 
 .loot-table{
   width:100%;
-  border-collapse:separate;
-  border-spacing:0;
-  overflow:hidden;
-  border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,.06);
+  border-collapse:collapse;
+  table-layout:fixed;
 }
 
-.loot-table thead th{
-  text-align:left;
-  font-size:12px;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  color: var(--muted);
-  background: rgba(0,0,0,.22);
-  border-bottom:1px solid rgba(255,255,255,.06);
-  padding:12px;
+.loot-table th,
+.loot-table td{
+  border-bottom:1px solid #333;
+  padding:10px 8px;
 }
 
-.loot-table tbody td{
-  padding:12px;
-  border-bottom:1px solid rgba(255,255,255,.06);
-  vertical-align:middle;
+.loot-table th{ color:#ccc; }
+
+.loot-table th:nth-child(1),
+.loot-table td:nth-child(1){ width:48%; }
+
+.loot-table th:nth-child(2),
+.loot-table td:nth-child(2){ width:18%; text-align:center; }
+
+.loot-table th:nth-child(3),
+.loot-table td:nth-child(3){ width:26%; }
+
+.loot-table th:nth-child(4),
+.loot-table td:nth-child(4){ width:44px; text-align:center; }
+
+.loot-table input[type="number"],
+.loot-table input[list]{
+  width:100%;
 }
 
-.loot-table tbody tr:hover td{
-  background: rgba(201,168,106,.06);
-}
-
-/* Loot item cell */
 .lootItemWrap{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:8px;
 }
 
 .lootIcon{
-  width:18px; height:18px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,.65));
+  width:var(--icon-loot-item-size);
+  height:var(--icon-loot-item-size);
+  filter:var(--icon-shadow);
+  display:none;
 }
 
-.lootItem{
-  width:100%;
-  padding:10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.25);
-  color: var(--text);
-  outline:none;
-  font-size: var(--fz-ui);
-}
-
-.lootItem:focus{
-  border-color: rgba(201,168,106,.55);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
-}
-
-/* Price cell */
 .priceCell{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  gap:8px;
-}
-
-.lootPrice{
-  font-weight:900;
-  min-width: 28px;
+  justify-content:center;
+  gap:6px;
+  white-space:nowrap;
 }
 
 .baseIcon{
-  width:18px; height:18px;
-  filter: drop-shadow(0 0 2px rgba(0,0,0,.65));
+  width:var(--icon-loot-price-size);
+  height:var(--icon-loot-price-size);
+  filter:var(--icon-shadow);
+  display:inline-block;
 }
 
-/* Quantity */
+/* Qty controls */
 .qtyWrap{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:10px;
+  justify-content:center;
 }
-
-.qtyBtn{
-  width:32px; height:32px;
-  border-radius: 12px;
-  border:1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.20);
-  color:var(--text);
-  cursor:pointer;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
-}
-
-.qtyBtn:hover{
-  border-color: rgba(201,168,106,.55);
-  background: rgba(201,168,106,.08);
-}
-
-.qtyBtn:active{ transform: translateY(1px); }
 
 .lootQty{
-  width:70px;
+  width:50% !important;
   text-align:center;
-  padding:10px 10px;
-  border-radius: 999px;
-  border:1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.25);
-  color:var(--text);
-  outline:none;
-  font-size: var(--fz-ui);
 }
 
-.lootQty:focus{
-  border-color: rgba(201,168,106,.55);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
+/* Smaller +/- buttons */
+.qtyBtn{
+  width:26px;
+  height:26px;
+  border-radius:9px;
+  border:1px solid #444;
+  background:#1b1b1b;
+  color:#fff;
+  font-weight:900;
+  font-size:14px;
+  line-height:1;
+  padding:0;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
-
-/* Delete */
-.deleteBtn{
-  width:44px;
-  height:34px;
-  border-radius: 12px;
-  border:1px solid rgba(255,60,60,.45);
-  background: rgba(0,0,0,.18);
-  color:var(--text);
-  cursor:pointer;
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
-}
-
-.deleteBtn:hover{
-  background: rgba(255,60,60,.10);
-  border-color: rgba(255,60,60,.70);
-}
-
-.deleteBtn:active{ transform: translateY(1px); }
-
-/* Manual price */
-.manualPrice{
-  width:120px;
-  padding:10px 12px;
-  border-radius: 999px;
-  border:1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.25);
-  color:var(--text);
-  outline:none;
-  font-size: var(--fz-ui);
-}
-
-.manualPrice:focus{
-  border-color: rgba(201,168,106,.55);
-  box-shadow: 0 0 0 3px rgba(201,168,106,.10);
+.qtyBtn:hover{
+  background:#2a2a2a;
+  border-color:#666;
 }
 
 /* Actions */
 .loot-actions{
+  margin-top:12px;
   display:flex;
   gap:10px;
-  margin-top:12px;
-  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.btnIcon{
+  color:#fff;
+  font-weight:900;
+  margin-right:6px;
+}
+
+/* Delete button */
+.deleteBtn{
+  background:transparent;
+  border:none;
+  color:#ff3b3b;
+  font-size:18px;
+  cursor:pointer;
+}
+.deleteBtn:hover{ color:#ff7b7b; }
+
+/* Export CSV (if you use exportCsvBtn class somewhere) */
+.exportCsvBtn{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:12px;
+  z-index:2;
+
+  background:#222;
+  color:#fff;
+  border:1px solid #444;
+  border-radius:10px;
+  padding:9px 12px;
+}
+.exportCsvBtn:hover{ background:#2f2f2f; }
+
+/* =========================================================
+   DARK SCROLLBARS
+   ========================================================= */
+*{
+  scrollbar-width:thin;
+  scrollbar-color:#444 #1b1b1b;
+}
+*::-webkit-scrollbar{ width:10px; height:10px; }
+*::-webkit-scrollbar-track{ background:#1b1b1b; border-radius:10px; }
+*::-webkit-scrollbar-thumb{ background:#444; border-radius:10px; border:2px solid #1b1b1b; }
+*::-webkit-scrollbar-thumb:hover{ background:#555; }
+
+/* =========================================================
+   STATUS BAR
+   ========================================================= */
+.status{
+  background:#111;
+  border:1px solid #333;
+  border-radius:10px;
+  padding:10px;
+  margin-top:14px;
+  color:#00ff66;
+  white-space:pre-wrap;
 }
 
 /* =========================================================
-   STATUS + FOOTER
+   Reddit link button
    ========================================================= */
-.status{
-  margin: 0 16px;
-  padding: 8px 0 12px 0;
-  color: rgba(255,255,255,.62);
-  font-size: 12px;
+a.resetBtn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+  color:#fff;
 }
 
+/* Reddit button top-right */
+.redditBtn{
+  position:fixed;
+  top:18px;
+  right:20px;
+  z-index:9999;
+  background:#222;
+  border:1px solid #444;
+}
+.redditBtn:hover{ background:#2f2f2f; }
+
+/* Footer signature */
 .site-signature{
-  margin: 0 16px 18px 16px;
-  padding: 10px 0 0 0;
-  border-top: 1px solid rgba(255,255,255,.06);
-  color: rgba(255,255,255,.62);
-  font-size: 12px;
+  margin-top:12px;
+  padding:10px 12px;
+  background:#111;
+  border:1px solid #333;
+  border-radius:10px;
+  color:#9a9a9a;
+  font-size:12px;
   display:flex;
   gap:8px;
   flex-wrap:wrap;
   align-items:center;
+  opacity:.85;
 }
+.site-signature a{ color:#cfcfcf; text-decoration:none; }
+.site-signature a:hover{ text-decoration:underline; }
 .site-signature .sep{ opacity:.5; }
 
 /* =========================================================
    RESPONSIVE
    ========================================================= */
 @media (max-width: 980px){
+  body{ padding:14px; }
   .layout{ grid-template-columns: 1fr; }
+  .left-panel{ width:100%; }
+  #marketList{ max-height:420px; }
   .field input{ width: 100%; }
-  .totalBox{ min-width: 140px; }
-  #marketList{ max-height: 360px; }
+  .invest-mini{ width:100%; }
 }
