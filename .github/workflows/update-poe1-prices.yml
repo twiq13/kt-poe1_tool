@@ -1,15 +1,15 @@
-name: Update PoE1 prices.json
+name: Update PoE1 prices
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *" # toutes les 30 minutes
+    - cron: "*/30 * * * *"  # toutes les 30 min
 
 permissions:
   contents: write
 
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -20,16 +20,14 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install
-        run: npm init -y
+      - name: Build PoE1 prices.json from poe.ninja API
+        env:
+          LEAGUE: Standard
+        run: node scripts/scrape-poeninja-poe1.mjs
 
-      - name: Build prices.json
-        run: node scripts/update-poe1-prices.js
-
-      - name: Commit & push
+      - name: Commit & push if changed
         run: |
-          git config user.name "poe1-bot"
-          git config user.email "actions@github.com"
+          git config user.name "poe1-price-bot"
+          git config user.email "actions@users.noreply.github.com"
           git add data/prices.json
-          git commit -m "update poe1 prices" || echo "No changes"
-          git push
+          git diff --staged --quiet || (git commit -m "Update PoE1 prices" && git push)
