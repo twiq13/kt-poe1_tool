@@ -1,367 +1,853 @@
-/* =========================================================
-   KT PoE1 Market (poe.ninja API)
-   - Uses poe.ninja currencyoverview/itemoverview endpoints :contentReference[oaicite:2]{index=2}
-   - Base currency = Chaos
-   - Display switch Chaos/Divine + auto-divine if >= 1 divine
-   ========================================================= */
+// =======================
+// PoE1 Loot Calculator (poe.ninja)
+// Base internal unit: Chaos
+// Display: auto Div if chaos >= (divineChaos + 1)  // "+1 minimum" rule
+// Totals toggle: Chaos / Div
+// =======================
 
-const $ = (id) => document.getElementById(id);
+// -----------------------
+// State
+// -----------------------
+let allItems = [];
+let byName = new Map();
 
-const state = {
-  league: localStorage.getItem("poe1_league") || "Standard",
-  displayMode: localStorage.getItem("poe1_display_mode") || "chaos", // "chaos" | "divine"
-  activeKey: null, // selected submenu key
-  divineChaos: null,
-  currentItems: [],
-};
+let activeMain = "general";
+let activeSub = "currency";
 
-/** 4 main menus + sub menus */
-const MENU = [
-  {
-    group: "General Currency",
-    items: [
-      { key: "cur_currency", label: "Currency", endpoint: { kind: "currency", type: "Currency" } },
-      { key: "cur_fragment", label: "Fragments", endpoint: { kind: "currency", type: "Fragment" } },
-      { key: "it_scarab", label: "Scarabs", endpoint: { kind: "item", type: "Scarab" } },
-      { key: "it_divcard", label: "Divination Cards", endpoint: { kind: "item", type: "DivinationCard" } },
-    ],
-  },
-  {
-    group: "Equipment & Gems",
-    items: [
-      { key: "it_skillgem", label: "Skill Gems", endpoint: { kind: "item", type: "SkillGem" } },
-      { key: "it_basetype", label: "Base Types", endpoint: { kind: "item", type: "BaseType" } },
-      { key: "it_uweapon", label: "Unique Weapons", endpoint: { kind: "item", type: "UniqueWeapon" } },
-      { key: "it_uarmour", label: "Unique Armours", endpoint: { kind: "item", type: "UniqueArmour" } },
-      { key: "it_uaccess", label: "Unique Accessories", endpoint: { kind: "item", type: "UniqueAccessory" } },
-      { key: "it_ujewel", label: "Unique Jewels", endpoint: { kind: "item", type: "UniqueJewel" } },
-      { key: "it_cluster", label: "Cluster Jewels", endpoint: { kind: "item", type: "ClusterJewel" } },
-      { key: "it_uflask", label: "Unique Flasks", endpoint: { kind: "item", type: "UniqueFlask" } },
-    ],
-  },
-  {
-    group: "Atlas",
-    items: [
-      { key: "it_map", label: "Maps", endpoint: { kind: "item", type: "Map" } },
-      { key: "it_umap", label: "Unique Maps", endpoint: { kind: "item", type: "UniqueMap" } },
-      { key: "it_memory", label: "Memories", endpoint: { kind: "item", type: "Memory" } },
-      { key: "it_invite", label: "Invitations", endpoint: { kind: "item", type: "Invitation" } },
-      { key: "it_blight", label: "Blighted Maps", endpoint: { kind: "item", type: "BlightedMap" } },
-      { key: "it_brav", label: "Blight Ravaged Maps", endpoint: { kind: "item", type: "BlightRavagedMap" } },
-    ],
-  },
-  {
-    group: "Crafting",
-    items: [
-      { key: "it_essence", label: "Essences", endpoint: { kind: "item", type: "Essence" } },
-      { key: "it_fossil", label: "Fossils", endpoint: { kind: "item", type: "Fossil" } },
-      { key: "it_resonator", label: "Resonators", endpoint: { kind: "item", type: "Resonator" } },
-      { key: "it_oil", label: "Oils", endpoint: { kind: "item", type: "Oil" } },
-      { key: "it_deliorb", label: "Delirium Orbs", endpoint: { kind: "item", type: "DeliriumOrb" } },
-      { key: "it_incubator", label: "Incubators", endpoint: { kind: "item", type: "Incubator" } },
-      { key: "it_beast", label: "Beasts", endpoint: { kind: "item", type: "Beast" } },
-      { key: "it_vial", label: "Vials", endpoint: { kind: "item", type: "Vial" } },
-      { key: "it_omen", label: "Omens", endpoint: { kind: "item", type: "Omen" } },
-    ],
-  },
+let chaosIcon = "";     // fallback icon (optional)
+let divineIcon = "";    // Divine Orb icon
+let divineChaosValue = null; // 1 Div = X Chaos
+
+let lastEditedCost = "chaos";   // "chaos" | "div"
+let isSyncingCost = false;
+
+let totalsUnit = "chaos";       // "chaos" | "div"
+
+// -----------------------
+// Menu config (4 main + sub menus)
+// type/kind are poe.ninja API types
+// -----------------------
+const MAIN_TABS = [
+  { id:"general", label:"General Currency" },
+  { id:"equip",   label:"Equipment & Gems" },
+  { id:"atlas",   label:"Atlas" },
+  { id:"craft",   label:"Crafting" },
 ];
 
-function setStatus(msg) {
-  $("statusLabel").textContent = msg;
+const SUB_TABS = {
+  general: [
+    { id:"currency",  label:"Currency",     kind:"currency", type:"Currency" },
+    { id:"fragment",  label:"Fragments",    kind:"currency", type:"Fragment" },
+    { id:"scarab",    label:"Scarabs",      kind:"item",     type:"Scarab" },
+    { id:"divcard",   label:"Div Cards",    kind:"item",     type:"DivinationCard" },
+  ],
+  equip: [
+    { id:"skillgem",  label:"Skill Gems",   kind:"item", type:"SkillGem" },
+    { id:"basetype",  label:"Base Types",   kind:"item", type:"BaseType" },
+    { id:"uweapon",   label:"Unique Wpn",   kind:"item", type:"UniqueWeapon" },
+    { id:"uarmour",   label:"Unique Arm",   kind:"item", type:"UniqueArmour" },
+    { id:"uacc",      label:"Unique Acc",   kind:"item", type:"UniqueAccessory" },
+    { id:"ujewel",    label:"Unique Jewel", kind:"item", type:"UniqueJewel" },
+    { id:"cluster",   label:"Cluster",      kind:"item", type:"ClusterJewel" },
+    { id:"uflask",    label:"Unique Flask", kind:"item", type:"UniqueFlask" },
+  ],
+  atlas: [
+    { id:"map",       label:"Maps",         kind:"item", type:"Map" },
+    { id:"umap",      label:"Unique Maps",  kind:"item", type:"UniqueMap" },
+    { id:"invite",    label:"Invitations",  kind:"item", type:"Invitation" },
+    { id:"memory",    label:"Memories",     kind:"item", type:"Memory" },
+    { id:"blight",    label:"Blighted",     kind:"item", type:"BlightedMap" },
+    { id:"brav",      label:"Ravaged",      kind:"item", type:"BlightRavagedMap" },
+  ],
+  craft: [
+    { id:"essence",   label:"Essences",     kind:"item", type:"Essence" },
+    { id:"fossil",    label:"Fossils",      kind:"item", type:"Fossil" },
+    { id:"resonator", label:"Resonators",   kind:"item", type:"Resonator" },
+    { id:"oil",       label:"Oils",         kind:"item", type:"Oil" },
+    { id:"deliorb",   label:"Deli Orbs",    kind:"item", type:"DeliriumOrb" },
+    { id:"incubator", label:"Incubators",   kind:"item", type:"Incubator" },
+    { id:"beast",     label:"Beasts",       kind:"item", type:"Beast" },
+    { id:"vial",      label:"Vials",        kind:"item", type:"Vial" },
+    { id:"omen",      label:"Omens",        kind:"item", type:"Omen" },
+  ]
+};
+
+// -----------------------
+// Helpers
+// -----------------------
+function setStatus(msg){
+  const el = document.getElementById("fetchStatus");
+  if (el) el.textContent = msg;
+  console.log(msg);
 }
 
-function setSelectedLabel(txt) {
-  $("selectedLabel").textContent = txt || "—";
+function cleanName(s){
+  return String(s || "").replace(/\s*WIKI\s*$/i, "").trim();
 }
 
-function normalizeLeagueName(input) {
-  const v = (input || "").trim();
+function num(id){
+  const el = document.getElementById(id);
+  const v = el ? Number(el.value) : 0;
+  return Number.isFinite(v) ? v : 0;
+}
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
+  }[m]));
+}
+
+// integer display everywhere (same as your PoE2)
+function fmtInt(n){
+  const x = Number(n || 0);
+  return String(Math.round(x));
+}
+
+function fmtDateTime(iso){
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (isNaN(d.getTime())) return String(iso);
+  const pad = (x)=> String(x).padStart(2,"0");
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+}
+
+function getLeague(){
+  const v = (document.getElementById("leagueInput")?.value || "").trim();
   return v.length ? v : "Standard";
 }
 
-/** poe.ninja endpoints: currencyoverview & itemoverview :contentReference[oaicite:3]{index=3} */
-function makePoeNinjaUrl(league, endpoint) {
+// poe.ninja API
+function makePoeNinjaUrl(league, kind, type){
   const base = "https://poe.ninja/api/data";
   const l = encodeURIComponent(league);
-  const t = encodeURIComponent(endpoint.type);
-
-  if (endpoint.kind === "currency") {
-    return `${base}/currencyoverview?league=${l}&type=${t}`;
-  }
+  const t = encodeURIComponent(type);
+  if (kind === "currency") return `${base}/currencyoverview?league=${l}&type=${t}`;
   return `${base}/itemoverview?league=${l}&type=${t}`;
 }
 
-async function fetchJSON(url) {
-  const res = await fetch(url, { cache: "no-store" });
+async function fetchJSON(url){
+  const res = await fetch(url, { cache:"no-store" });
   if (!res.ok) throw new Error(`HTTP ${res.status} on ${url}`);
   return await res.json();
 }
 
-/** Get Divine Orb chaosEquivalent from Currency overview payload */
-async function updateDivineRate() {
-  const league = state.league;
-  const url = makePoeNinjaUrl(league, { kind: "currency", type: "Currency" });
-
-  const payload = await fetchJSON(url);
-  const lines = Array.isArray(payload?.lines) ? payload.lines : [];
-
-  // poe.ninja uses currencyTypeName often; chaosEquivalent is common in many clients :contentReference[oaicite:4]{index=4}
-  const divineLine = lines.find(x => (x.currencyTypeName || x.name) === "Divine Orb");
-  const divineChaos =
-    divineLine?.chaosEquivalent ??
-    divineLine?.chaosValue ??
-    divineLine?.receive?.value ?? // fallback (some formats vary)
-    null;
-
-  state.divineChaos = (typeof divineChaos === "number" && isFinite(divineChaos)) ? divineChaos : null;
-
-  $("divineRateLabel").textContent = state.divineChaos
-    ? `${roundSmart(state.divineChaos)} c / 1 div`
-    : "—";
+// -----------------------
+// Currency logic: auto Div if >= (1div in chaos + 1 chaos)
+// -----------------------
+function shouldShowDiv(chaosAmount){
+  if (!divineChaosValue || divineChaosValue <= 0) return false;
+  return Number(chaosAmount || 0) >= (divineChaosValue + 1);
 }
 
-function roundSmart(n) {
-  if (!isFinite(n)) return "—";
-  if (n >= 100) return String(Math.round(n));
-  return String(Math.round(n * 10) / 10);
-}
+// market + loot price display (auto div)
+function setDualPriceDisplay(valueEl, iconEl, chaosAmount){
+  const c = Number(chaosAmount || 0);
 
-/** Price formatting with auto-divine if >= 1 divine */
-function formatPrice(priceChaos) {
-  const divineChaos = state.divineChaos;
-  const userMode = state.displayMode; // chaos|divine
-
-  if (!divineChaos || !isFinite(divineChaos)) {
-    return { value: Math.round(priceChaos || 0), unit: "c" };
+  if (shouldShowDiv(c) && divineIcon && divineChaosValue){
+    valueEl.textContent = fmtInt(c / divineChaosValue);
+    if (iconEl) iconEl.src = divineIcon;
+  } else {
+    valueEl.textContent = fmtInt(c);
+    if (iconEl) iconEl.src = chaosIcon || ""; // optional
   }
-
-  const shouldAutoDivine = (priceChaos >= divineChaos);
-
-  if (userMode === "divine" || shouldAutoDivine) {
-    const div = priceChaos / divineChaos;
-    const shown = (div >= 10) ? Math.round(div) : (Math.round(div * 10) / 10);
-    return { value: shown, unit: "div" };
-  }
-
-  return { value: Math.round(priceChaos), unit: "c" };
 }
 
-/** Convert poe.ninja payload to a unified list */
-function parseToItems(payload, endpointType) {
-  const lines = Array.isArray(payload?.lines) ? payload.lines : [];
+// Totals: single currency with toggle
+function formatTotalSingle(chaosVal){
+  const c = Number(chaosVal || 0);
+  if (totalsUnit === "div" && divineChaosValue && divineChaosValue > 0){
+    const div = c / divineChaosValue;
+    return `
+      <span>${fmtInt(div)}</span>
+      ${divineIcon ? `<img class="pIcon" src="${divineIcon}" alt="">` : ""}
+    `;
+  }
+  return `
+    <span>${fmtInt(c)}</span>
+    ${chaosIcon ? `<img class="pIcon" src="${chaosIcon}" alt="">` : ""}
+  `;
+}
 
-  // Currency overview lines often have currencyTypeName + chaosEquivalent :contentReference[oaicite:5]{index=5}
-  // Item overview lines often have name + chaosValue
-  return lines.map(x => {
-    const name = x.currencyTypeName || x.name || x.baseType || "Unknown";
-    const chaos =
+// -----------------------
+// Fetch & parse
+// -----------------------
+async function loadDivineRateAndIcons(league){
+  // Load Currency overview to find Divine Orb value and icons
+  const url = makePoeNinjaUrl(league, "currency", "Currency");
+  const data = await fetchJSON(url);
+
+  const lines = Array.isArray(data?.lines) ? data.lines : [];
+  const divine = lines.find(x => (x.currencyTypeName || x.name) === "Divine Orb");
+  const chaos  = lines.find(x => (x.currencyTypeName || x.name) === "Chaos Orb");
+
+  divineIcon = divine?.icon || "";
+  chaosIcon  = chaos?.icon || "";
+
+  const val = divine?.chaosEquivalent ?? divine?.chaosValue ?? null;
+  divineChaosValue = (typeof val === "number" && isFinite(val)) ? val : null;
+
+  return { updatedAt: data?.updated ?? data?.updatedAt ?? "" };
+}
+
+function parsePoeNinjaLines(payload, fallbackSectionId){
+  const lines = Array.isArray(payload?.lines) ? payload.lines : [];
+  const items = lines.map(x => {
+    const name = cleanName(x.currencyTypeName || x.name || x.baseType || "Unknown");
+    const icon = x.icon || "";
+    const chaos = Number(
       x.chaosEquivalent ??
       x.chaosValue ??
-      x.value ?? // fallback
-      0;
+      x.value ??
+      0
+    ) || 0;
 
-    const typeLabel =
-      endpointType ||
-      x.itemType ||
-      (x.currencyTypeName ? "Currency" : "Item");
-
+    // keep same object shape as PoE2 (amount in base unit)
     return {
+      section: fallbackSectionId,
       name,
-      type: typeLabel,
-      chaos: (typeof chaos === "number" && isFinite(chaos)) ? chaos : 0,
+      icon,
+      amount: chaos,     // base = chaos
+      unit: "chaos",
+      unitIcon: chaosIcon || "",
     };
   });
+
+  return items;
 }
 
-function buildMenu() {
-  const root = $("menuRoot");
-  root.innerHTML = "";
+async function loadMarketForActive(){
+  const league = getLeague();
+  const sub = (SUB_TABS[activeMain] || []).find(s => s.id === activeSub) || (SUB_TABS.general[0]);
 
-  for (const group of MENU) {
-    const groupEl = document.createElement("div");
-    groupEl.className = "menuGroup";
+  const url = makePoeNinjaUrl(league, sub.kind, sub.type);
 
-    const header = document.createElement("div");
-    header.className = "menuGroup__header";
-    header.innerHTML = `
-      <div class="menuGroup__title">${escapeHTML(group.group)}</div>
-      <div class="menuGroup__chev">▼</div>
-    `;
+  setStatus(`Status: loading poe.ninja... league=${league} type=${sub.type}`);
 
-    const itemsWrap = document.createElement("div");
-    itemsWrap.className = "menuGroup__items";
+  const payload = await fetchJSON(url);
+  const items = parsePoeNinjaLines(payload, `${activeMain}:${activeSub}`);
 
-    // simple collapse
-    let open = true;
-    header.addEventListener("click", () => {
-      open = !open;
-      itemsWrap.style.display = open ? "flex" : "none";
-      header.querySelector(".menuGroup__chev").textContent = open ? "▼" : "▶";
+  // update global list
+  allItems = items;
+  byName = new Map(allItems.map(it => [it.name.toLowerCase(), it]));
+
+  fillDatalist();
+  renderMarket();
+
+  const updatedAt = payload?.updated ?? payload?.updatedAt ?? "";
+  const updatedStr = updatedAt ? ` | last update=${fmtDateTime(updatedAt)}` : "";
+  const divStr = divineChaosValue ? ` | 1 Div=${fmtInt(divineChaosValue)} Chaos` : "";
+
+  setStatus(`Status: OK ✅ items=${allItems.length}${divStr}${updatedStr}`);
+}
+
+// -----------------------
+// UI: tabs
+// -----------------------
+function buildMainTabs(){
+  const wrap = document.getElementById("mainTabs");
+  if (!wrap) return;
+
+  wrap.innerHTML = "";
+  MAIN_TABS.forEach(t => {
+    const b = document.createElement("button");
+    b.className = "tab" + (t.id === activeMain ? " active" : "");
+    b.textContent = t.label;
+    b.dataset.tab = t.id;
+
+    b.addEventListener("click", async () => {
+      activeMain = t.id;
+      // default sub to first
+      activeSub = (SUB_TABS[activeMain]?.[0]?.id) || "currency";
+
+      document.querySelectorAll("#mainTabs .tab")
+        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
+
+      buildSubTabs();
+      await reloadAll();
+      saveState();
     });
 
-    for (const it of group.items) {
-      const itemEl = document.createElement("div");
-      itemEl.className = "menuItem";
-      itemEl.dataset.key = it.key;
-      itemEl.innerHTML = `
-        <div class="menuItem__label">${escapeHTML(it.label)}</div>
-        <div class="menuItem__meta">${escapeHTML(it.endpoint.type)}</div>
-      `;
-      itemEl.addEventListener("click", () => selectCategory(it));
-      itemsWrap.appendChild(itemEl);
-    }
-
-    groupEl.appendChild(header);
-    groupEl.appendChild(itemsWrap);
-    root.appendChild(groupEl);
-  }
-}
-
-function setActiveMenuItem(key) {
-  document.querySelectorAll(".menuItem").forEach(el => {
-    el.classList.toggle("is-active", el.dataset.key === key);
+    wrap.appendChild(b);
   });
 }
 
-function escapeHTML(s) {
-  return String(s).replace(/[&<>"']/g, (m) => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  }[m]));
+function buildSubTabs(){
+  const wrap = document.getElementById("subTabs");
+  if (!wrap) return;
+
+  wrap.innerHTML = "";
+
+  const subs = SUB_TABS[activeMain] || [];
+  subs.forEach(sec => {
+    const b = document.createElement("button");
+    b.className = "tab" + (sec.id === activeSub ? " active" : "");
+    b.textContent = sec.label;
+    b.dataset.tab = sec.id;
+
+    b.addEventListener("click", async () => {
+      activeSub = sec.id;
+      document.querySelectorAll("#subTabs .tab")
+        .forEach(x => x.classList.toggle("active", x.dataset.tab === activeSub));
+
+      await reloadAll();
+      saveState();
+    });
+
+    wrap.appendChild(b);
+  });
 }
 
-async function selectCategory(menuItem) {
-  state.activeKey = menuItem.key;
-  setActiveMenuItem(menuItem.key);
+// -----------------------
+// Market list render (same as PoE2)
+// -----------------------
+function renderMarket(){
+  const list = document.getElementById("marketList");
+  if (!list) return;
 
-  $("contentTitle").textContent = menuItem.label;
-  $("contentSubtitle").textContent = `Type: ${menuItem.endpoint.type} • League: ${state.league}`;
-  setSelectedLabel(`${menuItem.label}`);
+  const q = (document.getElementById("marketSearch")?.value || "").trim().toLowerCase();
 
-  await loadCategory(menuItem);
-}
+  const filtered = allItems
+    .filter(it => it.name.toLowerCase().includes(q))
+    .slice(0, 400);
 
-async function loadCategory(menuItem) {
-  const league = state.league;
-  const endpoint = menuItem.endpoint;
+  list.innerHTML = "";
 
-  setStatus("Loading...");
-  $("rows").innerHTML = "";
-  $("countLabel").textContent = "0";
-
-  try {
-    // update divine first (for correct rendering)
-    await updateDivineRate();
-
-    const url = makePoeNinjaUrl(league, endpoint);
-    const payload = await fetchJSON(url);
-    const list = parseToItems(payload, endpoint.type);
-
-    state.currentItems = list;
-    render();
-    setStatus("OK");
-  } catch (e) {
-    console.error(e);
-    setStatus("ERROR");
-    $("rows").innerHTML = `
-      <tr><td colspan="3">
-        <span class="badge">Fetch error</span>
-        <div class="muted small" style="margin-top:8px;">${escapeHTML(e.message || String(e))}</div>
-      </td></tr>
-    `;
-  }
-}
-
-function render() {
-  const q = ($("searchInput").value || "").trim().toLowerCase();
-  let rows = state.currentItems;
-
-  if (q.length) {
-    rows = rows.filter(x => (x.name || "").toLowerCase().includes(q));
+  if (!filtered.length){
+    list.innerHTML = `<div style="color:#bbb;padding:10px;">No items.</div>`;
+    return;
   }
 
-  // sort by chaos desc
-  rows = rows.slice().sort((a,b) => (b.chaos||0) - (a.chaos||0));
+  filtered.forEach(it => {
+    const row = document.createElement("div");
+    row.className = "market-row";
 
-  $("countLabel").textContent = String(rows.length);
+    row.innerHTML = `
+      <div class="mLeft">
+        ${it.icon ? `<img class="cIcon" src="${it.icon}" alt="">` : ""}
+        <span class="mName">${escapeHtml(it.name)}</span>
+      </div>
 
-  const tbody = $("rows");
-  tbody.innerHTML = "";
+      <div class="mArrow">⇄</div>
 
-  for (const it of rows) {
-    const p = formatPrice(it.chaos);
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-      <td>${escapeHTML(it.name)}</td>
-      <td><span class="badge">${escapeHTML(it.type)}</span></td>
-      <td class="col-price">
-        <div class="price">
-          <span class="price__value">${escapeHTML(p.value)}</span>
-          <span class="price__unit">${escapeHTML(p.unit)}</span>
-        </div>
-      </td>
+      <div class="mRight">
+        <span class="mPriceVal">0</span>
+        <img class="unitIcon" alt="">
+      </div>
     `;
 
-    tbody.appendChild(tr);
-  }
+    const valEl = row.querySelector(".mPriceVal");
+    const icoEl = row.querySelector(".unitIcon");
+    setDualPriceDisplay(valEl, icoEl, it.amount);
 
-  // update toggle button text
-  $("toggleCurrencyBtn").textContent =
-    `Display: ${state.displayMode === "divine" ? "Divine" : "Chaos"}`;
+    row.addEventListener("click", () => addLootRow(it.name));
+    list.appendChild(row);
+  });
 }
 
-function wireUI() {
-  $("leagueInput").value = state.league;
+function fillDatalist(){
+  const dl = document.getElementById("itemDatalist");
+  if (!dl) return;
+  dl.innerHTML = "";
+  allItems.forEach(it => {
+    const opt = document.createElement("option");
+    opt.value = it.name;
+    dl.appendChild(opt);
+  });
+}
 
-  $("leagueInput").addEventListener("change", async () => {
-    state.league = normalizeLeagueName($("leagueInput").value);
-    localStorage.setItem("poe1_league", state.league);
+// -----------------------
+// Loot rows (same structure, but base=chaos)
+// -----------------------
+function addLootRow(prefillName = ""){
+  if (prefillName && typeof prefillName === "object") prefillName = "";
+  prefillName = String(prefillName || "");
 
-    // refresh current category if selected
-    if (state.activeKey) {
-      const found = findMenuItemByKey(state.activeKey);
-      if (found) await loadCategory(found);
+  const body = document.getElementById("lootBody");
+  if (!body) return;
+
+  const tr = document.createElement("tr");
+  tr.className = "lootRow";
+
+  tr.innerHTML = `
+    <td>
+      <div class="lootItemWrap">
+        <img class="lootIcon" alt="">
+        <input class="lootItem" list="itemDatalist" placeholder="Item">
+      </div>
+    </td>
+
+    <td>
+      <div class="priceCell">
+        <span class="lootPrice" data-chaos="0">0</span>
+        <img class="baseIcon" alt="">
+      </div>
+    </td>
+
+    <td>
+      <div class="qtyWrap">
+        <button type="button" class="qtyBtn qtyMinus" aria-label="Minus">−</button>
+        <input class="lootQty" type="number" value="0" min="0">
+        <button type="button" class="qtyBtn qtyPlus" aria-label="Plus">+</button>
+      </div>
+    </td>
+
+    <td><button type="button" class="deleteBtn" title="Delete">✖</button></td>
+  `;
+
+  body.appendChild(tr);
+
+  const itemInput = tr.querySelector(".lootItem");
+  const qtyInput  = tr.querySelector(".lootQty");
+  const iconImg   = tr.querySelector(".lootIcon");
+  const priceSpan = tr.querySelector(".lootPrice");
+  const unitImg   = tr.querySelector(".baseIcon");
+
+  itemInput.value = prefillName;
+
+  function applyPrice(){
+    const name = (itemInput.value || "").trim().toLowerCase();
+    const found = byName.get(name);
+
+    if (found?.icon){
+      iconImg.src = found.icon;
+      iconImg.style.display = "block";
     } else {
-      await updateDivineRate();
-      setStatus("OK");
+      iconImg.style.display = "none";
+    }
+
+    const chaos = Number(found ? found.amount : 0);
+    priceSpan.dataset.chaos = String(chaos);
+
+    setDualPriceDisplay(priceSpan, unitImg, chaos);
+  }
+
+  applyPrice();
+  recalcAll();
+  saveState();
+
+  itemInput.addEventListener("input", () => {
+    applyPrice();
+    recalcAll();
+    saveState();
+  });
+
+  qtyInput.addEventListener("input", () => {
+    recalcAll();
+    saveState();
+  });
+
+  tr.querySelector(".qtyMinus").addEventListener("click", () => {
+    qtyInput.value = Math.max(0, (Number(qtyInput.value) || 0) - 1);
+    recalcAll();
+    saveState();
+  });
+
+  tr.querySelector(".qtyPlus").addEventListener("click", () => {
+    qtyInput.value = (Number(qtyInput.value) || 0) + 1;
+    recalcAll();
+    saveState();
+  });
+
+  tr.querySelector(".deleteBtn").addEventListener("click", () => {
+    tr.remove();
+    recalcAll();
+    saveState();
+  });
+}
+
+function addManualRow(){
+  const body = document.getElementById("lootBody");
+  if (!body) return;
+
+  const tr = document.createElement("tr");
+  tr.className = "lootRow manualRow";
+
+  tr.innerHTML = `
+    <td>
+      <div class="lootItemWrap">
+        <img class="lootIcon" style="display:none" alt="">
+        <input class="lootItem" placeholder="Custom item">
+      </div>
+    </td>
+
+    <td>
+      <div class="priceCell">
+        <input class="manualPrice" type="number" value="0" min="0" step="0.01">
+        ${chaosIcon ? `<img class="baseIcon" src="${chaosIcon}" alt="">` : `<img class="baseIcon" alt="">`}
+      </div>
+    </td>
+
+    <td>
+      <div class="qtyWrap">
+        <button type="button" class="qtyBtn qtyMinus">−</button>
+        <input class="lootQty" type="number" value="0" min="0">
+        <button type="button" class="qtyBtn qtyPlus">+</button>
+      </div>
+    </td>
+
+    <td><button type="button" class="deleteBtn" title="Delete">✖</button></td>
+  `;
+
+  body.appendChild(tr);
+
+  const qtyInput = tr.querySelector(".lootQty");
+  const priceInput = tr.querySelector(".manualPrice");
+  const update = () => { recalcAll(); saveState(); };
+
+  qtyInput.addEventListener("input", update);
+  priceInput.addEventListener("input", update);
+
+  tr.querySelector(".qtyMinus").addEventListener("click", () => {
+    qtyInput.value = Math.max(0, (Number(qtyInput.value) || 0) - 1);
+    update();
+  });
+
+  tr.querySelector(".qtyPlus").addEventListener("click", () => {
+    qtyInput.value = (Number(qtyInput.value) || 0) + 1;
+    update();
+  });
+
+  tr.querySelector(".deleteBtn").addEventListener("click", () => {
+    tr.remove();
+    update();
+  });
+
+  update();
+}
+
+// -----------------------
+// Cost per map syncing (chaos <-> div)
+// -----------------------
+function syncCostFields(){
+  const cEl = document.getElementById("costPerMap");
+  const dEl = document.getElementById("costPerMapDiv");
+  if (!cEl || !dEl) return;
+  if (!divineChaosValue || divineChaosValue <= 0) return;
+
+  isSyncingCost = true;
+  if (lastEditedCost === "div"){
+    const div = Number(dEl.value || 0);
+    cEl.value = String(div * divineChaosValue);
+  } else {
+    const chaos = Number(cEl.value || 0);
+    dEl.value = String(chaos / divineChaosValue);
+  }
+  isSyncingCost = false;
+}
+
+function calcInvestChaos(){
+  const maps = num("maps");
+  const cEl = document.getElementById("costPerMap");
+  const dEl = document.getElementById("costPerMapDiv");
+
+  const chaosCost = cEl ? Number(cEl.value || 0) : 0;
+  const divCost = dEl ? Number(dEl.value || 0) : 0;
+
+  let costChaos = chaosCost;
+  if (lastEditedCost === "div" && divineChaosValue && divineChaosValue > 0){
+    costChaos = divCost * divineChaosValue;
+  }
+  return maps * (Number(costChaos) || 0);
+}
+
+function calcLootChaos(){
+  let total = 0;
+  document.querySelectorAll("#lootBody tr").forEach(tr => {
+    const qty = Number(tr.querySelector(".lootQty")?.value || 0);
+
+    if (tr.classList.contains("manualRow")){
+      const p = Number(tr.querySelector(".manualPrice")?.value || 0);
+      total += p * qty;
+    } else {
+      const chaos = Number(tr.querySelector(".lootPrice")?.dataset?.chaos || 0);
+      total += chaos * qty;
     }
   });
-
-  $("searchInput").addEventListener("input", () => render());
-
-  $("toggleCurrencyBtn").addEventListener("click", () => {
-    state.displayMode = (state.displayMode === "chaos") ? "divine" : "chaos";
-    localStorage.setItem("poe1_display_mode", state.displayMode);
-    render();
-  });
-
-  $("refreshBtn").addEventListener("click", async () => {
-    if (!state.activeKey) return;
-    const found = findMenuItemByKey(state.activeKey);
-    if (found) await loadCategory(found);
-  });
+  return total;
 }
 
-function findMenuItemByKey(key) {
-  for (const g of MENU) {
-    const found = g.items.find(i => i.key === key);
-    if (found) return found;
-  }
-  return null;
+function recalcAll(){
+  const invest = calcInvestChaos();
+  const loot = calcLootChaos();
+  const gain = loot - invest;
+
+  document.getElementById("totalInvest").innerHTML = formatTotalSingle(invest);
+  document.getElementById("totalLoot").innerHTML = formatTotalSingle(loot);
+  document.getElementById("gain").innerHTML = formatTotalSingle(gain);
 }
 
-async function init() {
-  buildMenu();
-  wireUI();
+// -----------------------
+// CSV export (same structure as PoE2, but chaos/div)
+// -----------------------
+function exportLootCSV(){
+  const lines = [];
+  lines.push("Item,Price,Devise,Qty,Total price chaos/divine");
 
-  setStatus("Init...");
-  try {
-    await updateDivineRate();
-    setStatus("OK");
-  } catch (e) {
+  const investC = calcInvestChaos();
+  const lootC = calcLootChaos();
+  const gainC = lootC - investC;
+
+  const toBoth = (chaos) => {
+    const cInt = fmtInt(chaos);
+    const dInt = (divineChaosValue && divineChaosValue > 0) ? fmtInt(chaos / divineChaosValue) : "0";
+    return `${cInt} Chaos / ${dInt} Div`;
+  };
+
+  document.querySelectorAll("#lootBody tr").forEach(tr => {
+    const item = (tr.querySelector(".lootItem")?.value || "").trim();
+    const qty = Number(tr.querySelector(".lootQty")?.value || 0);
+
+    let priceC = 0;
+    let devise = "Chaos";
+
+    if (tr.classList.contains("manualRow")){
+      priceC = Number(tr.querySelector(".manualPrice")?.value || 0);
+      devise = "Chaos";
+    } else {
+      priceC = Number(tr.querySelector(".lootPrice")?.dataset?.chaos || 0);
+      devise = shouldShowDiv(priceC) ? "Div" : "Chaos";
+    }
+
+    if (!item && qty === 0 && priceC === 0) return;
+
+    const displayPrice = (devise === "Div" && divineChaosValue)
+      ? fmtInt(priceC / divineChaosValue)
+      : fmtInt(priceC);
+
+    const totalC = priceC * qty;
+
+    const esc = (s) => {
+      const str = String(s ?? "");
+      return /[",\n"]/.test(str) ? `"${str.replace(/"/g,'""')}"` : str;
+    };
+
+    lines.push([
+      esc(item),
+      displayPrice,
+      devise,
+      fmtInt(qty),
+      esc(toBoth(totalC))
+    ].join(","));
+  });
+
+  lines.push("");
+  lines.push("Invest,Loot,Gains");
+  lines.push([toBoth(investC), toBoth(lootC), toBoth(gainC)].join(","));
+
+  const csv = lines.join("\n");
+  const blob = new Blob([csv], { type:"text/csv;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `poe1_loot_${Date.now()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  URL.revokeObjectURL(url);
+}
+
+// -----------------------
+// Persistence
+// -----------------------
+function saveState(){
+  const rows = [...document.querySelectorAll("#lootBody tr")].map(tr => {
+    const manual = tr.classList.contains("manualRow");
+    return {
+      manual,
+      item: tr.querySelector(".lootItem")?.value || "",
+      qty: tr.querySelector(".lootQty")?.value ?? "0",
+      price: manual ? (tr.querySelector(".manualPrice")?.value ?? "0") : null
+    };
+  });
+
+  const state = {
+    activeMain,
+    activeSub,
+    search: document.getElementById("marketSearch")?.value ?? "",
+    league: document.getElementById("leagueInput")?.value ?? "Standard",
+    maps: document.getElementById("maps")?.value ?? "10",
+    costPerMap: document.getElementById("costPerMap")?.value ?? "0",
+    costPerMapDiv: document.getElementById("costPerMapDiv")?.value ?? "0",
+    lastEditedCost,
+    totalsUnit,
+    rows
+  };
+
+  localStorage.setItem("poe1FarmState", JSON.stringify(state));
+}
+
+function loadState(){
+  const raw = localStorage.getItem("poe1FarmState");
+  if (!raw) return;
+
+  try{
+    const s = JSON.parse(raw);
+
+    if (s.activeMain) activeMain = s.activeMain;
+    if (s.activeSub) activeSub = s.activeSub;
+
+    if (document.getElementById("marketSearch")) document.getElementById("marketSearch").value = s.search ?? "";
+    if (document.getElementById("leagueInput")) document.getElementById("leagueInput").value = s.league ?? "Standard";
+
+    if (document.getElementById("maps")) document.getElementById("maps").value = s.maps ?? "10";
+    if (document.getElementById("costPerMap")) document.getElementById("costPerMap").value = s.costPerMap ?? "0";
+    if (document.getElementById("costPerMapDiv")) document.getElementById("costPerMapDiv").value = s.costPerMapDiv ?? "0";
+
+    if (s.lastEditedCost) lastEditedCost = s.lastEditedCost;
+    if (s.totalsUnit) totalsUnit = s.totalsUnit;
+
+    const btn = document.getElementById("displayUnitBtn");
+    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
+
+    // build tabs UI state
+    buildMainTabs();
+    document.querySelectorAll("#mainTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeMain));
+
+    buildSubTabs();
+    document.querySelectorAll("#subTabs .tab").forEach(x => x.classList.toggle("active", x.dataset.tab === activeSub));
+
+    const body = document.getElementById("lootBody");
+    body.innerHTML = "";
+
+    if (Array.isArray(s.rows) && s.rows.length){
+      s.rows.forEach(r => {
+        if (r.manual){
+          addManualRow();
+          const last = body.lastElementChild;
+          last.querySelector(".lootItem").value = r.item || "";
+          last.querySelector(".lootQty").value = r.qty ?? "0";
+          last.querySelector(".manualPrice").value = r.price ?? "0";
+        } else {
+          addLootRow(r.item || "");
+          const last = body.lastElementChild;
+          last.querySelector(".lootQty").value = r.qty ?? "0";
+        }
+      });
+    }
+  }catch{}
+}
+
+function resetAll(){
+  localStorage.removeItem("poe1FarmState");
+
+  document.getElementById("maps").value = "10";
+  document.getElementById("costPerMap").value = "0";
+  document.getElementById("costPerMapDiv").value = "0";
+  lastEditedCost = "chaos";
+
+  totalsUnit = "chaos";
+  const btn = document.getElementById("displayUnitBtn");
+  if (btn) btn.textContent = "Show Div";
+
+  document.getElementById("lootBody").innerHTML = "";
+  addLootRow();
+
+  activeMain = "general";
+  activeSub = "currency";
+  document.getElementById("marketSearch").value = "";
+
+  buildMainTabs();
+  buildSubTabs();
+
+  recalcAll();
+  setStatus("Status: reset ✅");
+}
+
+// -----------------------
+// Reload all (league change, tab change, etc.)
+// -----------------------
+async function reloadAll(){
+  const league = getLeague();
+  document.getElementById("leagueTitle").textContent = `League: ${league}`;
+
+  try{
+    // always refresh divine rate (needed for conversion)
+    const meta = await loadDivineRateAndIcons(league);
+
+    const divStr = divineChaosValue ? `1 Div=${fmtInt(divineChaosValue)} Chaos` : "Div rate: N/A";
+    const updatedStr = meta?.updatedAt ? ` | rates updated=${fmtDateTime(meta.updatedAt)}` : "";
+
+    setStatus(`Status: rates OK ✅ ${divStr}${updatedStr}`);
+
+    // sync cost inputs now that we have divineChaosValue
+    syncCostFields();
+
+    // now load active market
+    await loadMarketForActive();
+
+    // re-render existing loot rows (icons/prices)
+    document.querySelectorAll("#lootBody tr").forEach(tr => {
+      if (tr.classList.contains("manualRow")) return;
+      const itemInput = tr.querySelector(".lootItem");
+      if (!itemInput) return;
+      itemInput.dispatchEvent(new Event("input"));
+    });
+
+    recalcAll();
+  }catch(e){
     console.error(e);
-    setStatus("ERROR");
+    setStatus("Status: ERROR ❌ " + e.toString());
   }
 }
 
-init();
+// -----------------------
+// Init
+// -----------------------
+document.addEventListener("DOMContentLoaded", () => {
+  // defaults
+  buildMainTabs();
+  buildSubTabs();
+
+  // restore
+  loadState();
+
+  // wire events
+  document.getElementById("marketSearch")?.addEventListener("input", () => { renderMarket(); saveState(); });
+
+  document.getElementById("leagueInput")?.addEventListener("change", async () => {
+    await reloadAll();
+    saveState();
+  });
+
+  document.getElementById("maps")?.addEventListener("input", () => { recalcAll(); saveState(); });
+
+  document.getElementById("costPerMap")?.addEventListener("input", () => {
+    if (isSyncingCost) return;
+    lastEditedCost = "chaos";
+    syncCostFields();
+    recalcAll();
+    saveState();
+  });
+
+  document.getElementById("costPerMapDiv")?.addEventListener("input", () => {
+    if (isSyncingCost) return;
+    lastEditedCost = "div";
+    syncCostFields();
+    recalcAll();
+    saveState();
+  });
+
+  document.getElementById("displayUnitBtn")?.addEventListener("click", () => {
+    totalsUnit = (totalsUnit === "chaos") ? "div" : "chaos";
+    const btn = document.getElementById("displayUnitBtn");
+    if (btn) btn.textContent = (totalsUnit === "chaos") ? "Show Div" : "Show Chaos";
+    recalcAll();
+    saveState();
+  });
+
+  document.getElementById("resetBtn")?.addEventListener("click", resetAll);
+  document.getElementById("exportCsvBtn")?.addEventListener("click", exportLootCSV);
+
+  // ensure at least one row
+  if (!document.querySelector("#lootBody tr")) addLootRow();
+
+  // initial load
+  reloadAll();
+});
+
+// expose (same as your PoE2)
+window.addLootRow = addLootRow;
+window.addManualRow = addManualRow;
+window.resetAll = resetAll;
