@@ -83,28 +83,31 @@
 
     <!-- LEFT PANEL -->
     <aside class="left-panel">
-      <div class="panel-title">Market List</div>
+<div class="panel-title">Market List</div>
 
-      <!-- ✅ League row with dropdown just after League: ... -->
 <div class="panel-league-row">
   <span class="league-label">League:</span>
-
   <select id="leagueSelect" class="leagueSelect" aria-label="Select League">
     <option value="Standard">Standard</option>
     <option value="Keepers">Keepers</option>
   </select>
 </div>
 
+<!-- MAIN -->
+<div class="tabsBlock">
+  <div class="tabsLabel">Main</div>
+  <div class="tabs tabs--main" id="mainTabs"></div>
+</div>
 
+<!-- SUB -->
+<div class="tabsBlock tabsBlock--sub">
+  <div class="tabsLabel">Sub</div>
+  <div class="tabs tabs--sub" id="subTabs"></div>
+</div>
 
-      <!-- MAIN TABS -->
-      <div class="tabs" id="mainTabs"></div>
+<input id="marketSearch" placeholder="Search..." />
+<div id="marketList"></div>
 
-      <!-- SUB TABS -->
-      <div class="tabs" id="subTabs"></div>
-
-      <input id="marketSearch" placeholder="Search..." />
-      <div id="marketList"></div>
     </aside>
 
     <!-- RIGHT PANEL -->
@@ -162,6 +165,7 @@
   <script src="app.js?v=1" defer></script>
 </body>
 </html>
+
 
 
 
