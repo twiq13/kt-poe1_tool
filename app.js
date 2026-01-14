@@ -114,7 +114,7 @@ function pricesUrlForLeague(league){
 
 function updateLeagueUI(){
   const title = document.getElementById("leagueTitle");
-  if (title) title.textContent = `League: ${activeLeague}`;
+  if (title) title.textContent = activeLeague;
 
   const sel = document.getElementById("leagueSelect");
   if (sel && sel.value !== activeLeague) sel.value = activeLeague;
@@ -728,3 +728,4 @@ document.addEventListener("DOMContentLoaded", async () => {
 window.addLootRow = addLootRow;
 window.addManualRow = addManualRow;
 window.resetAll = resetAll;
+
