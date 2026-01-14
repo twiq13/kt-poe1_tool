@@ -1,325 +1,374 @@
 :root{
-  --bg:#1c1c1c;
-  --panel:#232323;
-  --panel2:#1f1f1f;
-  --border:rgba(255,255,255,.08);
-  --text:#ffffff;
-  --muted:rgba(255,255,255,.7);
-  --muted2:rgba(255,255,255,.55);
-  --danger:#ff3b3b;
-  --radius:12px;
+  --bg:#141414;
+  --panel:#1c1c1c;
+  --panel2:#202020;
+  --border:#2c2c2c;
+  --text:#f0f0f0;
+  --muted:#b8b8b8;
+  --accent:#c9a86a;
+
+  --radius:14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
 }
 
 *{ box-sizing:border-box; }
+html,body{ height:100%; }
 
 body{
   margin:0;
-  background:var(--bg);
+  background:
+    radial-gradient(1200px 600px at 20% 0%, rgba(201,168,106,.08), transparent 60%),
+    radial-gradient(900px 500px at 80% 10%, rgba(201,168,106,.06), transparent 55%),
+    var(--bg);
   color:var(--text);
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.app{
-  padding:16px;
-}
-
-.topbar{
-  position:relative;
-  display:flex;
-  align-items:flex-start;
-  gap:16px;
-  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:16px;
-}
-
-.title{
-  font-size:28px;
-  font-weight:800;
+h1{
+  margin:14px 16px 10px 16px;
+  font-size:32px;
+  font-weight:900;
   letter-spacing:.3px;
-  margin-right:8px;
-  white-space:nowrap;
 }
 
-.controls{
+a{ color:var(--accent); text-decoration:none; }
+a:hover{ text-decoration:underline; }
+
+/* top right poe.ninja button */
+.redditBtn{
+  position:fixed;
+  top:14px;
+  right:14px;
+  z-index:50;
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid rgba(201,168,106,.55);
+  background: rgba(201,168,106,.12);
+  color:var(--text);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.redditBtn:hover{ background: rgba(201,168,106,.18); }
+
+/* header bar */
+.header-bar{
+  margin:0 16px 10px 16px;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, rgba(28,28,28,.92), rgba(28,28,28,.86));
+  box-shadow: var(--shadow);
+
   display:flex;
-  gap:12px;
+  gap:14px;
+  align-items:flex-end;
+  justify-content:space-between;
   flex-wrap:wrap;
-  padding-top:2px;
 }
 
 .field{
   display:flex;
   flex-direction:column;
   gap:6px;
-  min-width:160px;
 }
-
 .field label{
-  color:var(--muted2);
   font-size:12px;
+  color:var(--muted);
 }
-
-input, select, button{
-  font:inherit;
-}
-
-input, select{
-  background:#1a1a1a;
-  color:var(--text);
-  border:1px solid var(--border);
-  border-radius:10px;
+.field input{
+  width:170px;
   padding:10px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#151515;
+  color:var(--text);
   outline:none;
 }
-
-input:focus, select:focus{
-  border-color:rgba(255,255,255,.18);
+.field input:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
-.totals{
-  margin-left:auto;
+.invest-mini{
   display:flex;
-  align-items:center;
-  gap:10px;
+  gap:12px;
   flex-wrap:wrap;
-  padding-top:2px;
+  align-items:flex-end;
 }
 
-.pill{
-  background:rgba(0,0,0,.25);
-  border:1px solid var(--border);
+.totals-mini{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.totalBox{
+  min-width:150px;
+  padding:10px 12px;
   border-radius:14px;
-  padding:10px 14px;
-  min-width:140px;
+  border:1px solid var(--border);
+  background: rgba(0,0,0,.18);
 }
-
-.pillLabel{
+.tLabel{
   font-size:12px;
-  color:var(--muted2);
+  color:var(--muted);
   margin-bottom:4px;
 }
-
-.pillValue{
+.tValue{
   font-size:18px;
-  font-weight:800;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  gap:8px;
 }
 
-.btn{
-  background:#2a2a2a;
-  border:1px solid var(--border);
-  color:var(--text);
-  border-radius:10px;
+/* buttons */
+.toggleBtn, .resetBtn, .loot-actions button{
   padding:10px 12px;
-  cursor:pointer;
-}
-
-.btn:hover{
-  border-color:rgba(255,255,255,.18);
-}
-
-.btn.danger{
-  background:var(--danger);
-  border-color:rgba(0,0,0,.15);
-  font-weight:800;
-}
-
-.poeninja{
-  position:absolute;
-  right:16px;
-  top:16px;
-  background:#2a2a2a;
-  border:1px solid var(--border);
+  border-radius:12px;
+  border:1px solid rgba(201,168,106,.55);
+  background: rgba(201,168,106,.12);
   color:var(--text);
-  padding:8px 10px;
-  border-radius:10px;
-  text-decoration:none;
-  font-size:13px;
+  cursor:pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
 }
+.toggleBtn:hover, .resetBtn:hover, .loot-actions button:hover{
+  background: rgba(201,168,106,.18);
+}
+.resetBtn#resetBtn{
+  border-color: rgba(255,60,60,.5);
+  background: rgba(255,60,60,.12);
+}
+.resetBtn#resetBtn:hover{
+  background: rgba(255,60,60,.18);
+}
+.btnIcon{ font-weight:900; margin-right:6px; }
 
+/* main layout */
 .layout{
   display:grid;
   grid-template-columns: 320px 1fr;
   gap:16px;
-  margin-top:16px;
-  min-height:calc(100vh - 110px);
+  padding:0 16px 16px 16px;
 }
 
-.sidebar{
-  background:rgba(255,255,255,.03);
+/* left panel */
+.left-panel{
+  background: linear-gradient(180deg, rgba(28,28,28,.92), rgba(28,28,28,.86));
   border:1px solid var(--border);
-  border-radius:var(--radius);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
   padding:14px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
+  min-height: 400px;
 }
 
-.panelHeader{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
+.panel-title{
+  font-weight:900;
+  margin:0 0 10px 0;
 }
 
-.panelTitle{
-  font-size:16px;
-  font-weight:800;
-}
-
-.leagueRow{
+.panel-league-row{
   display:flex;
   align-items:center;
-  gap:8px;
-  flex-wrap:wrap;
-}
-
-.leagueLabel{
-  color:var(--muted2);
-  font-size:13px;
-}
-
-.leagueName{
-  font-weight:800;
-  font-size:14px;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
 }
 
 .leagueSelect{
-  margin-left:auto;
   min-width:130px;
   padding:8px 10px;
   border-radius:10px;
+  border:1px solid var(--border);
+  background:#151515;
+  color:var(--text);
+  outline:none;
+}
+.leagueSelect:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
+/* tabs */
 .tabs{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-}
-
-.tab{
-  background:#2a2a2a;
-  border:1px solid var(--border);
-  color:var(--text);
-  border-radius:999px;
-  padding:8px 10px;
-  cursor:pointer;
-  font-size:12px;
-}
-
-.tab.active{
-  background:#3a3a3a;
-  border-color:rgba(255,255,255,.18);
-  font-weight:800;
-}
-
-.searchBox input{
-  width:100%;
-}
-
-.marketList{
-  flex:1;
-  overflow:auto;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  background:rgba(0,0,0,.15);
-}
-
-.hint{
-  padding:12px;
-  color:var(--muted);
-  font-size:13px;
-}
-
-.marketItem{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px 12px;
-  border-bottom:1px solid var(--border);
-  cursor:pointer;
-}
-
-.marketItem:hover{
-  background:rgba(255,255,255,.04);
-}
-
-.marketItemName{
-  flex:1;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.marketItemPrice{
-  color:var(--muted);
-  font-weight:700;
-  font-size:13px;
-}
-
-.content{
-  background:rgba(255,255,255,.03);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:14px;
-  position:relative;
-  overflow:hidden;
-}
-
-.contentHeader{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
   margin-bottom:10px;
 }
 
-.contentTitle{
-  font-size:16px;
-  font-weight:800;
-}
-
-.lootTable{
+.tab{
+  padding:8px 10px;
+  border-radius:999px;
   border:1px solid var(--border);
-  border-radius:var(--radius);
-  overflow:hidden;
-  background:rgba(0,0,0,.12);
-}
-
-.lootHead{
-  display:grid;
-  grid-template-columns: 1fr 140px 160px 160px 60px;
-  gap:10px;
-  padding:10px 12px;
-  background:rgba(255,255,255,.04);
-  color:var(--muted2);
+  background: rgba(0,0,0,.18);
+  color:var(--text);
+  cursor:pointer;
   font-size:12px;
-  border-bottom:1px solid var(--border);
+}
+.tab:hover{
+  border-color: rgba(201,168,106,.55);
+  background: rgba(201,168,106,.08);
+}
+.tab.active{
+  border-color: rgba(201,168,106,.85);
+  background: rgba(201,168,106,.14);
+  font-weight:900;
 }
 
-.lootRows{
-  display:flex;
-  flex-direction:column;
-}
-
-.lootRow{
-  display:grid;
-  grid-template-columns: 1fr 140px 160px 160px 60px;
-  gap:10px;
-  padding:10px 12px;
-  border-bottom:1px solid var(--border);
-  align-items:center;
-}
-
-.lootRow input{
+#marketSearch{
   width:100%;
+  padding:10px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#151515;
+  color:var(--text);
+  outline:none;
+  margin-bottom:10px;
+}
+#marketSearch:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
-.right{
-  text-align:right;
+#marketList{
+  max-height: calc(100vh - 360px);
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  background: rgba(0,0,0,.14);
 }
 
-.center{
-  text-align:center;
+/* market rows (used by your JS) */
+.market-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:10px 10px;
+  border-bottom:1px solid rgba(44,44,44,.65);
+  cursor:pointer;
+}
+.market-row:hover{
+  background: rgba(201,168,106,.06);
+}
+.mLeft{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+.cIcon{
+  width:18px; height:18px;
+  flex:0 0 auto;
+}
+.mName{
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width: 190px;
+}
+.mArrow{
+  color:var(--muted);
+  opacity:.7;
+}
+.mRight{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  justify-content:flex-end;
+}
+.mPriceVal{
+  font-weight:900;
+}
+.unitIcon{
+  width:18px; height:18px;
+}
+
+/* right panel */
+.app{
+  background: linear-gradient(180deg, rgba(28,28,28,.92), rgba(28,28,28,.86));
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+  padding:14px;
+  min-width:0;
+}
+
+.app-title{
+  font-weight:900;
+  margin:0 0 10px 0;
+}
+
+.loot-table{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  border:1px solid var(--border);
+  border-radius: var(--radius);
+  overflow:hidden;
+  background: rgba(0,0,0,.14);
+}
+
+.loot-table thead th{
+  position:sticky;
+  top:0;
+  z-index:5;
+  background: rgba(20,20,20,.95);
+  border-bottom:1px solid var(--border);
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  color:var(--muted);
+  padding:12px;
+  text-align:left;
+}
+.loot-table tbody td{
+  padding:12px;
+  border-bottom:1px solid rgba(44,44,44,.65);
+  vertical-align:middle;
+}
+.loot-table tbody tr:hover td{
+  background: rgba(201,168,106,.06);
+}
+
+.lootItemWrap{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.lootIcon{
+  width:18px; height:18px;
+}
+.lootItem{
+  width:100%;
+  padding:10px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#151515;
+  color:var(--text);
+  outline:none;
+}
+.lootItem:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
+}
+
+.priceCell{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+}
+.lootPrice{
+  font-weight:900;
+}
+.baseIcon{
+  width:18px; height:18px;
 }
 
 .qtyWrap{
@@ -328,42 +377,81 @@ input:focus, select:focus{
   justify-content:center;
   gap:8px;
 }
-
 .qtyBtn{
   width:34px;
   height:34px;
   border-radius:10px;
   border:1px solid var(--border);
-  background:#2a2a2a;
+  background:#151515;
   color:var(--text);
   cursor:pointer;
   font-weight:900;
 }
-
 .qtyBtn:hover{
-  border-color:rgba(255,255,255,.18);
+  border-color: rgba(201,168,106,.55);
+  background: rgba(201,168,106,.08);
+}
+.lootQty{
+  width:80px;
+  text-align:center;
+  padding:8px 10px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#151515;
+  color:var(--text);
+  outline:none;
 }
 
-.killBtn{
+.deleteBtn{
   width:40px;
   height:34px;
   border-radius:10px;
-  border:1px solid rgba(255,0,0,.25);
-  background:rgba(255,0,0,.12);
+  border:1px solid rgba(255,60,60,.4);
+  background: rgba(255,60,60,.12);
   color:#ff6b6b;
   cursor:pointer;
-  font-size:18px;
+  font-size:16px;
   font-weight:900;
 }
+.deleteBtn:hover{
+  background: rgba(255,60,60,.18);
+}
 
-.lootActions{
+.loot-actions{
   display:flex;
   gap:10px;
   margin-top:12px;
+  flex-wrap:wrap;
 }
 
 .status{
-  margin-top:10px;
+  margin: 10px 16px 0 16px;
   color:var(--muted);
   font-size:12px;
+}
+
+/* signature */
+.site-signature{
+  margin: 14px 16px 16px 16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  color:var(--muted);
+  font-size:12px;
+  opacity:.95;
+}
+.site-signature .sep{ opacity:.6; }
+
+/* icons in totals */
+.pIcon{
+  width:18px;
+  height:18px;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .layout{ grid-template-columns: 1fr; }
+  .field input{ width: 100%; }
+  #marketList{ max-height: 45vh; }
 }
