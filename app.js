@@ -80,38 +80,38 @@ const MAIN_TABS = [
   { id:"craft",   label:"Crafting" },
 ];
 
-// Must match your scraper output "section" ids
+// Sub tabs labels in FULL (no abbreviations)
 const SUB_TABS = {
   general: [
     { id:"currency",  label:"Currency" },
     { id:"fragments", label:"Fragments" },
     { id:"scarabs",   label:"Scarabs" },
-    { id:"divcards",  label:"Div Cards" },
+    { id:"divcards",  label:"Divination Cards" },
   ],
   equip: [
     { id:"skillgems", label:"Skill Gems" },
     { id:"basetypes", label:"Base Types" },
-    { id:"uweapon",   label:"Unique Wpn" },
-    { id:"uarmour",   label:"Unique Arm" },
-    { id:"uacc",      label:"Unique Acc" },
+    { id:"uweapon",   label:"Unique Weapon" },
+    { id:"uarmour",   label:"Unique Armour" },
+    { id:"uacc",      label:"Unique Accessories" },
     { id:"ujewel",    label:"Unique Jewel" },
-    { id:"cluster",   label:"Cluster" },
-    { id:"uflask",    label:"Unique Flask" },
+    { id:"cluster",   label:"Cluster Jewels" },
+    { id:"uflask",    label:"Unique Flasks" },
   ],
   atlas: [
     { id:"maps",      label:"Maps" },
     { id:"umaps",     label:"Unique Maps" },
     { id:"invites",   label:"Invitations" },
     { id:"memories",  label:"Memories" },
-    { id:"blighted",  label:"Blighted" },
-    { id:"ravaged",   label:"Ravaged" },
+    { id:"blighted",  label:"Blighted Maps" },
+    { id:"ravaged",   label:"Ravaged Maps" },
   ],
   craft: [
     { id:"essence",   label:"Essences" },
     { id:"fossil",    label:"Fossils" },
     { id:"resonator", label:"Resonators" },
     { id:"oil",       label:"Oils" },
-    { id:"deliorb",   label:"Deli Orbs" },
+    { id:"deliorb",   label:"Delirium Orbs" },
     { id:"incubator", label:"Incubators" },
     { id:"beast",     label:"Beasts" },
     { id:"vial",      label:"Vials" },
@@ -836,3 +836,4 @@ document.addEventListener("DOMContentLoaded", () => {
 window.addLootRow = addLootRow;
 window.addManualRow = addManualRow;
 window.resetAll = resetAll;
+
