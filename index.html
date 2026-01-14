@@ -1,153 +1,99 @@
-<!--
-  © KT_ - https://github.com/twiq13/
-  This website and its source code are provided for personal use only.
-  Copying, redistribution, or reuse without explicit credit is not permitted.
--->
-
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PoE2 Loot Calculator</title>
-  <link rel="stylesheet" href="style.css?v=1">
-  <link rel="icon" href="data/favincon.jpg">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KT PoE1 Loot Calc</title>
+  <link rel="stylesheet" href="./styles.css" />
 </head>
 
 <body>
-
-  <!-- TOP RIGHT (like "Feedback" button) -->
-  <a
-    id="redditBtn"
-    class="resetBtn redditBtn"
-    href="https://www.reddit.com/r/PathOfExile2/comments/1qaa7yx/poe2_farm_calculator_profit_tracker/"
-    target="_blank"
-    rel="noopener"
-    title="Open Reddit"
-  >
-    Reddit
-  </a>
-
-  <h1>PoE2 Loot Calculator</h1>
-
-  <!-- HEADER BAR -->
-  <div class="header-bar">
-
-    <!-- INVEST (left) -->
-    <div class="invest-mini">
-      <div class="field">
-        <label>Total Maps</label>
-        <input type="number" id="maps" value="10" min="0">
-      </div>
-
-      <div class="field">
-        <label>Cost per Map (Ex)</label>
-        <input type="number" id="costPerMap" value="0" min="0" step="0.01">
-      </div>
-
-      <div class="field">
-        <label>Cost per Map (Div)</label>
-        <input type="number" id="costPerMapDiv" value="0" min="0" step="0.01">
-      </div>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand__title">KT PoE Loot Calc</div>
+      <div class="brand__subtitle">PoE1 Market (poe.ninja)</div>
     </div>
 
-    <!-- TOTALS (right) -->
-    <div class="totals-mini">
-      <div class="totalBox">
-        <div class="tLabel">Total Invest</div>
-        <div class="tValue" id="totalInvest">0</div>
+    <div class="topbar__controls">
+      <div class="field">
+        <label for="leagueInput">League</label>
+        <input id="leagueInput" type="text" value="Standard" spellcheck="false" />
       </div>
 
-      <div class="totalBox">
-        <div class="tLabel">Total Loot</div>
-        <div class="tValue" id="totalLoot">0</div>
+      <div class="field">
+        <label for="searchInput">Search</label>
+        <input id="searchInput" type="text" placeholder="Item name..." spellcheck="false" />
       </div>
 
-      <div class="totalBox">
-        <div class="tLabel">Gains</div>
-        <div class="tValue" id="gain">0</div>
-      </div>
+      <button id="toggleCurrencyBtn" class="btn btn--ghost" title="Switch display currency">
+        Display: Chaos
+      </button>
 
-      <!-- toggle Ex/Div display for totals -->
-      <button class="toggleBtn" id="displayUnitBtn" type="button">Show Div</button>
-
-      <button class="resetBtn" id="resetBtn" type="button">Reset</button>
+      <button id="refreshBtn" class="btn" title="Refresh current category">
+        Refresh
+      </button>
     </div>
+  </header>
 
-  </div>
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="sidebar__section">
+        <div class="sidebar__title">Market</div>
+        <div id="menuRoot" class="menu"></div>
+      </div>
 
-  <!-- MAIN LAYOUT -->
-  <div class="layout">
+      <div class="sidebar__section info">
+        <div class="info__row">
+          <span class="muted">Divine rate</span>
+          <span id="divineRateLabel" class="pill">—</span>
+        </div>
+        <div class="info__row">
+          <span class="muted">Selected</span>
+          <span id="selectedLabel" class="pill">—</span>
+        </div>
+        <div class="info__row">
+          <span class="muted">Status</span>
+          <span id="statusLabel" class="pill pill--status">Idle</span>
+        </div>
+      </div>
 
-    <!-- LEFT PANEL -->
-    <aside class="left-panel">
-      <div class="panel-title">Market List</div>
-      <div class="panel-title">League: Fate of the Vaal</div>
-
-      <!-- TABS -->
-      <div class="tabs" id="tabs"></div>
-
-      <input id="marketSearch" placeholder="Search..." />
-
-      <div id="marketList"></div>
+      <div class="sidebar__section footer">
+        <div class="muted small">
+          Created by KT_ • GitHub: <a href="https://github.com/twiq13/" target="_blank" rel="noreferrer">twiq13</a>
+        </div>
+      </div>
     </aside>
 
-    <!-- RIGHT PANEL -->
-    <main class="app">
-      <div class="app-title">Loot</div>
-
-      <table class="loot-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody id="lootBody"></tbody>
-      </table>
-
-      <div class="loot-actions">
-        <button type="button" onclick="addLootRow()">
-          <span class="btnIcon">+</span> Add row
-        </button>
-
-        <button type="button" onclick="addManualRow()">
-          <span class="btnIcon">+</span> Manual row
-        </button>
-
-        <!-- same spacing as others -->
-        <button type="button" id="exportCsvBtn">Export CSV</button>
+    <section class="content">
+      <div class="content__header">
+        <h1 id="contentTitle">Market</h1>
+        <div class="muted" id="contentSubtitle">Select a category</div>
       </div>
-    </main>
 
-  </div>
+      <div class="panel">
+        <div class="panel__header">
+          <div class="panel__title">Results</div>
+          <div class="panel__meta">
+            <span class="muted">Count:</span> <span id="countLabel">0</span>
+          </div>
+        </div>
 
-  <!-- AUTOCOMPLETE -->
-  <datalist id="itemDatalist"></datalist>
+        <div class="tableWrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th class="col-name">Item</th>
+                <th class="col-type">Type</th>
+                <th class="col-price">Price</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- STATUS -->
-  <div id="fetchStatus" class="status">Status: waiting...</div>
-
-<footer class="site-signature" role="contentinfo">
-  <span>© <span id="year"></span> PoE2 Loot Calculator</span>
-  <span class="sep">•</span>
-  <span>Created by <strong>KT_</strong></span>
-  <span class="sep">•</span>
-  <a href="https://github.com/twiq13/" target="_blank" rel="noopener">
-    github.com/twiq13
-  </a>
-</footer>
-
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-
-
-  <!-- JS -->
-  <script src="app.js?v=1" defer></script>
+  <script src="./app.js"></script>
 </body>
 </html>
-
-
