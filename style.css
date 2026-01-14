@@ -9,9 +9,18 @@
 
   --radius:14px;
   --shadow: 0 10px 30px rgba(0,0,0,.35);
+
+  /* scrollbar */
+  --sb-track: rgba(0,0,0,.28);
+  --sb-thumb: rgba(255,255,255,.14);
+  --sb-thumb-hover: rgba(201,168,106,.22);
 }
 
+/* =========================================================
+   BASE
+   ========================================================= */
 *{ box-sizing:border-box; }
+
 html,body{ height:100%; }
 
 body{
@@ -24,17 +33,37 @@ body{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-h1{
-  margin:14px 16px 10px 16px;
-  font-size:32px;
-  font-weight:900;
-  letter-spacing:.3px;
-}
-
 a{ color:var(--accent); text-decoration:none; }
 a:hover{ text-decoration:underline; }
 
-/* top right poe.ninja button */
+/* =========================================================
+   NIGHTMODE SCROLLBARS (GLOBAL)
+   ========================================================= */
+/* Firefox */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,106,.35) var(--sb-track);
+}
+/* WebKit */
+::-webkit-scrollbar{ width:10px; height:10px; }
+::-webkit-scrollbar-track{
+  background: var(--sb-track);
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb{
+  background: var(--sb-thumb);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover{
+  background: var(--sb-thumb-hover);
+  border-color: rgba(201,168,106,.20);
+}
+::-webkit-scrollbar-corner{ background: var(--sb-track); }
+
+/* =========================================================
+   TOP RIGHT poe.ninja BUTTON
+   ========================================================= */
 .redditBtn{
   position:fixed;
   top:14px;
@@ -49,7 +78,19 @@ a:hover{ text-decoration:underline; }
 }
 .redditBtn:hover{ background: rgba(201,168,106,.18); }
 
-/* header bar */
+/* =========================================================
+   TITLE
+   ========================================================= */
+h1{
+  margin:14px 16px 10px 16px;
+  font-size:32px;
+  font-weight:900;
+  letter-spacing:.3px;
+}
+
+/* =========================================================
+   HEADER BAR
+   ========================================================= */
 .header-bar{
   margin:0 16px 10px 16px;
   padding:14px;
@@ -63,6 +104,13 @@ a:hover{ text-decoration:underline; }
   align-items:flex-end;
   justify-content:space-between;
   flex-wrap:wrap;
+}
+
+.invest-mini{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  align-items:flex-end;
 }
 
 .field{
@@ -86,13 +134,6 @@ a:hover{ text-decoration:underline; }
 .field input:focus{
   border-color: rgba(201,168,106,.6);
   box-shadow: 0 0 0 3px rgba(201,168,106,.12);
-}
-
-.invest-mini{
-  display:flex;
-  gap:12px;
-  flex-wrap:wrap;
-  align-items:flex-end;
 }
 
 .totals-mini{
@@ -122,8 +163,16 @@ a:hover{ text-decoration:underline; }
   align-items:center;
   gap:8px;
 }
+.pIcon{
+  width:18px;
+  height:18px;
+  vertical-align:middle;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
+}
 
-/* buttons */
+/* =========================================================
+   BUTTONS (shared)
+   ========================================================= */
 .toggleBtn, .resetBtn, .loot-actions button{
   padding:10px 12px;
   border-radius:12px;
@@ -136,6 +185,10 @@ a:hover{ text-decoration:underline; }
 .toggleBtn:hover, .resetBtn:hover, .loot-actions button:hover{
   background: rgba(201,168,106,.18);
 }
+.toggleBtn:active, .resetBtn:active, .loot-actions button:active{
+  transform: translateY(1px);
+}
+
 .resetBtn#resetBtn{
   border-color: rgba(255,60,60,.5);
   background: rgba(255,60,60,.12);
@@ -143,9 +196,12 @@ a:hover{ text-decoration:underline; }
 .resetBtn#resetBtn:hover{
   background: rgba(255,60,60,.18);
 }
+
 .btnIcon{ font-weight:900; margin-right:6px; }
 
-/* main layout */
+/* =========================================================
+   LAYOUT
+   ========================================================= */
 .layout{
   display:grid;
   grid-template-columns: 320px 1fr;
@@ -153,7 +209,9 @@ a:hover{ text-decoration:underline; }
   padding:0 16px 16px 16px;
 }
 
-/* left panel */
+/* =========================================================
+   LEFT PANEL (Market)
+   ========================================================= */
 .left-panel{
   background: linear-gradient(180deg, rgba(28,28,28,.92), rgba(28,28,28,.86));
   border:1px solid var(--border);
@@ -169,23 +227,20 @@ a:hover{ text-decoration:underline; }
   margin:0 0 10px 0;
 }
 
-/* ============ League row (closer) ============ */
+/* League row: close + clean */
 .panel-league-row{
   display:flex;
   align-items:center;
-  gap:8px;              /* was wider */
-  margin: 6px 0 12px 0; /* tighter */
+  gap:8px;
+  margin: 4px 0 12px 0;
 }
-
 .league-label{
-  font-weight:800;
+  font-weight:900;
   color:var(--text);
   opacity:.95;
 }
-
-/* remove "push to right", keep close to label */
 .leagueSelect{
-  margin-left: 0;       /* IMPORTANT: was auto */
+  margin-left: 0;
   min-width: 120px;
   padding: 7px 10px;
   border-radius: 10px;
@@ -194,161 +249,172 @@ a:hover{ text-decoration:underline; }
   color:var(--text);
   outline:none;
 }
-
-.leagueSelect:hover{
-  border-color: rgba(201,168,106,.55);
-}
+.leagueSelect:hover{ border-color: rgba(201,168,106,.55); }
 .leagueSelect:focus{
   border-color: rgba(201,168,106,.75);
   box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
-/* ============ Tabs blocks (Main/Sub clarity) ============ */
+/* MAIN / SUB blocks */
 .tabsBlock{
-  margin-top: 6px;
-}
-
-.tabsBlock--sub{
   margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(44,44,44,.85);
+}
+.tabsBlock--sub{
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255,255,255,.06);
 }
 
 .tabsLabel{
-  font-size: 12px;
-  color: var(--muted);
-  letter-spacing: .6px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .9px;
   text-transform: uppercase;
-  margin: 0 0 8px 2px;
+  color: rgba(255,255,255,.78);
+  background: rgba(0,0,0,.22);
+  border: 1px solid rgba(255,255,255,.08);
+  margin: 0 0 10px 2px;
 }
 
-/* Tabs container */
 .tabs{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
+  gap:10px;
 }
 
-/* MAIN tabs: bigger & stronger */
-.tabs--main .tab{
-  padding: 8px 12px;
+/* unified pill base */
+.tabs .tab{
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.10);
   background: rgba(0,0,0,.16);
   color: var(--text);
-  font-weight: 800;
-  font-size: 13px;
   cursor:pointer;
+  transition: transform .05s ease, background .15s ease, border-color .15s ease;
+  white-space: nowrap;
 }
-
-.tabs--main .tab:hover{
+.tabs .tab:hover{
   border-color: rgba(201,168,106,.55);
   background: rgba(201,168,106,.08);
 }
-
-.tabs--main .tab.active{
+.tabs .tab.active{
   border-color: rgba(201,168,106,.85);
   background: rgba(201,168,106,.14);
 }
+.tabs .tab:active{ transform: translateY(1px); }
 
-/* SUB tabs: smaller + slightly indented */
+/* MAIN slightly bigger */
+.tabs--main .tab{
+  padding: 9px 14px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+/* SUB slightly smaller + indented */
 .tabs--sub{
-  padding-left: 10px; /* visual "child" indentation */
+  padding-left: 10px;
 }
-
 .tabs--sub .tab{
-  padding: 7px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.08);
-  background: rgba(0,0,0,.10);
-  color: var(--text);
-  font-weight: 700;
+  padding: 8px 12px;
   font-size: 12px;
-  cursor:pointer;
+  font-weight: 750;
+  background: rgba(0,0,0,.12);
+  border-color: rgba(255,255,255,.08);
 }
 
-.tabs--sub .tab:hover{
-  border-color: rgba(201,168,106,.45);
-  background: rgba(201,168,106,.06);
-}
-
-.tabs--sub .tab.active{
-  border-color: rgba(201,168,106,.80);
-  background: rgba(201,168,106,.12);
-}
-
-
+/* search */
 #marketSearch{
   width:100%;
-  padding:10px 10px;
-  border-radius:10px;
+  margin-top:10px;
+  padding:10px 12px;
+  border-radius:12px;
   border:1px solid var(--border);
   background:#151515;
   color:var(--text);
   outline:none;
-  margin-bottom:10px;
 }
 #marketSearch:focus{
   border-color: rgba(201,168,106,.6);
   box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
+/* market list */
 #marketList{
-  max-height: calc(100vh - 360px);
+  margin-top:10px;
+  max-height: 420px;
   overflow:auto;
-  border:1px solid var(--border);
-  border-radius: var(--radius);
-  background: rgba(0,0,0,.14);
+  padding-right: 4px;
 }
 
-/* market rows (used by your JS) */
+/* single market row */
 .market-row{
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
   padding:10px 10px;
-  border-bottom:1px solid rgba(44,44,44,.65);
+  border-radius: 12px;
+  border:1px solid rgba(255,255,255,.08);
+  background: rgba(0,0,0,.12);
   cursor:pointer;
+  margin-bottom:8px;
 }
+
 .market-row:hover{
-  background: rgba(201,168,106,.06);
+  border-color: rgba(201,168,106,.55);
+  background: rgba(201,168,106,.08);
 }
+
 .mLeft{
   display:flex;
   align-items:center;
-  gap:10px;
-  min-width:0;
+  gap:8px;
+  min-width: 0;
 }
 .cIcon{
-  width:18px; height:18px;
+  width:18px;
+  height:18px;
   flex:0 0 auto;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
 }
 .mName{
-  font-weight:700;
+  font-weight:800;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
-  max-width: 190px;
+  max-width: 170px;
 }
+
 .mArrow{
-  color:var(--muted);
-  opacity:.7;
+  opacity:.55;
+  flex:0 0 auto;
 }
+
 .mRight{
   display:flex;
   align-items:center;
-  gap:8px;
   justify-content:flex-end;
+  gap:8px;
+  flex:0 0 auto;
 }
 .mPriceVal{
   font-weight:900;
+  min-width: 26px;
+  text-align:right;
 }
 .unitIcon{
-  width:18px; height:18px;
+  width:18px;
+  height:18px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
 }
 
-/* right panel */
+/* =========================================================
+   RIGHT PANEL (Loot)
+   ========================================================= */
 .app{
   background: linear-gradient(180deg, rgba(28,28,28,.92), rgba(28,28,28,.86));
   border:1px solid var(--border);
@@ -356,7 +422,7 @@ a:hover{ text-decoration:underline; }
   box-shadow: var(--shadow);
   overflow:hidden;
   padding:14px;
-  min-width:0;
+  min-height: 520px;
 }
 
 .app-title{
@@ -368,30 +434,27 @@ a:hover{ text-decoration:underline; }
   width:100%;
   border-collapse:separate;
   border-spacing:0;
-  border:1px solid var(--border);
-  border-radius: var(--radius);
   overflow:hidden;
-  background: rgba(0,0,0,.14);
+  border-radius: 12px;
 }
 
 .loot-table thead th{
-  position:sticky;
-  top:0;
-  z-index:5;
-  background: rgba(20,20,20,.95);
-  border-bottom:1px solid var(--border);
+  text-align:left;
   font-size:12px;
   text-transform:uppercase;
   letter-spacing:.6px;
   color:var(--muted);
+  background: rgba(0,0,0,.20);
+  border-bottom:1px solid rgba(255,255,255,.06);
   padding:12px;
-  text-align:left;
 }
+
 .loot-table tbody td{
   padding:12px;
-  border-bottom:1px solid rgba(44,44,44,.65);
+  border-bottom:1px solid rgba(255,255,255,.06);
   vertical-align:middle;
 }
+
 .loot-table tbody tr:hover td{
   background: rgba(201,168,106,.06);
 }
@@ -402,13 +465,15 @@ a:hover{ text-decoration:underline; }
   gap:10px;
 }
 .lootIcon{
-  width:18px; height:18px;
+  width:18px;
+  height:18px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
 }
 .lootItem{
   width:100%;
   padding:10px 10px;
   border-radius:10px;
-  border:1px solid var(--border);
+  border:1px solid rgba(255,255,255,.08);
   background:#151515;
   color:var(--text);
   outline:none;
@@ -421,60 +486,78 @@ a:hover{ text-decoration:underline; }
 .priceCell{
   display:flex;
   align-items:center;
-  justify-content:flex-end;
+  justify-content:flex-start;
   gap:8px;
 }
 .lootPrice{
   font-weight:900;
+  min-width: 28px;
 }
 .baseIcon{
-  width:18px; height:18px;
+  width:18px;
+  height:18px;
+  filter: drop-shadow(0 0 2px rgba(0,0,0,.55));
 }
 
 .qtyWrap{
   display:flex;
   align-items:center;
-  justify-content:center;
   gap:8px;
 }
 .qtyBtn{
-  width:34px;
-  height:34px;
+  width:32px;
+  height:32px;
   border-radius:10px;
-  border:1px solid var(--border);
-  background:#151515;
+  border:1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.18);
   color:var(--text);
   cursor:pointer;
-  font-weight:900;
 }
 .qtyBtn:hover{
   border-color: rgba(201,168,106,.55);
   background: rgba(201,168,106,.08);
 }
+.qtyBtn:active{ transform: translateY(1px); }
+
 .lootQty{
-  width:80px;
+  width:70px;
   text-align:center;
-  padding:8px 10px;
+  padding:10px 10px;
   border-radius:10px;
-  border:1px solid var(--border);
+  border:1px solid rgba(255,255,255,.08);
   background:#151515;
   color:var(--text);
   outline:none;
 }
+.lootQty:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
+}
 
 .deleteBtn{
   width:40px;
-  height:34px;
+  height:32px;
   border-radius:10px;
-  border:1px solid rgba(255,60,60,.4);
-  background: rgba(255,60,60,.12);
-  color:#ff6b6b;
+  border:1px solid rgba(255,60,60,.45);
+  background: rgba(255,60,60,.10);
+  color:var(--text);
   cursor:pointer;
-  font-size:16px;
-  font-weight:900;
 }
-.deleteBtn:hover{
-  background: rgba(255,60,60,.18);
+.deleteBtn:hover{ background: rgba(255,60,60,.16); }
+.deleteBtn:active{ transform: translateY(1px); }
+
+.manualPrice{
+  width:120px;
+  padding:10px 10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.08);
+  background:#151515;
+  color:var(--text);
+  outline:none;
+}
+.manualPrice:focus{
+  border-color: rgba(201,168,106,.6);
+  box-shadow: 0 0 0 3px rgba(201,168,106,.12);
 }
 
 .loot-actions{
@@ -484,36 +567,35 @@ a:hover{ text-decoration:underline; }
   flex-wrap:wrap;
 }
 
+/* =========================================================
+   STATUS + FOOTER
+   ========================================================= */
 .status{
-  margin: 10px 16px 0 16px;
-  color:var(--muted);
-  font-size:12px;
+  margin: 0 16px;
+  padding: 8px 0 12px 0;
+  color: rgba(255,255,255,.65);
+  font-size: 12px;
 }
 
-/* signature */
 .site-signature{
-  margin: 14px 16px 16px 16px;
+  margin: 0 16px 18px 16px;
+  padding: 8px 0 0 0;
+  border-top: 1px solid rgba(255,255,255,.06);
+  color: rgba(255,255,255,.65);
+  font-size: 12px;
   display:flex;
-  align-items:center;
-  gap:10px;
+  gap:8px;
   flex-wrap:wrap;
-  color:var(--muted);
-  font-size:12px;
-  opacity:.95;
+  align-items:center;
 }
-.site-signature .sep{ opacity:.6; }
+.site-signature .sep{ opacity:.5; }
 
-/* icons in totals */
-.pIcon{
-  width:18px;
-  height:18px;
-}
-
-/* responsive */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media (max-width: 980px){
   .layout{ grid-template-columns: 1fr; }
   .field input{ width: 100%; }
-  #marketList{ max-height: 45vh; }
+  .totalBox{ min-width: 140px; }
+  #marketList{ max-height: 360px; }
 }
-
-
