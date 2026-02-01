@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-02-01T09:51:19.790Z",
+  "updatedAt": "2026-02-01T10:15:02.392Z",
   "league": "Standard",
   "source": "https://poe.ninja/api/data",
   "base": "Chaos Orb",
@@ -997,7 +997,7 @@
       "section": "fragments",
       "name": "Reality Fragment",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleU1hdmVuIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/1876f58c4b/UberBossKeyMaven.png",
-      "amount": 253.3,
+      "amount": 251.7,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1005,7 +1005,7 @@
       "section": "fragments",
       "name": "Devouring Fragment",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUVhdGVyT2ZXb3JsZHMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/935c580d4c/UberBossKeyEaterOfWorlds.png",
-      "amount": 232,
+      "amount": 248,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1013,7 +1013,7 @@
       "section": "fragments",
       "name": "Valdo's Puzzle Box",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvVmFsZG9zUHV6emxlQm94IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/aa5be00d00/ValdosPuzzleBox.png",
-      "amount": 212,
+      "amount": 209,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1021,15 +1021,15 @@
       "section": "fragments",
       "name": "An Audience With The King",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL1Zvb2Rvb0tpbmdFZmZpZ3kiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/5006769e86/VoodooKingEffigy.png",
-      "amount": 188.5,
+      "amount": 180,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
     {
       "section": "fragments",
-      "name": "Traumatic Fragment",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUluY2FybmF0aW9uT2ZGZWFyIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/8f2009d5c6/UberBossKeyIncarnationOfFear.png",
-      "amount": 160,
+      "name": "Lonely Fragment",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUluY2FybmF0aW9uT2ZOZWdsZWN0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/00f95887d8/UberBossKeyIncarnationOfNeglect.png",
+      "amount": 166,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1051,14 +1051,6 @@
     },
     {
       "section": "fragments",
-      "name": "Lonely Fragment",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUluY2FybmF0aW9uT2ZOZWdsZWN0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/00f95887d8/UberBossKeyIncarnationOfNeglect.png",
-      "amount": 120,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "fragments",
       "name": "Blazing Fragment",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleVNlYXJpbmdFeGFyY2giLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/a005e1a684/UberBossKeySearingExarch.png",
       "amount": 100,
@@ -1075,17 +1067,17 @@
     },
     {
       "section": "fragments",
-      "name": "Synthesising Fragment",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUNvcnRleCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/210227ccfc/UberBossKeyCortex.png",
-      "amount": 66.33,
+      "name": "Cosmic Fragment",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleVNoYXBlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/d5ef574938/UberBossKeyShaper.png",
+      "amount": 75.2,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
     {
       "section": "fragments",
-      "name": "Cosmic Fragment",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleVNoYXBlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/d5ef574938/UberBossKeyShaper.png",
-      "amount": 61,
+      "name": "Synthesising Fragment",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleUNvcnRleCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/210227ccfc/UberBossKeyCortex.png",
+      "amount": 69,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1101,7 +1093,7 @@
       "section": "fragments",
       "name": "Timeless Maraketh Emblem",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9NYXJha2V0aEZyYWdtZW50IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/7c42d58a5e/MarakethFragment.png",
-      "amount": 57.14,
+      "amount": 48.57,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1115,14 +1107,6 @@
     },
     {
       "section": "fragments",
-      "name": "Fragment of Purification",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcEd1YXJkaWFuQ2hhb3MiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/767832e457/AtlasMapGuardianChaos.png",
-      "amount": 38.14,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "fragments",
       "name": "Timeless Templar Emblem",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9UZW1wbGFyRnJhZ21lbnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e31c7a2a1e/TemplarFragment.png",
       "amount": 36.31,
@@ -1131,9 +1115,25 @@
     },
     {
       "section": "fragments",
+      "name": "Fragment of Purification",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcEd1YXJkaWFuQ2hhb3MiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/767832e457/AtlasMapGuardianChaos.png",
+      "amount": 35.43,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "fragments",
       "name": "Fragment of Constriction",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcEd1YXJkaWFuSG9seSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/ade615a113/AtlasMapGuardianHoly.png",
-      "amount": 32.71,
+      "amount": 30,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "fragments",
+      "name": "Awakening Fragment",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleVNpcnVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/2d2c405857/UberBossKeySirus.png",
+      "amount": 28.57,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1163,25 +1163,9 @@
     },
     {
       "section": "fragments",
-      "name": "Awakening Fragment",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyQm9zc0tleVNpcnVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/2d2c405857/UberBossKeySirus.png",
-      "amount": 22.66,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "fragments",
-      "name": "Esh's Breachstone",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaEZyYWdtZW50c0xpZ2h0bmluZyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/e66ff540ed/BreachFragmentsLightning.png",
-      "amount": 19,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "fragments",
       "name": "Baran's Crest",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9DcnVzYWRlckZyYWdtZW50IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/83e0f167f2/CrusaderFragment.png",
-      "amount": 19,
+      "amount": 18.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1189,7 +1173,7 @@
       "section": "fragments",
       "name": "Drox's Crest",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9XYXJsb3JkRnJhZ21lbnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/863882aba2/WarlordFragment.png",
-      "amount": 19,
+      "amount": 18.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1197,7 +1181,15 @@
       "section": "fragments",
       "name": "Fragment of Enslavement",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcEd1YXJkaWFuRmlyZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/6327dee00e/AtlasMapGuardianFire.png",
-      "amount": 17.71,
+      "amount": 17.14,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "fragments",
+      "name": "Esh's Breachstone",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQnJlYWNoL0JyZWFjaEZyYWdtZW50c0xpZ2h0bmluZyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/e66ff540ed/BreachFragmentsLightning.png",
+      "amount": 17,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1229,7 +1221,7 @@
       "section": "fragments",
       "name": "Fragment of the Chimera",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRDaGltZXJhIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/df51d0bd7a/FragmentChimera.png",
-      "amount": 15.17,
+      "amount": 15,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1245,7 +1237,7 @@
       "section": "fragments",
       "name": "Fragment of the Hydra",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRIeWRyYSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/16cec8bced/FragmentHydra.png",
-      "amount": 12.7,
+      "amount": 12.07,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1253,15 +1245,7 @@
       "section": "fragments",
       "name": "Timeless Vaal Emblem",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsRnJhZ21lbnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7b02499e4e/VaalFragment.png",
-      "amount": 12,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "fragments",
-      "name": "Fragment of the Phoenix",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRQaG9lbml4IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/bf64bb03f8/FragmentPhoenix.png",
-      "amount": 11.37,
+      "amount": 11.67,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1277,15 +1261,15 @@
       "section": "fragments",
       "name": "Mortal Grief",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9VYmVyVmFhbDA0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/aa109d2841/UberVaal04.png",
-      "amount": 11.2,
+      "amount": 10.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
     {
       "section": "fragments",
-      "name": "Fragment of the Minotaur",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRNaW5vdGF1ciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a6307f6cc9/FragmentMinotaur.png",
-      "amount": 10.53,
+      "name": "Fragment of the Phoenix",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRQaG9lbml4IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/bf64bb03f8/FragmentPhoenix.png",
+      "amount": 10.64,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1294,6 +1278,14 @@
       "name": "Timeless Eternal Emblem",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9FdGVybmFsRW1waXJlRnJhZ21lbnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/c1776eeb6b/EternalEmpireFragment.png",
       "amount": 10.32,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "fragments",
+      "name": "Fragment of the Minotaur",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9BdGxhc01hcHMvRnJhZ21lbnRNaW5vdGF1ciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a6307f6cc9/FragmentMinotaur.png",
+      "amount": 10.17,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1349,7 +1341,7 @@
       "section": "fragments",
       "name": "Sacrifice at Dawn",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvTWFwcy9WYWFsMDIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2e0739455f/Vaal02.png",
-      "amount": 0.37,
+      "amount": 0.36,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1413,7 +1405,7 @@
       "section": "scarabs",
       "name": "Blight Scarab of Invigoration",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkJsaWdodCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/e74a0932bd/AltTier4ScarabBlight.png",
-      "amount": 413.2,
+      "amount": 417.2,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1605,7 +1597,7 @@
       "section": "scarabs",
       "name": "Cartography Scarab of Risk",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJNYXBzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/0baaf413d0/NormalScarabMaps.png",
-      "amount": 34.41,
+      "amount": 34.69,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1869,7 +1861,7 @@
       "section": "scarabs",
       "name": "Blight Scarab of the Blightheart",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmxpZ2h0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/cf36f28d45/GreaterScarabBlight.png",
-      "amount": 6.15,
+      "amount": 6.17,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -1989,7 +1981,7 @@
       "section": "scarabs",
       "name": "Cartography Scarab of Escalation",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9MZXNzZXJTY2FyYWJNYXBzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/c982c28d52/LesserScarabMaps.png",
-      "amount": 3.95,
+      "amount": 3.96,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -6211,6 +6203,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Vaal Righteous Fire",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsUmlnaHRlb3VzRmlyZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a59a827cc2/VaalRighteousFire.png",
+      "amount": 70996,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Ice Crash of Cadence",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JY2VDcmFzaEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6NX1d/6696511683/IceCrashGem.png",
       "amount": 69913,
@@ -6427,6 +6427,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Increased Critical Damage Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0luY3JlYXNlZENyaXRpY2FsRGFtYWdlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/74164474d1/IncreasedCriticalDamage.png",
+      "amount": 43290,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Vaal Glacial Hammer",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsR2xhY2lhbEhhbW1lciIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6NX1d/123033ba9c/VaalGlacialHammer.png",
       "amount": 43290,
@@ -6494,14 +6502,6 @@
       "name": "Autoexertion",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9BdXRvQ2FzdEluc3RhbnRXYXJjcnkiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ffc975c2b7/AutoCastInstantWarcry.png",
       "amount": 42857,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Increased Critical Damage Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0luY3JlYXNlZENyaXRpY2FsRGFtYWdlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/74164474d1/IncreasedCriticalDamage.png",
-      "amount": 41342,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -7131,6 +7131,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Firestorm of Pelting",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9GaXJlc3Rvcm0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/ac42f6b194/Firestorm.png",
+      "amount": 19480,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Kinetic Rain",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9LaW5ldGljUmFpblNraWxsR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/568245b6d1/KineticRainSkillGem.png",
       "amount": 19480,
@@ -7453,14 +7461,6 @@
       "section": "skillgems",
       "name": "Awakened Fork Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0ZvcmtQbHVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/664ffa6acd/ForkPlus.png",
-      "amount": 15584,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Firestorm of Pelting",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9GaXJlc3Rvcm0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/ac42f6b194/Firestorm.png",
       "amount": 15584,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -7974,14 +7974,6 @@
       "name": "Summon Reaper of Revenants",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25SZWFwZXJTa2lsbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6MTN9XQ/d12fd09c37/SummonReaperSkillGem.png",
       "amount": 11255,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Vaal Righteous Fire",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsUmlnaHRlb3VzRmlyZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a59a827cc2/VaalRighteousFire.png",
-      "amount": 11169,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -10331,14 +10323,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Vaal Discipline",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsRGlzY2lwbGluZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/abe73da97d/VaalDiscipline.png",
-      "amount": 4545,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Siege Ballista",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Dcm9zc0Jvd1RvdGVtR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/ab7ce277f5/CrossBowTotemGem.png",
       "amount": 4545,
@@ -10382,6 +10366,14 @@
       "name": "Contagion of Subsiding",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Db250YWdpb25HZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjEzfV0/4534bc8660/ContagionGem.png",
       "amount": 4509,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Vaal Discipline",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsRGlzY2lwbGluZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/abe73da97d/VaalDiscipline.png",
+      "amount": 4502,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -12211,6 +12203,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Awakened Brutality Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0JydXRhbGl0eVBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9553670260/BrutalityPlus.png",
+      "amount": 2597,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Raise Zombie of Falling",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9SYWlzZVpvbWJpZSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6MTR9XQ/f849e6401e/RaiseZombie.png",
       "amount": 2597,
@@ -12310,14 +12310,6 @@
       "name": "Conductivity",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Db25kdWN0aXZpdHkiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/076cd0472c/Conductivity.png",
       "amount": 2554,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Awakened Brutality Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0JydXRhbGl0eVBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9553670260/BrutalityPlus.png",
-      "amount": 2511,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -12533,6 +12525,14 @@
       "section": "skillgems",
       "name": "Raise Spectre",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9SYWlzZVNwZWN0cmUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/581a69bc61/RaiseSpectre.png",
+      "amount": 2164,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Purity of Fire",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9GaXJlUmVzaXN0QXVyYSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/c2ab10c400/FireResistAura.png",
       "amount": 2164,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -12966,14 +12966,6 @@
       "name": "Lightning Arrow of Electrocution",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9MaWdodG5pbmdBcnJvdyIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/3e146857f2/LightningArrow.png",
       "amount": 1948,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Purity of Fire",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9GaXJlUmVzaXN0QXVyYSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/c2ab10c400/FireResistAura.png",
-      "amount": 1905,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -13691,6 +13683,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Minion Life Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L01pbmlvbkxpZmUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/efcc549806/MinionLife.png",
+      "amount": 1472,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Rage Vortex of Berserking",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9SYWdlVm9ydGV4IiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjo1fV0/3c7c199775/RageVortex.png",
       "amount": 1472,
@@ -13933,14 +13933,6 @@
       "section": "skillgems",
       "name": "Faster Projectiles Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Zhc3RlclByb2plY3RpbGVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/a6517119dd/FasterProjectiles.png",
-      "amount": 1299,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Minion Life Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L01pbmlvbkxpZmUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/efcc549806/MinionLife.png",
       "amount": 1299,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -14723,14 +14715,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Returning Projectiles Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1JldHVyblByb2plY3RpbGVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/76e59b7e35/ReturnProjectiles.png",
-      "amount": 1169,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Herald of Thunder",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9IZXJhbGRvZlRodW5kZXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/fcc8e7de1e/HeraldofThunder.png",
       "amount": 1169,
@@ -14782,14 +14766,6 @@
       "name": "Summon Carrion Golem",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25DYXJyaW9uR29sZW1HZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/84d9986a34/SummonCarrionGolemGem.png",
       "amount": 1145,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Meat Shield Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0RlZmVuc2l2ZU1pbmlvbiIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/604a531a0b/DefensiveMinion.png",
-      "amount": 1130,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -14891,6 +14867,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Returning Projectiles Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1JldHVyblByb2plY3RpbGVzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/76e59b7e35/ReturnProjectiles.png",
+      "amount": 1040,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Grace",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9HcmFjZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/0d4fbca4ae/Grace.png",
       "amount": 1039,
@@ -14950,6 +14934,14 @@
       "name": "Viper Strike of the Mamba",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WaXBlclN0cmlrZSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/8b37a8f02e/ViperStrike.png",
       "amount": 1026,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Meat Shield Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0RlZmVuc2l2ZU1pbmlvbiIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/604a531a0b/DefensiveMinion.png",
+      "amount": 1005,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -15262,6 +15254,14 @@
       "name": "Spellblade Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1NwZWxsQmxhZGUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/6f4a6cf751/SpellBlade.png",
       "amount": 881.8,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Awakened Swift Affliction Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL1N1cHBvcnRSYXBpZERlY2F5UGx1cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/275f8da8d1/SupportRapidDecayPlus.png",
+      "amount": 870.1,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -16283,14 +16283,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Awakened Swift Affliction Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL1N1cHBvcnRSYXBpZERlY2F5UGx1cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/275f8da8d1/SupportRapidDecayPlus.png",
-      "amount": 831.2,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Awakened Melee Physical Damage Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0luY3JlYXNlZFBoeXNjaWFsRGFtYWdlUGx1cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b5d08a6777/IncreasedPhyscialDamagePlus.png",
       "amount": 826.8,
@@ -16691,14 +16683,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Culling Strike Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0N1bGxpbmdTdHJpa2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/328a156075/CullingStrike.png",
-      "amount": 660,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Caustic Arrow of Poison",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Qb2lzb25BcnJvdyIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/a8fe13d1a6/PoisonArrow.png",
       "amount": 652.8,
@@ -16822,6 +16806,14 @@
       "name": "Living Lightning Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0xpdmluZ0xpZ2h0bmluZ1N1cHBvcnRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/91576fc0e7/LivingLightningSupportGem.png",
       "amount": 612.9,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Detonate Dead of Scavenging",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EZXRvbmF0ZURlYWQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjl9XQ/ce6c88958c/DetonateDead.png",
+      "amount": 612.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -16966,6 +16958,14 @@
       "name": "Creeping Frost",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9BcmN0aWNCcmVhdGgiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7e13902453/ArcticBreath.png",
       "amount": 599.2,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Culling Strike Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0N1bGxpbmdTdHJpa2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/328a156075/CullingStrike.png",
+      "amount": 590,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -20787,14 +20787,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Detonate Dead of Scavenging",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EZXRvbmF0ZURlYWQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjl9XQ/ce6c88958c/DetonateDead.png",
-      "amount": 396.8,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Momentum Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L01vbWVudHVtU3VwcG9ydEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/ccdd57e05a/MomentumSupportGem.png",
       "amount": 396.4,
@@ -21947,14 +21939,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Arrogance Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Jsb29kTWFnaWMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f90e23f319/BloodMagic.png",
-      "amount": 279.4,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Conductivity",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Db25kdWN0aXZpdHkiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/076cd0472c/Conductivity.png",
       "amount": 275.7,
@@ -21974,6 +21958,14 @@
       "name": "Summon Holy Relic of Conviction",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Ib2x5UmVsaWMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjEzfV0/e1765b396e/HolyRelic.png",
       "amount": 275.2,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Arrogance Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Jsb29kTWFnaWMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f90e23f319/BloodMagic.png",
+      "amount": 274.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -22379,6 +22371,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Vaal Ice Shot",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsSWNlU2hvdCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/1c767a1fbf/VaalIceShot.png",
+      "amount": 241.4,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Ball Lightning of Orbiting",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CYWxsTGlnaHRuaW5nIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjoxM31d/b61314b6d0/BallLightning.png",
       "amount": 241.4,
@@ -22454,14 +22454,6 @@
       "name": "Double Strike of Impaling",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Eb3VibGVTdHJpa2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjl9XQ/e0c9064ba9/DoubleStrike.png",
       "amount": 237.2,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Awakened Vicious Projectiles Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL1JhbmdlZFBoeXNpY2FsQXR0YWNrRGFtYWdlUGx1cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/982ca84dbe/RangedPhysicalAttackDamagePlus.png",
-      "amount": 236.4,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -22878,14 +22870,6 @@
       "name": "Less Duration Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1JlZHVjZUR1cmF0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/ab88044f5f/ReduceDuration.png",
       "amount": 203.6,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Vaal Ice Shot",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsSWNlU2hvdCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/1c767a1fbf/VaalIceShot.png",
-      "amount": 203.2,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -23349,6 +23333,14 @@
       "section": "skillgems",
       "name": "Flame Wall",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9GaXJld2FsbCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/93fe8f55b5/Firewall.png",
+      "amount": 197.2,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Awakened Vicious Projectiles Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL1JhbmdlZFBoeXNpY2FsQXR0YWNrRGFtYWdlUGx1cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/982ca84dbe/RangedPhysicalAttackDamagePlus.png",
       "amount": 197.2,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -24235,6 +24227,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Summon Stone Golem",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
+      "amount": 154.4,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Bane",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EYXJrUml0dWFsR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/49b669a081/DarkRitualGem.png",
       "amount": 153.8,
@@ -24651,14 +24651,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Siege Ballista of Trarthus",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Dcm9zc0Jvd1RvdGVtR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImd0Ijp0cnVlfV0/0c75ef5367/CrossBowTotemGem.png",
-      "amount": 140,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Blight",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbGlnaHRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0a44062dbd/BlightGem.png",
       "amount": 139.8,
@@ -25051,16 +25043,16 @@
     },
     {
       "section": "skillgems",
-      "name": "Ice Bite Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0ZyZW56eUNoYXJnZU9uU2hhdHRlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/d172bfc06a/FrenzyChargeOnShatter.png",
-      "amount": 131.6,
+      "name": "Siege Ballista of Trarthus",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Dcm9zc0Jvd1RvdGVtR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImd0Ijp0cnVlfV0/0c75ef5367/CrossBowTotemGem.png",
+      "amount": 132,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
     {
       "section": "skillgems",
-      "name": "Chain Hook of Trarthus",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9DaGFpblN0cmlrZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJndCI6dHJ1ZX1d/46b9a12655/ChainStrikeGem.png",
+      "name": "Ice Bite Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0ZyZW56eUNoYXJnZU9uU2hhdHRlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/d172bfc06a/FrenzyChargeOnShatter.png",
       "amount": 131.6,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -25203,14 +25195,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Heavy Strike of Trarthus",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9IZWF2eVN0cmlrZSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJndCI6dHJ1ZX1d/06d94c8603/HeavyStrike.png",
-      "amount": 126.6,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Impale Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L2ltcGFsZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/a974bd1dc1/impale.png",
       "amount": 126.6,
@@ -25222,14 +25206,6 @@
       "name": "Awakened Cold Penetration Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0NvbGRQZW5ldHJhdGlvblBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/52ac74cbd4/ColdPenetrationPlus.png",
       "amount": 126.4,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Awakened Controlled Destruction Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0NvbnRyb2xsZWREZXN0cnVjdGlvblBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e545c985d0/ControlledDestructionPlus.png",
-      "amount": 126.2,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -25270,6 +25246,14 @@
       "name": "Shield Charge",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TaGllbGRDaGFyZ2UiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/6d2723f822/ShieldCharge.png",
       "amount": 124,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Awakened Controlled Destruction Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1N1cHBvcnRQbHVzL0NvbnRyb2xsZWREZXN0cnVjdGlvblBsdXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e545c985d0/ControlledDestructionPlus.png",
+      "amount": 123.9,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -25563,6 +25547,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Chain Hook of Trarthus",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9DaGFpblN0cmlrZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJndCI6dHJ1ZX1d/46b9a12655/ChainStrikeGem.png",
+      "amount": 113.6,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Blight",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbGlnaHRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/0a44062dbd/BlightGem.png",
       "amount": 113.5,
@@ -25645,6 +25637,14 @@
       "section": "skillgems",
       "name": "Bloodthirst Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Jsb29kUHJpY2VTdXBwb3J0R2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/4ea8419360/BloodPriceSupportGem.png",
+      "amount": 110.6,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Heavy Strike of Trarthus",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9IZWF2eVN0cmlrZSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJndCI6dHJ1ZX1d/06d94c8603/HeavyStrike.png",
       "amount": 110.6,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -26979,6 +26979,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Summon Skeletons of Mages",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25Ta2VsZXRvbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/9be85a0cf8/SummonSkeletons.png",
+      "amount": 90,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Flameblast of Celerity",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9DaGFyZ2VkQmxhc3QiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjEzfV0/e2efcceaa3/ChargedBlast.png",
       "amount": 90,
@@ -27179,14 +27187,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Summon Skeletons of Mages",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25Ta2VsZXRvbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/9be85a0cf8/SummonSkeletons.png",
-      "amount": 88,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Discipline",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EaXNjaXBsaW5lIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d802479c30/Discipline.png",
       "amount": 88,
@@ -27379,6 +27379,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Hex Bloom Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9IZXhTcHJlYWRpbmdTdXBwb3J0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/873fa8ef65/HexSpreadingSupport.png",
+      "amount": 84,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Dual Strike of Ambidexterity",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EdWFsU3RyaWtlIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjo5fV0/789379cc39/DualStrike.png",
       "amount": 84,
@@ -27470,6 +27478,14 @@
       "name": "Scourge Arrow of Menace",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WaXJ1bGVudEFycm93IiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjo5fV0/564fcac0e9/VirulentArrow.png",
       "amount": 81,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Summon Stone Golem",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
+      "amount": 80.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -28251,6 +28267,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Lifetap Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0xpZmVUYXAiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9cef38ae47/LifeTap.png",
+      "amount": 70,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Eye of Winter",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Gcm96ZW5TcGhlcmVTa2lsbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/944702b2ee/FrozenSphereSkillGem.png",
       "amount": 70,
@@ -28635,14 +28659,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Summon Stone Golem",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
-      "amount": 65.6,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Pulverise Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1B1bHZlcml6ZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f6e9b6cedb/Pulverize.png",
       "amount": 65.4,
@@ -28805,6 +28821,14 @@
       "section": "skillgems",
       "name": "Blazing Salvo",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9FbWJlciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/1c2a784fb0/Ember.png",
+      "amount": 62.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Shield Crush of the Chieftain",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TaGllbGRDcnVzaCIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6NX1d/b555b42bfa/ShieldCrush.png",
       "amount": 62.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -29179,24 +29203,8 @@
     },
     {
       "section": "skillgems",
-      "name": "Hex Bloom Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9IZXhTcHJlYWRpbmdTdXBwb3J0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/873fa8ef65/HexSpreadingSupport.png",
-      "amount": 59,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Caustic Arrow of Poison",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Qb2lzb25BcnJvdyIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/a8fe13d1a6/PoisonArrow.png",
-      "amount": 59,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Shield Crush of the Chieftain",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TaGllbGRDcnVzaCIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6NX1d/b555b42bfa/ShieldCrush.png",
       "amount": 59,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -29331,16 +29339,16 @@
     },
     {
       "section": "skillgems",
-      "name": "Splitting Steel of Ammunition",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JbXBhY3RpbmdTdGVlbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/6351a48174/ImpactingSteelGem.png",
+      "name": "Summon Skeletons of Mages",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25Ta2VsZXRvbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/9be85a0cf8/SummonSkeletons.png",
       "amount": 56.79,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
     {
       "section": "skillgems",
-      "name": "Vengeful Cry",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9SZXRhbGlhdGlvblJhZ2VXYXJlY3J5V2FyY3J5IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/963303d35a/RetaliationRageWarecryWarcry.png",
+      "name": "Splitting Steel of Ammunition",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JbXBhY3RpbmdTdGVlbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/6351a48174/ImpactingSteelGem.png",
       "amount": 56.79,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -29771,14 +29779,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Summon Skeletons of Mages",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25Ta2VsZXRvbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjE0fV0/9be85a0cf8/SummonSkeletons.png",
-      "amount": 52.29,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Wrath",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9XcmF0aCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/6925b79eac/Wrath.png",
       "amount": 52.29,
@@ -30107,6 +30107,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Ice Nova of Frostbolts",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JY2VOb3ZhIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjoxM31d/22ca4fa2fa/IceNova.png",
+      "amount": 50,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Ice Nova of Deep Freeze",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JY2VOb3ZhIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjoxNH1d/ae240ae12b/IceNova.png",
       "amount": 50,
@@ -30347,14 +30355,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Lifetap Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0xpZmVUYXAiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9cef38ae47/LifeTap.png",
-      "amount": 49,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Explosive Concoction",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9FeHBsb3NpdmVGbGFza1NraWxsR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/7a8b38230f/ExplosiveFlaskSkillGem.png",
       "amount": 49,
@@ -30525,6 +30525,14 @@
       "section": "skillgems",
       "name": "Dread Banner",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EcmVhZEJhbm5lciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b2153b8c9a/DreadBanner.png",
+      "amount": 47.79,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Vengeful Cry",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9SZXRhbGlhdGlvblJhZ2VXYXJlY3J5V2FyY3J5IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/963303d35a/RetaliationRageWarecryWarcry.png",
       "amount": 47.79,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -30718,6 +30726,14 @@
       "name": "Windburst Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1Rvcm5hZG9zU3VwcG9ydEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f662ca6a73/TornadosSupportGem.png",
       "amount": 46,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Cursed Ground Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0hleFpvbmVTdXBwb3J0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/63e77cc4ae/HexZoneSupport.png",
+      "amount": 45.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -31107,14 +31123,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Ice Nova of Frostbolts",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9JY2VOb3ZhIiwidyI6MSwiaCI6MSwic2NhbGUiOjEsImdkIjoxM31d/22ca4fa2fa/IceNova.png",
-      "amount": 43,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Ethereal Knives of Lingering Blades",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9FdGhlcmVhbEtuaXZlcyIsInciOjEsImgiOjEsInNjYWxlIjoxLCJnZCI6OX1d/2f04083038/EtherealKnives.png",
       "amount": 43,
@@ -31286,14 +31294,6 @@
       "name": "Overcharge Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1B1cmVTaG9ja1N1cHBvcnRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/161c06a8d4/PureShockSupportGem.png",
       "amount": 41.32,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Summon Stone Golem",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Sb2NrR29sZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/f0d237e67b/RockGolem.png",
-      "amount": 41,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -33027,6 +33027,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Zealotry",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TcGVsbERhbWFnZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/42650bac1a/SpellDamageGem.png",
+      "amount": 32,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Withering Step",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9XaXRoZXJpbmdTdGVwR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/9f7784c2fa/WitheringStepGem.png",
       "amount": 32,
@@ -33731,6 +33739,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Phase Run",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9QaGFzZVJ1biIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b4c9b05661/PhaseRun.png",
+      "amount": 29.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Summon Raging Spirit of Enormity",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdW1tb25FbGVtZW50YWwiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjEzfV0/fb1da2a0cc/SummonElemental.png",
       "amount": 29.2,
@@ -34069,14 +34085,6 @@
       "section": "skillgems",
       "name": "Temporal Rift",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9DaHJvbm9tYW5jZXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/ce3fb3cfe3/Chronomancer.png",
-      "amount": 28,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Cursed Ground Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0hleFpvbmVTdXBwb3J0IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/63e77cc4ae/HexZoneSupport.png",
       "amount": 28,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -34915,14 +34923,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Phase Run",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9QaGFzZVJ1biIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b4c9b05661/PhaseRun.png",
-      "amount": 25,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Cast On Critical Strike Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Nhc3RPbkNyaXQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/8ebad1afae/CastOnCrit.png",
       "amount": 25,
@@ -35307,14 +35307,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Vaal Arc",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsQXJjIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/72aafca740/VaalArc.png",
-      "amount": 23.5,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Blind Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0JsaW5kIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/06f95114ae/Blind.png",
       "amount": 23.5,
@@ -35627,6 +35619,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Hexblast",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Eb29tQmxhc3RTa2lsbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/2de8630bc4/DoomBlastSkillGem.png",
+      "amount": 22.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Destructive Link",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Dcml0aWNhbExpbmtHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7d9090dbef/CriticalLinkGem.png",
       "amount": 22.5,
@@ -35813,14 +35813,6 @@
       "section": "skillgems",
       "name": "Smite",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TbWl0ZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/080c458cfe/SmiteGem.png",
-      "amount": 22,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Zealotry",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TcGVsbERhbWFnZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/42650bac1a/SpellDamageGem.png",
       "amount": 22,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -36213,6 +36205,14 @@
       "section": "skillgems",
       "name": "Blink Arrow",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbGlua0Fycm93IiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3d3f2cbd98/BlinkArrow.png",
+      "amount": 20.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Vaal Arc",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9WYWFsR2Vtcy9WYWFsQXJjIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/72aafca740/VaalArc.png",
       "amount": 20.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -36899,14 +36899,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Penance Brand",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9QZW5hbmNlQnJhbmRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/644fc3d6eb/PenanceBrandGem.png",
-      "amount": 20,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Arcanist Brand",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9BcmNhbmlzdEJyYW5kR2VtIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/b365952f18/ArcanistBrandGem.png",
       "amount": 20,
@@ -37357,6 +37349,14 @@
       "section": "skillgems",
       "name": "Cast On Critical Strike Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Nhc3RPbkNyaXQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/8ebad1afae/CastOnCrit.png",
+      "amount": 19.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Penance Brand",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9QZW5hbmNlQnJhbmRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/644fc3d6eb/PenanceBrandGem.png",
       "amount": 19.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -38203,14 +38203,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Purity of Lightning",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9MaWdodG5pbmdSZXNpc3RBdXJhIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/98fde57b81/LightningResistAura.png",
-      "amount": 17.5,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Bloodlust Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Jsb29kbHVzdCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/0f21ba16fe/Bloodlust.png",
       "amount": 17.5,
@@ -38437,6 +38429,14 @@
       "section": "skillgems",
       "name": "Lacerate",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Eb3VibGVTbGFzaCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f87e49aab5/DoubleSlash.png",
+      "amount": 17,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
+      "name": "Purity of Lightning",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9MaWdodG5pbmdSZXNpc3RBdXJhIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/98fde57b81/LightningResistAura.png",
       "amount": 17,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -41277,14 +41277,6 @@
       "section": "skillgems",
       "name": "Archmage Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L01hbmF3ZWF2ZVN1cHBvcnRHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/26b9a98b33/ManaweaveSupportGem.png",
-      "amount": 12,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Hexblast",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Eb29tQmxhc3RTa2lsbEdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/2de8630bc4/DoomBlastSkillGem.png",
       "amount": 12,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -50155,6 +50147,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Exsanguinate of Transmission",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbG9vZFRlbmRyaWxzU2tpbGxHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjV9XQ/8f6e1aa8be/BloodTendrilsSkillGem.png",
+      "amount": 4.4,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Destructive Link",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Dcml0aWNhbExpbmtHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7d9090dbef/CriticalLinkGem.png",
       "amount": 4.4,
@@ -50245,14 +50245,6 @@
       "section": "skillgems",
       "name": "Trauma Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L1RyYXVtYSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/f1642bf8e3/Trauma.png",
-      "amount": 4.3,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Exsanguinate of Transmission",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbG9vZFRlbmRyaWxzU2tpbGxHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MSwiZ2QiOjV9XQ/8f6e1aa8be/BloodTendrilsSkillGem.png",
       "amount": 4.3,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -52075,14 +52067,6 @@
     },
     {
       "section": "skillgems",
-      "name": "Dread Banner",
-      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EcmVhZEJhbm5lciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b2153b8c9a/DreadBanner.png",
-      "amount": 3.1,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
       "name": "Zealotry",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TcGVsbERhbWFnZUdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/42650bac1a/SpellDamageGem.png",
       "amount": 3.1,
@@ -52715,6 +52699,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Dread Banner",
+      "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9EcmVhZEJhbm5lciIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/b2153b8c9a/DreadBanner.png",
+      "amount": 2.8,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Armageddon Brand",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9Bcm1hZ2VkZG9uQnJhbmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2949aac373/ArmageddonBrand.png",
       "amount": 2.8,
@@ -53019,6 +53011,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Cold to Fire Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0NvbGR0b0ZpcmUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/cc186488fc/ColdtoFire.png",
+      "amount": 2.5,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Shield Crush",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TaGllbGRDcnVzaCIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/6f73431f58/ShieldCrush.png",
       "amount": 2.5,
@@ -53101,14 +53101,6 @@
       "section": "skillgems",
       "name": "Fist of War Support",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0Zpc3RPZldhckdlbSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/6ba67a3963/FistOfWarGem.png",
-      "amount": 2.4,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Cold to Fire Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0NvbGR0b0ZpcmUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/cc186488fc/ColdtoFire.png",
       "amount": 2.4,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -53995,6 +53987,14 @@
     },
     {
       "section": "skillgems",
+      "name": "Cruelty Support",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0ZyYWdpbGl0eSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/85392d054c/Fragility.png",
+      "amount": 1.6,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "skillgems",
       "name": "Pride",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9QcmlkZUF1cmFHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2cbd388a8d/PrideAuraGem.png",
       "amount": 1.6,
@@ -54181,14 +54181,6 @@
       "section": "skillgems",
       "name": "Reap",
       "icon": "https://web.poecdn.com/gen/image/WzMwLDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9CbG9vZHJlYXBHZW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/b2a913da04/BloodreapGem.png",
-      "amount": 1.4,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "skillgems",
-      "name": "Cruelty Support",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvR2Vtcy9TdXBwb3J0L0ZyYWdpbGl0eSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/85392d054c/Fragility.png",
       "amount": 1.4,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
@@ -173861,15 +173853,7 @@
       "section": "deliorb",
       "name": "Kalguuran Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJFeHBlZGl0aW9uIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/a5ecb5219f/DeliriumOrbExpedition.png",
-      "amount": 173.2,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "deliorb",
-      "name": "Primal Delirium Orb",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJUYWxpc21hbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/726210e48c/DeliriumOrbTalismans.png",
-      "amount": 117.2,
+      "amount": 136.1,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173877,7 +173861,7 @@
       "section": "deliorb",
       "name": "Challenging Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJVbHRpbWF0dW0iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/382c6157d7/DeliriumOrbUltimatum.png",
-      "amount": 115.4,
+      "amount": 111.8,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173907,17 +173891,9 @@
     },
     {
       "section": "deliorb",
-      "name": "Obscured Delirium Orb",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJCcmVhY2giLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9182ffc9b8/DeliriumOrbBreach.png",
-      "amount": 54,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "deliorb",
       "name": "Timeless Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJMZWdpb24iLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/448f80d7c4/DeliriumOrbLegion.png",
-      "amount": 52.22,
+      "amount": 50,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173925,23 +173901,7 @@
       "section": "deliorb",
       "name": "Fossilised Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJGb3NzaWxzIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/ea3a92a762/DeliriumOrbFossils.png",
-      "amount": 49.1,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "deliorb",
-      "name": "Imperial Delirium Orb",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJMYWJ5cmludGgiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/50340fc6c8/DeliriumOrbLabyrinth.png",
-      "amount": 48.96,
-      "unit": "Chaos Orb",
-      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
-    },
-    {
-      "section": "deliorb",
-      "name": "Fine Delirium Orb",
-      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJDdXJyZW5jeSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/edac9239bd/DeliriumOrbCurrency.png",
-      "amount": 48.1,
+      "amount": 49,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173955,9 +173915,33 @@
     },
     {
       "section": "deliorb",
+      "name": "Obscured Delirium Orb",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJCcmVhY2giLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/9182ffc9b8/DeliriumOrbBreach.png",
+      "amount": 48.01,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "deliorb",
       "name": "Jeweller's Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJUcmlua2V0cyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/51a3def31b/DeliriumOrbTrinkets.png",
-      "amount": 47.99,
+      "amount": 47.88,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "deliorb",
+      "name": "Fine Delirium Orb",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJDdXJyZW5jeSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/edac9239bd/DeliriumOrbCurrency.png",
+      "amount": 47.09,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "deliorb",
+      "name": "Imperial Delirium Orb",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJMYWJ5cmludGgiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/50340fc6c8/DeliriumOrbLabyrinth.png",
+      "amount": 46.38,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173973,7 +173957,7 @@
       "section": "deliorb",
       "name": "Foreboding Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJIYXJiaW5nZXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/707c1f792a/DeliriumOrbHarbinger.png",
-      "amount": 45.4,
+      "amount": 45,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173981,7 +173965,7 @@
       "section": "deliorb",
       "name": "Blacksmith's Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJXZWFwb25zIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/1a249fbf02/DeliriumOrbWeapons.png",
-      "amount": 41,
+      "amount": 40.9,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -173989,7 +173973,15 @@
       "section": "deliorb",
       "name": "Armoursmith's Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJBcm1vdXIiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/3f5099006e/DeliriumOrbArmour.png",
-      "amount": 40,
+      "amount": 39.61,
+      "unit": "Chaos Orb",
+      "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
+    },
+    {
+      "section": "deliorb",
+      "name": "Primal Delirium Orb",
+      "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJUYWxpc21hbnMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/726210e48c/DeliriumOrbTalismans.png",
+      "amount": 34,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174005,7 +173997,7 @@
       "section": "deliorb",
       "name": "Whispering Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJFc3NlbmNlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/4c854cba72/DeliriumOrbEssence.png",
-      "amount": 23.21,
+      "amount": 21.61,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174021,7 +174013,7 @@
       "section": "deliorb",
       "name": "Abyssal Delirium Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJBYnlzcyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/9c2b5d6d64/DeliriumOrbAbyss.png",
-      "amount": 17.11,
+      "amount": 15,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174077,7 +174069,7 @@
       "section": "incubator",
       "name": "Enchanted Incubator",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uTGFieXJpbnRoIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/6387f86116/IncubationLabyrinth.png",
-      "amount": 4,
+      "amount": 3.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174101,7 +174093,7 @@
       "section": "incubator",
       "name": "Fossilised Incubator",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uRm9zc2lscyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/30fb338730/IncubationFossils.png",
-      "amount": 1.8,
+      "amount": 1.9,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174205,7 +174197,7 @@
       "section": "incubator",
       "name": "Celestial Blacksmith's Incubator",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uV2VhcG9ucyIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/5457d8c543/IncubationWeapons.png",
-      "amount": 0.89,
+      "amount": 0.83,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -174213,7 +174205,7 @@
       "section": "incubator",
       "name": "Celestial Armoursmith's Incubator",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSW5jdWJhdGlvbi9JbmN1YmF0aW9uQXJtb3VyIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/637c41a730/IncubationArmour.png",
-      "amount": 0.72,
+      "amount": 0.66,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -175965,7 +175957,7 @@
       "section": "omen",
       "name": "Omen of Connections",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL1Zvb2Rvb09tZW5zM1B1cnBsZSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/73a387466a/VoodooOmens3Purple.png",
-      "amount": 1948,
+      "amount": 1991,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -175989,7 +175981,7 @@
       "section": "omen",
       "name": "Omen of Amelioration",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL1Zvb2Rvb09tZW5zMUJsdWUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/2ef7acaf03/VoodooOmens1Blue.png",
-      "amount": 125,
+      "amount": 107,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
