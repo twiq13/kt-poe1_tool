@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-03-02T22:57:28.907Z",
+  "updatedAt": "2026-03-02T23:15:57.041Z",
   "league": "Standard",
   "source": "https://poe.ninja/api/data",
   "base": "Chaos Orb",
@@ -7,7 +7,7 @@
   "divine": {
     "name": "Divine Orb",
     "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lNb2RWYWx1ZXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e1a54ff97d/CurrencyModValues.png",
-    "chaosValue": 386
+    "chaosValue": 386.5
   },
   "sections": [
     {
@@ -205,7 +205,7 @@
       "section": "currency",
       "name": "Mirror of Kalandra",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lEdXBsaWNhdGUiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/7111e35254/CurrencyDuplicate.png",
-      "amount": 621029,
+      "amount": 621749,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -213,7 +213,7 @@
       "section": "currency",
       "name": "Hinekora's Lock",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSGluZWtvcmFzTG9jayIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/9fe8aa2704/HinekorasLock.png",
-      "amount": 146935,
+      "amount": 147033,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -221,7 +221,7 @@
       "section": "currency",
       "name": "Mirror Shard",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvTWlycm9yU2hhcmQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/6604b7aa32/MirrorShard.png",
-      "amount": 27760,
+      "amount": 27801,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -253,7 +253,7 @@
       "section": "currency",
       "name": "Tempering Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGl2aW5lRW5jaGFudEJvZHlBcm1vdXJDdXJyZW5jeSIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/41418e201d/DivineEnchantBodyArmourCurrency.png",
-      "amount": 1799,
+      "amount": 1804,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -301,7 +301,7 @@
       "section": "currency",
       "name": "Divine Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lNb2RWYWx1ZXMiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/e1a54ff97d/CurrencyModValues.png",
-      "amount": 386,
+      "amount": 386.5,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -397,7 +397,7 @@
       "section": "currency",
       "name": "Tainted Mythic Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvSGVsbHNjYXBlL0hlbGxzY2FwZU15dGhpY09yYiIsInciOjEsImgiOjEsInNjYWxlIjoxfV0/3cc4ad8930/HellscapeMythicOrb.png",
-      "amount": 56.36,
+      "amount": 59.67,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
@@ -405,7 +405,7 @@
       "section": "currency",
       "name": "Eldritch Exalted Orb",
       "icon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRWxkcml0Y2hFeGFsdGVkT3JiIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/56026bffa3/EldritchExaltedOrb.png",
-      "amount": 48.17,
+      "amount": 52.92,
       "unit": "Chaos Orb",
       "unitIcon": "https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQ3VycmVuY3lSZXJvbGxSYXJlIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/d119a0d734/CurrencyRerollRare.png"
     },
