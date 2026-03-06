@@ -346,7 +346,7 @@ a:hover{ text-decoration:underline; }
   content:"";
   position:absolute;
   inset:0;
-  background-image:url("data/Legacy_of_Phrecia_event_logo.jpg");
+  background-image:url("data/Mirage_HighResKeyArt.png");
   background-size:cover;
   background-position:center;
   opacity:var(--loot-bg-opacity);
@@ -576,5 +576,6 @@ a.resetBtn{
   .field input{ width: 100%; }
   .invest-mini{ width:100%; }
 }
+
 
 
