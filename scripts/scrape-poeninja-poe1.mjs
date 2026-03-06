@@ -1,7 +1,7 @@
 // scripts/scrape-poeninja-poe1.mjs
 import fs from "fs";
 
-const LEAGUE = (process.env.LEAGUE || "Keepers").trim();
+const LEAGUE = (process.env.LEAGUE || "Mirage").trim();
 const BASE = "https://poe.ninja/api/data";
 
 // 4 menus (main) + sous menus (sub)
